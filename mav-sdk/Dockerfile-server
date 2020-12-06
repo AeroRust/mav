@@ -1,0 +1,19 @@
+FROM ubuntu:20.04
+
+RUN  apt update \
+  && apt install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /server
+
+ARG MAVSDK_VERSION=0.35.0
+
+RUN wget -O mavsdk_server https://github.com/mavlink/MAVSDK/releases/download/v${MAVSDK_VERSION}/mavsdk_server_manylinux2010-x64
+
+RUN chmod +x mavsdk_server
+
+EXPOSE 4000
+
+ENTRYPOINT ["/server/mavsdk_server", "-p", "4000"]
+
+CMD ["udp://:14540"]

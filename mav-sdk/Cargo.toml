@@ -1,0 +1,18 @@
+[package]
+authors = ["Lachezar Lechev <elpiel93@gmail.com>"]
+edition = "2018"
+name = "mav_sdk"
+version = "0.1.0"
+
+[dependencies]
+
+tonic = "0.3.1"
+prost = "0.6.1"
+
+[dev-dependencies]
+tokio = {version = "0.2.23", features = ["macros", "rt-threaded"]}
+
+[build-dependencies]
+tonic-build = {version = "0.3.1", features = ["rustfmt"]}
+
+[lib]

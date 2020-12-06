@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  px4-gazebo-headless:
+    image: jonasvautherin/px4-gazebo-headless:1.11.0
+    container_name: gazebo-headless
+    ports:
+      - "14540:14540"
+    networks:
+      - internal
+      - external
+    stdin_open: true
+    tty: true
+  mavsdk-grpc-server:
+    build:
+      dockerfile: Dockerfile-server
+      context: mav-sdk
+    container_name: mavsdk-grpc-server
+    # entrypoint: /server/mavsdk_server_manylinux2010-x64 -p 4000 udp://:14540
+    ports:
+      - "4000:4000"
+    networks:
+      - internal
+      - external
+
+networks:
+  internal:
+    internal: true
+  external:
