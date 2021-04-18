@@ -54,6 +54,12 @@ Docker images:
 - https://github.com/radarku/ardupilot-sitl-docker
 - https://github.com/gmyoungblood-parc/docker-alpine-ardupilot
 
+#### Gazebo
+
+Gazebo doesn't yet have built-in support for ArduPilot and it requires a plugin to be installed.
+
+- https://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html
+
 #### MAVLink
 - MAVLink basics: https://ardupilot.org/dev/docs/mavlink-basics.html#mavlink-basics
 - MAVLink Routing in ArduPilot: https://ardupilot.org/dev/docs/mavlink-routing-in-ardupilot.html
