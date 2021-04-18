@@ -47,6 +47,8 @@ Useful documentation regarding the Gazebo simulation and the PX4 flight software
 - Vehicle frame types to choose from: https://ardupilot.org/dev/docs/using-sitl-for-ardupilot-testing.html#frame-types
 - Starting SITL without MAVProxy (`--no-mavproxy`): https://ardupilot.org/dev/docs/using-sitl-for-ardupilot-testing.html#connecting-other-additional-ground-stations
 - Using STIL: https://ardupilot.org/dev/docs/using-sitl-for-ardupilot-testing.html
+- SITL Serial mapping: https://ardupilot.org/dev/docs/sitl-serial-mapping.html
+- SITL Parameters: https://ardupilot.org/dev/docs/sitl-parameters.html
 
 Docker images:
 - https://github.com/radarku/ardupilot-sitl-docker
