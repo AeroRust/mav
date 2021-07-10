@@ -6,13 +6,13 @@ version = "0.1.0"
 
 [dependencies]
 
-tonic = "0.3.1"
-prost = "0.6.1"
+tonic = "0.5.0"
+prost = "0.8.0"
 
 [dev-dependencies]
-tokio = {version = "0.2.23", features = ["macros", "rt-threaded"]}
+tokio = {version = "1.8", features = ["macros", "rt-multi-thread"]}
 
 [build-dependencies]
-tonic-build = {version = "0.3.1", features = ["rustfmt"]}
+tonic-build = {version = "0.5", features = ["rustfmt"]}
 
 [lib]

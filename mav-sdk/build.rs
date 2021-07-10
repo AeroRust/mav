@@ -20,7 +20,7 @@ fn main() -> Result<(), std::io::Error> {
         "telemetry",
     ];
 
-    let mavsdk_options_include = format!("{submodule}/protos", submodule = PROTO_GIT_SUBMODULE,);
+    let mavsdk_options_include = format!("{submodule}/protos", submodule = PROTO_GIT_SUBMODULE);
 
     // tonic_build(&plugins, mavsdk_options_include.into())
 
