@@ -2,12 +2,12 @@
 pub struct SendRequest {
     /// The command line to send
     #[prost(string, tag = "1")]
-    pub command: std::string::String,
+    pub command: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendResponse {
     #[prost(message, optional, tag = "1")]
-    pub shell_result: ::std::option::Option<ShellResult>,
+    pub shell_result: ::core::option::Option<ShellResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeReceiveRequest {}
@@ -15,7 +15,7 @@ pub struct SubscribeReceiveRequest {}
 pub struct ReceiveResponse {
     /// Received data.
     #[prost(string, tag = "1")]
-    pub data: std::string::String,
+    pub data: ::prost::alloc::string::String,
 }
 /// Result type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -25,8 +25,9 @@ pub struct ShellResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `ShellResult`.
 pub mod shell_result {
     /// Possible results returned for shell requests
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -52,6 +53,7 @@ pub mod shell_service_client {
     use tonic::codegen::*;
     #[doc = "*"]
     #[doc = " Allow to communicate with the vehicle's system shell."]
+    #[derive(Debug, Clone)]
     pub struct ShellServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -69,17 +71,43 @@ pub mod shell_service_client {
     impl<T> ShellServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> ShellServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            ShellServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = ""]
         #[doc = " Send a command line."]
@@ -121,18 +149,6 @@ pub mod shell_service_client {
                 .await
         }
     }
-    impl<T: Clone> Clone for ShellServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for ShellServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "ShellServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod shell_service_server {
@@ -148,7 +164,7 @@ pub mod shell_service_server {
             request: tonic::Request<super::SendRequest>,
         ) -> Result<tonic::Response<super::SendResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeReceive method."]
-        type SubscribeReceiveStream: Stream<Item = Result<super::ReceiveResponse, tonic::Status>>
+        type SubscribeReceiveStream: futures_core::Stream<Item = Result<super::ReceiveResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -166,24 +182,31 @@ pub mod shell_service_server {
     #[derive(Debug)]
     pub struct ShellServiceServer<T: ShellService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: ShellService> ShellServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for ShellServiceServer<T>
     where
         T: ShellService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -210,17 +233,17 @@ pub mod shell_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SendSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -246,17 +269,17 @@ pub mod shell_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeReceiveSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -266,7 +289,8 @@ pub mod shell_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -275,12 +299,16 @@ pub mod shell_service_server {
     impl<T: ShellService> Clone for ShellServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: ShellService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

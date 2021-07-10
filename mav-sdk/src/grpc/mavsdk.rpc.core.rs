@@ -4,7 +4,7 @@ pub struct SubscribeConnectionStateRequest {}
 pub struct ConnectionStateResponse {
     /// Connection state
     #[prost(message, optional, tag = "1")]
-    pub connection_state: ::std::option::Option<ConnectionState>,
+    pub connection_state: ::core::option::Option<ConnectionState>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListRunningPluginsRequest {}
@@ -12,7 +12,7 @@ pub struct ListRunningPluginsRequest {}
 pub struct ListRunningPluginsResponse {
     /// Plugin info
     #[prost(message, repeated, tag = "1")]
-    pub plugin_info: ::std::vec::Vec<PluginInfo>,
+    pub plugin_info: ::prost::alloc::vec::Vec<PluginInfo>,
 }
 /// Connection state type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -29,10 +29,10 @@ pub struct ConnectionState {
 pub struct PluginInfo {
     /// Name of the plugin
     #[prost(string, tag = "1")]
-    pub name: std::string::String,
+    pub name: ::prost::alloc::string::String,
     /// Address where the plugin is running
     #[prost(string, tag = "2")]
-    pub address: std::string::String,
+    pub address: ::prost::alloc::string::String,
     /// Port where the plugin is running
     #[prost(int32, tag = "3")]
     pub port: i32,
@@ -42,6 +42,7 @@ pub mod core_service_client {
     #![allow(unused_variables, dead_code, missing_docs)]
     use tonic::codegen::*;
     #[doc = " Access to the connection state and running plugins."]
+    #[derive(Debug, Clone)]
     pub struct CoreServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -59,17 +60,43 @@ pub mod core_service_client {
     impl<T> CoreServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> CoreServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            CoreServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = " Subscribe to 'connection state' updates."]
         pub async fn subscribe_connection_state(
@@ -111,18 +138,6 @@ pub mod core_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for CoreServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for CoreServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "CoreServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod core_service_server {
@@ -132,7 +147,7 @@ pub mod core_service_server {
     #[async_trait]
     pub trait CoreService: Send + Sync + 'static {
         #[doc = "Server streaming response type for the SubscribeConnectionState method."]
-        type SubscribeConnectionStateStream: Stream<Item = Result<super::ConnectionStateResponse, tonic::Status>>
+        type SubscribeConnectionStateStream: futures_core::Stream<Item = Result<super::ConnectionStateResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -151,24 +166,31 @@ pub mod core_service_server {
     #[derive(Debug)]
     pub struct CoreServiceServer<T: CoreService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: CoreService> CoreServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for CoreServiceServer<T>
     where
         T: CoreService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -202,17 +224,17 @@ pub mod core_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeConnectionStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -236,17 +258,17 @@ pub mod core_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = ListRunningPluginsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -256,7 +278,8 @@ pub mod core_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -265,12 +288,16 @@ pub mod core_service_server {
     impl<T: CoreService> Clone for CoreServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: CoreService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

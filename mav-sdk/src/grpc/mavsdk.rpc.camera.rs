@@ -3,7 +3,7 @@ pub struct TakePhotoRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TakePhotoResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartPhotoIntervalRequest {
@@ -14,42 +14,42 @@ pub struct StartPhotoIntervalRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartPhotoIntervalResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopPhotoIntervalRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopPhotoIntervalResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoStreamingRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoStreamingResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoStreamingRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoStreamingResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetModeRequest {
@@ -60,7 +60,7 @@ pub struct SetModeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetModeResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeInformationRequest {}
@@ -68,7 +68,7 @@ pub struct SubscribeInformationRequest {}
 pub struct InformationResponse {
     /// Camera information
     #[prost(message, optional, tag = "1")]
-    pub information: ::std::option::Option<Information>,
+    pub information: ::core::option::Option<Information>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeModeRequest {}
@@ -84,7 +84,7 @@ pub struct SubscribeVideoStreamInfoRequest {}
 pub struct VideoStreamInfoResponse {
     /// Video stream info
     #[prost(message, optional, tag = "1")]
-    pub video_stream_info: ::std::option::Option<VideoStreamInfo>,
+    pub video_stream_info: ::core::option::Option<VideoStreamInfo>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCaptureInfoRequest {}
@@ -92,7 +92,7 @@ pub struct SubscribeCaptureInfoRequest {}
 pub struct CaptureInfoResponse {
     /// Capture info
     #[prost(message, optional, tag = "1")]
-    pub capture_info: ::std::option::Option<CaptureInfo>,
+    pub capture_info: ::core::option::Option<CaptureInfo>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeStatusRequest {}
@@ -100,7 +100,7 @@ pub struct SubscribeStatusRequest {}
 pub struct StatusResponse {
     /// Camera status
     #[prost(message, optional, tag = "1")]
-    pub camera_status: ::std::option::Option<Status>,
+    pub camera_status: ::core::option::Option<Status>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCurrentSettingsRequest {}
@@ -108,7 +108,7 @@ pub struct SubscribeCurrentSettingsRequest {}
 pub struct CurrentSettingsResponse {
     /// List of current settings
     #[prost(message, repeated, tag = "1")]
-    pub current_settings: ::std::vec::Vec<Setting>,
+    pub current_settings: ::prost::alloc::vec::Vec<Setting>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePossibleSettingOptionsRequest {}
@@ -116,39 +116,39 @@ pub struct SubscribePossibleSettingOptionsRequest {}
 pub struct PossibleSettingOptionsResponse {
     /// List of settings that can be changed
     #[prost(message, repeated, tag = "1")]
-    pub setting_options: ::std::vec::Vec<SettingOptions>,
+    pub setting_options: ::prost::alloc::vec::Vec<SettingOptions>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetSettingRequest {
     /// Desired setting
     #[prost(message, optional, tag = "1")]
-    pub setting: ::std::option::Option<Setting>,
+    pub setting: ::core::option::Option<Setting>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetSettingResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSettingRequest {
     /// Requested setting
     #[prost(message, optional, tag = "1")]
-    pub setting: ::std::option::Option<Setting>,
+    pub setting: ::core::option::Option<Setting>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSettingResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
     /// Setting
     #[prost(message, optional, tag = "2")]
-    pub setting: ::std::option::Option<Setting>,
+    pub setting: ::core::option::Option<Setting>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FormatStorageRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FormatStorageResponse {
     #[prost(message, optional, tag = "1")]
-    pub camera_result: ::std::option::Option<CameraResult>,
+    pub camera_result: ::core::option::Option<CameraResult>,
 }
 /// Result type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -158,8 +158,9 @@ pub struct CameraResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `CameraResult`.
 pub mod camera_result {
     /// Possible results returned for camera commands
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -247,13 +248,13 @@ pub struct EulerAngle {
 pub struct CaptureInfo {
     /// Location where the picture was taken
     #[prost(message, optional, tag = "1")]
-    pub position: ::std::option::Option<Position>,
+    pub position: ::core::option::Option<Position>,
     /// Attitude of the camera when the picture was taken (quaternion)
     #[prost(message, optional, tag = "2")]
-    pub attitude_quaternion: ::std::option::Option<Quaternion>,
+    pub attitude_quaternion: ::core::option::Option<Quaternion>,
     /// Attitude of the camera when the picture was taken (euler angle)
     #[prost(message, optional, tag = "3")]
-    pub attitude_euler_angle: ::std::option::Option<EulerAngle>,
+    pub attitude_euler_angle: ::core::option::Option<EulerAngle>,
     /// Timestamp in UTC (since UNIX epoch) in microseconds
     #[prost(uint64, tag = "4")]
     pub time_utc_us: u64,
@@ -265,7 +266,7 @@ pub struct CaptureInfo {
     pub index: i32,
     /// Download URL of this image
     #[prost(string, tag = "7")]
-    pub file_url: std::string::String,
+    pub file_url: ::prost::alloc::string::String,
 }
 /// Type for video stream settings.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -287,18 +288,19 @@ pub struct VideoStreamSettings {
     pub rotation_deg: u32,
     /// Video stream URI
     #[prost(string, tag = "6")]
-    pub uri: std::string::String,
+    pub uri: ::prost::alloc::string::String,
 }
 /// Information about the video stream.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamInfo {
     /// Video stream settings
     #[prost(message, optional, tag = "1")]
-    pub settings: ::std::option::Option<VideoStreamSettings>,
+    pub settings: ::core::option::Option<VideoStreamSettings>,
     /// Current status of video streaming
     #[prost(enumeration = "video_stream_info::Status", tag = "2")]
     pub status: i32,
 }
+/// Nested message and enum types in `VideoStreamInfo`.
 pub mod video_stream_info {
     /// Video stream status type.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -333,11 +335,12 @@ pub struct Status {
     pub recording_time_s: f32,
     /// Current folder name where media are saved
     #[prost(string, tag = "7")]
-    pub media_folder_name: std::string::String,
+    pub media_folder_name: ::prost::alloc::string::String,
     /// Storage status
     #[prost(enumeration = "status::StorageStatus", tag = "8")]
     pub storage_status: i32,
 }
+/// Nested message and enum types in `Status`.
 pub mod status {
     /// Storage status type.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -356,23 +359,23 @@ pub mod status {
 pub struct Option {
     /// Name of the option (machine readable)
     #[prost(string, tag = "1")]
-    pub option_id: std::string::String,
+    pub option_id: ::prost::alloc::string::String,
     /// Description of the option (human readable)
     #[prost(string, tag = "2")]
-    pub option_description: std::string::String,
+    pub option_description: ::prost::alloc::string::String,
 }
 /// Type to represent a setting with a selected option.
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Setting {
     /// Name of a setting (machine readable)
     #[prost(string, tag = "1")]
-    pub setting_id: std::string::String,
+    pub setting_id: ::prost::alloc::string::String,
     /// Description of the setting (human readable). This field is meant to be read from the drone, ignore it when setting.
     #[prost(string, tag = "2")]
-    pub setting_description: std::string::String,
+    pub setting_description: ::prost::alloc::string::String,
     /// Selected option
     #[prost(message, optional, tag = "3")]
-    pub option: ::std::option::Option<Option>,
+    pub option: ::core::option::Option<Option>,
     /// If option is given as a range. This field is meant to be read from the drone, ignore it when setting.
     #[prost(bool, tag = "4")]
     pub is_range: bool,
@@ -382,13 +385,13 @@ pub struct Setting {
 pub struct SettingOptions {
     /// Name of the setting (machine readable)
     #[prost(string, tag = "1")]
-    pub setting_id: std::string::String,
+    pub setting_id: ::prost::alloc::string::String,
     /// Description of the setting (human readable)
     #[prost(string, tag = "2")]
-    pub setting_description: std::string::String,
+    pub setting_description: ::prost::alloc::string::String,
     /// List of options or if range [min, max] or [min, max, interval]
     #[prost(message, repeated, tag = "3")]
-    pub options: ::std::vec::Vec<Option>,
+    pub options: ::prost::alloc::vec::Vec<Option>,
     /// If option is given as a range
     #[prost(bool, tag = "4")]
     pub is_range: bool,
@@ -398,10 +401,10 @@ pub struct SettingOptions {
 pub struct Information {
     /// Name of the camera vendor
     #[prost(string, tag = "1")]
-    pub vendor_name: std::string::String,
+    pub vendor_name: ::prost::alloc::string::String,
     /// Name of the camera model
     #[prost(string, tag = "2")]
-    pub model_name: std::string::String,
+    pub model_name: ::prost::alloc::string::String,
 }
 /// Camera mode type.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -426,6 +429,7 @@ pub mod camera_service_client {
     #[doc = " When multiple cameras are supported the plugin will need to be"]
     #[doc = " instantiated separately for every camera and the camera selected using"]
     #[doc = " `select_camera`."]
+    #[derive(Debug, Clone)]
     pub struct CameraServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -443,17 +447,43 @@ pub mod camera_service_client {
     impl<T> CameraServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> CameraServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            CameraServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = ""]
         #[doc = " Take one photo."]
@@ -811,18 +841,6 @@ pub mod camera_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for CameraServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for CameraServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "CameraServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod camera_service_server {
@@ -880,7 +898,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SetModeRequest>,
         ) -> Result<tonic::Response<super::SetModeResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeMode method."]
-        type SubscribeModeStream: Stream<Item = Result<super::ModeResponse, tonic::Status>>
+        type SubscribeModeStream: futures_core::Stream<Item = Result<super::ModeResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -891,7 +909,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeModeRequest>,
         ) -> Result<tonic::Response<Self::SubscribeModeStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeInformation method."]
-        type SubscribeInformationStream: Stream<Item = Result<super::InformationResponse, tonic::Status>>
+        type SubscribeInformationStream: futures_core::Stream<Item = Result<super::InformationResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -902,7 +920,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeInformationRequest>,
         ) -> Result<tonic::Response<Self::SubscribeInformationStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeVideoStreamInfo method."]
-        type SubscribeVideoStreamInfoStream: Stream<Item = Result<super::VideoStreamInfoResponse, tonic::Status>>
+        type SubscribeVideoStreamInfoStream: futures_core::Stream<Item = Result<super::VideoStreamInfoResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -913,7 +931,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeVideoStreamInfoRequest>,
         ) -> Result<tonic::Response<Self::SubscribeVideoStreamInfoStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeCaptureInfo method."]
-        type SubscribeCaptureInfoStream: Stream<Item = Result<super::CaptureInfoResponse, tonic::Status>>
+        type SubscribeCaptureInfoStream: futures_core::Stream<Item = Result<super::CaptureInfoResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -924,7 +942,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeCaptureInfoRequest>,
         ) -> Result<tonic::Response<Self::SubscribeCaptureInfoStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeStatus method."]
-        type SubscribeStatusStream: Stream<Item = Result<super::StatusResponse, tonic::Status>>
+        type SubscribeStatusStream: futures_core::Stream<Item = Result<super::StatusResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -935,7 +953,7 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeStatusRequest>,
         ) -> Result<tonic::Response<Self::SubscribeStatusStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeCurrentSettings method."]
-        type SubscribeCurrentSettingsStream: Stream<Item = Result<super::CurrentSettingsResponse, tonic::Status>>
+        type SubscribeCurrentSettingsStream: futures_core::Stream<Item = Result<super::CurrentSettingsResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -946,8 +964,9 @@ pub mod camera_service_server {
             request: tonic::Request<super::SubscribeCurrentSettingsRequest>,
         ) -> Result<tonic::Response<Self::SubscribeCurrentSettingsStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribePossibleSettingOptions method."]
-        type SubscribePossibleSettingOptionsStream: Stream<Item = Result<super::PossibleSettingOptionsResponse, tonic::Status>>
-            + Send
+        type SubscribePossibleSettingOptionsStream: futures_core::Stream<
+                Item = Result<super::PossibleSettingOptionsResponse, tonic::Status>,
+            > + Send
             + Sync
             + 'static;
         #[doc = ""]
@@ -992,24 +1011,31 @@ pub mod camera_service_server {
     #[derive(Debug)]
     pub struct CameraServiceServer<T: CameraService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: CameraService> CameraServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for CameraServiceServer<T>
     where
         T: CameraService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -1036,17 +1062,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = TakePhotoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1070,17 +1096,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StartPhotoIntervalSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1104,17 +1130,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StopPhotoIntervalSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1135,17 +1161,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StartVideoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1166,17 +1192,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StopVideoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1200,17 +1226,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StartVideoStreamingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1234,17 +1260,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StopVideoStreamingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1265,17 +1291,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetModeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1301,17 +1327,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeModeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1337,17 +1363,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeInformationSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1375,17 +1401,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeVideoStreamInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1411,17 +1437,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeCaptureInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1447,17 +1473,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1485,17 +1511,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeCurrentSettingsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1524,17 +1550,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribePossibleSettingOptionsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1555,17 +1581,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetSettingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1586,17 +1612,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = GetSettingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1619,17 +1645,17 @@ pub mod camera_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = FormatStorageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1639,7 +1665,8 @@ pub mod camera_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -1648,12 +1675,16 @@ pub mod camera_service_server {
     impl<T: CameraService> Clone for CameraServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: CameraService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

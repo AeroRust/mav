@@ -2,57 +2,57 @@
 pub struct UploadMissionRequest {
     /// The mission plan
     #[prost(message, optional, tag = "1")]
-    pub mission_plan: ::std::option::Option<MissionPlan>,
+    pub mission_plan: ::core::option::Option<MissionPlan>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UploadMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
     /// The mission plan
     #[prost(message, optional, tag = "2")]
-    pub mission_plan: ::std::option::Option<MissionPlan>,
+    pub mission_plan: ::core::option::Option<MissionPlan>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemRequest {
@@ -63,14 +63,14 @@ pub struct SetCurrentMissionItemRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IsMissionFinishedRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IsMissionFinishedResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
     /// True if the mission is finished and the last mission item has been reached
     #[prost(bool, tag = "2")]
     pub is_finished: bool,
@@ -81,14 +81,14 @@ pub struct SubscribeMissionProgressRequest {}
 pub struct MissionProgressResponse {
     /// Mission progress
     #[prost(message, optional, tag = "1")]
-    pub mission_progress: ::std::option::Option<MissionProgress>,
+    pub mission_progress: ::core::option::Option<MissionProgress>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAfterMissionRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAfterMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
     /// If true, trigger an RTL at the end of the mission
     #[prost(bool, tag = "2")]
     pub enable: bool,
@@ -102,21 +102,21 @@ pub struct SetReturnToLaunchAfterMissionRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAfterMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportQgroundcontrolMissionRequest {
     /// File path of the QGC plan
     #[prost(string, tag = "1")]
-    pub qgc_plan_path: std::string::String,
+    pub qgc_plan_path: ::prost::alloc::string::String,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ImportQgroundcontrolMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::std::option::Option<MissionResult>,
+    pub mission_result: ::core::option::Option<MissionResult>,
     /// The mission plan
     #[prost(message, optional, tag = "2")]
-    pub mission_plan: ::std::option::Option<MissionPlan>,
+    pub mission_plan: ::core::option::Option<MissionPlan>,
 }
 ///
 /// Type representing a mission item.
@@ -158,6 +158,7 @@ pub struct MissionItem {
     #[prost(double, tag = "10")]
     pub camera_photo_interval_s: f64,
 }
+/// Nested message and enum types in `MissionItem`.
 pub mod mission_item {
     /// Possible camera actions at a mission item.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -182,7 +183,7 @@ pub mod mission_item {
 pub struct MissionPlan {
     /// The mission items
     #[prost(message, repeated, tag = "1")]
-    pub mission_items: ::std::vec::Vec<MissionItem>,
+    pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
 }
 /// Mission progress type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -202,8 +203,9 @@ pub struct MissionResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `MissionResult`.
 pub mod mission_result {
     /// Possible results returned for action requests.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -242,6 +244,7 @@ pub mod mission_service_client {
     #![allow(unused_variables, dead_code, missing_docs)]
     use tonic::codegen::*;
     #[doc = " Enable waypoint missions."]
+    #[derive(Debug, Clone)]
     pub struct MissionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -259,17 +262,43 @@ pub mod mission_service_client {
     impl<T> MissionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> MissionServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            MissionServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = ""]
         #[doc = " Upload a list of mission items to the system."]
@@ -542,18 +571,6 @@ pub mod mission_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for MissionServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for MissionServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "MissionServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod mission_service_server {
@@ -636,7 +653,7 @@ pub mod mission_service_server {
             request: tonic::Request<super::IsMissionFinishedRequest>,
         ) -> Result<tonic::Response<super::IsMissionFinishedResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeMissionProgress method."]
-        type SubscribeMissionProgressStream: Stream<Item = Result<super::MissionProgressResponse, tonic::Status>>
+        type SubscribeMissionProgressStream: futures_core::Stream<Item = Result<super::MissionProgressResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -678,24 +695,31 @@ pub mod mission_service_server {
     #[derive(Debug)]
     pub struct MissionServiceServer<T: MissionService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: MissionService> MissionServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for MissionServiceServer<T>
     where
         T: MissionService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -724,17 +748,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = UploadMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -758,17 +782,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = CancelMissionUploadSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -792,17 +816,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = DownloadMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -827,17 +851,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = CancelMissionDownloadSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -860,17 +884,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StartMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -893,17 +917,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = PauseMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -926,17 +950,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = ClearMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -961,17 +985,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetCurrentMissionItemSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -995,17 +1019,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = IsMissionFinishedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1033,17 +1057,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeMissionProgressSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -1069,17 +1093,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = GetReturnToLaunchAfterMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1105,17 +1129,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetReturnToLaunchAfterMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1141,17 +1165,17 @@ pub mod mission_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = ImportQgroundcontrolMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1161,7 +1185,8 @@ pub mod mission_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -1170,12 +1195,16 @@ pub mod mission_service_server {
     impl<T: MissionService> Clone for MissionServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: MissionService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

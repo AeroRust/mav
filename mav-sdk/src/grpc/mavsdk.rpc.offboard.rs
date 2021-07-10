@@ -3,14 +3,14 @@ pub struct StartRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StartResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StopResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IsActiveRequest {}
@@ -24,81 +24,81 @@ pub struct IsActiveResponse {
 pub struct SetAttitudeRequest {
     /// Attitude roll, pitch and yaw along with thrust
     #[prost(message, optional, tag = "1")]
-    pub attitude: ::std::option::Option<Attitude>,
+    pub attitude: ::core::option::Option<Attitude>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorControlRequest {
     /// Actuator control values
     #[prost(message, optional, tag = "1")]
-    pub actuator_control: ::std::option::Option<ActuatorControl>,
+    pub actuator_control: ::core::option::Option<ActuatorControl>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorControlResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeRateRequest {
     /// Attitude rate roll, pitch and yaw angular rate along with thrust
     #[prost(message, optional, tag = "1")]
-    pub attitude_rate: ::std::option::Option<AttitudeRate>,
+    pub attitude_rate: ::core::option::Option<AttitudeRate>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeRateResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionNedRequest {
     /// Position and yaw
     #[prost(message, optional, tag = "1")]
-    pub position_ned_yaw: ::std::option::Option<PositionNedYaw>,
+    pub position_ned_yaw: ::core::option::Option<PositionNedYaw>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionNedResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityBodyRequest {
     /// Velocity and yaw angular rate
     #[prost(message, optional, tag = "1")]
-    pub velocity_body_yawspeed: ::std::option::Option<VelocityBodyYawspeed>,
+    pub velocity_body_yawspeed: ::core::option::Option<VelocityBodyYawspeed>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityBodyResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityNedRequest {
     /// Velocity and yaw
     #[prost(message, optional, tag = "1")]
-    pub velocity_ned_yaw: ::std::option::Option<VelocityNedYaw>,
+    pub velocity_ned_yaw: ::core::option::Option<VelocityNedYaw>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionVelocityNedRequest {
     /// Position and yaw
     #[prost(message, optional, tag = "1")]
-    pub position_ned_yaw: ::std::option::Option<PositionNedYaw>,
+    pub position_ned_yaw: ::core::option::Option<PositionNedYaw>,
     /// Velocity and yaw
     #[prost(message, optional, tag = "2")]
-    pub velocity_ned_yaw: ::std::option::Option<VelocityNedYaw>,
+    pub velocity_ned_yaw: ::core::option::Option<VelocityNedYaw>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
-    pub offboard_result: ::std::option::Option<OffboardResult>,
+    pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 /// Type for attitude body angles in NED reference frame (roll, pitch, yaw and thrust)
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -123,7 +123,7 @@ pub struct Attitude {
 pub struct ActuatorControlGroup {
     /// Controls in the group
     #[prost(float, repeated, tag = "1")]
-    pub controls: ::std::vec::Vec<f32>,
+    pub controls: ::prost::alloc::vec::Vec<f32>,
 }
 ///
 /// Type for actuator control.
@@ -145,7 +145,7 @@ pub struct ActuatorControlGroup {
 pub struct ActuatorControl {
     /// Control groups.
     #[prost(message, repeated, tag = "1")]
-    pub groups: ::std::vec::Vec<ActuatorControlGroup>,
+    pub groups: ::prost::alloc::vec::Vec<ActuatorControlGroup>,
 }
 /// Type for attitude rate commands in body coordinates (roll, pitch, yaw angular rate and thrust)
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -219,8 +219,9 @@ pub struct OffboardResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `OffboardResult`.
 pub mod offboard_result {
     /// Possible results returned for offboard requests
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -257,6 +258,7 @@ pub mod offboard_service_client {
     #[doc = " Client code must specify a setpoint before starting offboard mode."]
     #[doc = " Mavsdk automatically sends setpoints at 20Hz (PX4 Offboard mode requires that setpoints"]
     #[doc = " are minimally sent at 2Hz)."]
+    #[derive(Debug, Clone)]
     pub struct OffboardServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -274,17 +276,43 @@ pub mod offboard_service_client {
     impl<T> OffboardServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> OffboardServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            OffboardServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = ""]
         #[doc = " Start offboard control."]
@@ -473,18 +501,6 @@ pub mod offboard_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for OffboardServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for OffboardServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "OffboardServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod offboard_service_server {
@@ -574,24 +590,31 @@ pub mod offboard_service_server {
     #[derive(Debug)]
     pub struct OffboardServiceServer<T: OffboardService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: OffboardService> OffboardServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for OffboardServiceServer<T>
     where
         T: OffboardService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -618,17 +641,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StartSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -649,17 +672,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = StopSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -680,17 +703,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = IsActiveSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -713,17 +736,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetAttitudeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -747,17 +770,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetActuatorControlSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -781,17 +804,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetAttitudeRateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -815,17 +838,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetPositionNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -849,17 +872,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetVelocityBodySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -883,17 +906,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -918,17 +941,17 @@ pub mod offboard_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetPositionVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -938,7 +961,8 @@ pub mod offboard_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -947,12 +971,16 @@ pub mod offboard_service_server {
     impl<T: OffboardService> Clone for OffboardServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: OffboardService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

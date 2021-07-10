@@ -2,34 +2,34 @@
 pub struct SetVisionPositionEstimateRequest {
     /// The vision position estimate
     #[prost(message, optional, tag = "1")]
-    pub vision_position_estimate: ::std::option::Option<VisionPositionEstimate>,
+    pub vision_position_estimate: ::core::option::Option<VisionPositionEstimate>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetVisionPositionEstimateResponse {
     #[prost(message, optional, tag = "1")]
-    pub mocap_result: ::std::option::Option<MocapResult>,
+    pub mocap_result: ::core::option::Option<MocapResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudePositionMocapRequest {
     /// The attitude and position data
     #[prost(message, optional, tag = "1")]
-    pub attitude_position_mocap: ::std::option::Option<AttitudePositionMocap>,
+    pub attitude_position_mocap: ::core::option::Option<AttitudePositionMocap>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudePositionMocapResponse {
     #[prost(message, optional, tag = "1")]
-    pub mocap_result: ::std::option::Option<MocapResult>,
+    pub mocap_result: ::core::option::Option<MocapResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOdometryRequest {
     /// The odometry data
     #[prost(message, optional, tag = "1")]
-    pub odometry: ::std::option::Option<Odometry>,
+    pub odometry: ::core::option::Option<Odometry>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOdometryResponse {
     #[prost(message, optional, tag = "1")]
-    pub mocap_result: ::std::option::Option<MocapResult>,
+    pub mocap_result: ::core::option::Option<MocapResult>,
 }
 /// Body position type
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -91,7 +91,7 @@ pub struct AngularVelocityBody {
 pub struct Covariance {
     /// The covariance matrix
     #[prost(float, repeated, tag = "1")]
-    pub covariance_matrix: ::std::vec::Vec<f32>,
+    pub covariance_matrix: ::prost::alloc::vec::Vec<f32>,
 }
 ///
 /// Quaternion type.
@@ -125,13 +125,13 @@ pub struct VisionPositionEstimate {
     pub time_usec: u64,
     /// Global position (m)
     #[prost(message, optional, tag = "2")]
-    pub position_body: ::std::option::Option<PositionBody>,
+    pub position_body: ::core::option::Option<PositionBody>,
     /// Body angle (rad).
     #[prost(message, optional, tag = "3")]
-    pub angle_body: ::std::option::Option<AngleBody>,
+    pub angle_body: ::core::option::Option<AngleBody>,
     /// Pose cross-covariance matrix.
     #[prost(message, optional, tag = "4")]
-    pub pose_covariance: ::std::option::Option<Covariance>,
+    pub pose_covariance: ::core::option::Option<Covariance>,
 }
 /// Motion capture attitude and position
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -141,13 +141,13 @@ pub struct AttitudePositionMocap {
     pub time_usec: u64,
     /// Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
     #[prost(message, optional, tag = "2")]
-    pub q: ::std::option::Option<Quaternion>,
+    pub q: ::core::option::Option<Quaternion>,
     /// Body Position (NED)
     #[prost(message, optional, tag = "3")]
-    pub position_body: ::std::option::Option<PositionBody>,
+    pub position_body: ::core::option::Option<PositionBody>,
     /// Pose cross-covariance matrix.
     #[prost(message, optional, tag = "4")]
-    pub pose_covariance: ::std::option::Option<Covariance>,
+    pub pose_covariance: ::core::option::Option<Covariance>,
 }
 /// Odometry message to communicate odometry information with an external interface.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -160,23 +160,24 @@ pub struct Odometry {
     pub frame_id: i32,
     /// Body Position.
     #[prost(message, optional, tag = "3")]
-    pub position_body: ::std::option::Option<PositionBody>,
+    pub position_body: ::core::option::Option<PositionBody>,
     /// Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation).
     #[prost(message, optional, tag = "4")]
-    pub q: ::std::option::Option<Quaternion>,
+    pub q: ::core::option::Option<Quaternion>,
     /// Linear speed (m/s).
     #[prost(message, optional, tag = "5")]
-    pub speed_body: ::std::option::Option<SpeedBody>,
+    pub speed_body: ::core::option::Option<SpeedBody>,
     /// Angular speed (rad/s).
     #[prost(message, optional, tag = "6")]
-    pub angular_velocity_body: ::std::option::Option<AngularVelocityBody>,
+    pub angular_velocity_body: ::core::option::Option<AngularVelocityBody>,
     /// Pose cross-covariance matrix.
     #[prost(message, optional, tag = "7")]
-    pub pose_covariance: ::std::option::Option<Covariance>,
+    pub pose_covariance: ::core::option::Option<Covariance>,
     /// Velocity cross-covariance matrix.
     #[prost(message, optional, tag = "8")]
-    pub velocity_covariance: ::std::option::Option<Covariance>,
+    pub velocity_covariance: ::core::option::Option<Covariance>,
 }
+/// Nested message and enum types in `Odometry`.
 pub mod odometry {
     /// Mavlink frame id
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -196,8 +197,9 @@ pub struct MocapResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `MocapResult`.
 pub mod mocap_result {
     /// Possible results returned for mocap requests
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -223,6 +225,7 @@ pub mod mocap_service_client {
     #[doc = " Allows interfacing a vehicle with a motion capture system in"]
     #[doc = " order to allow navigation without global positioning sources available"]
     #[doc = " (e.g. indoors, or when flying under a bridge. etc.)."]
+    #[derive(Debug, Clone)]
     pub struct MocapServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -240,17 +243,43 @@ pub mod mocap_service_client {
     impl<T> MocapServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> MocapServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            MocapServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = " Send Global position/attitude estimate from a vision source."]
         pub async fn set_vision_position_estimate(
@@ -305,18 +334,6 @@ pub mod mocap_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for MocapServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for MocapServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "MocapServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod mocap_service_server {
@@ -348,24 +365,31 @@ pub mod mocap_service_server {
     #[derive(Debug)]
     pub struct MocapServiceServer<T: MocapService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: MocapService> MocapServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for MocapServiceServer<T>
     where
         T: MocapService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -396,17 +420,17 @@ pub mod mocap_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetVisionPositionEstimateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -431,17 +455,17 @@ pub mod mocap_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetAttitudePositionMocapSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -462,17 +486,17 @@ pub mod mocap_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetOdometrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -482,7 +506,8 @@ pub mod mocap_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -491,12 +516,16 @@ pub mod mocap_service_server {
     impl<T: MocapService> Clone for MocapServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: MocapService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {

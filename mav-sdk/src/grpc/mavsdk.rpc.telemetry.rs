@@ -4,7 +4,7 @@ pub struct SubscribePositionRequest {}
 pub struct PositionResponse {
     /// The next position
     #[prost(message, optional, tag = "1")]
-    pub position: ::std::option::Option<Position>,
+    pub position: ::core::option::Option<Position>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHomeRequest {}
@@ -12,7 +12,7 @@ pub struct SubscribeHomeRequest {}
 pub struct HomeResponse {
     /// The next home position
     #[prost(message, optional, tag = "1")]
-    pub home: ::std::option::Option<Position>,
+    pub home: ::core::option::Option<Position>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeInAirRequest {}
@@ -44,7 +44,7 @@ pub struct SubscribeAttitudeQuaternionRequest {}
 pub struct AttitudeQuaternionResponse {
     /// The next attitude (quaternion)
     #[prost(message, optional, tag = "1")]
-    pub attitude_quaternion: ::std::option::Option<Quaternion>,
+    pub attitude_quaternion: ::core::option::Option<Quaternion>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeEulerRequest {}
@@ -52,7 +52,7 @@ pub struct SubscribeAttitudeEulerRequest {}
 pub struct AttitudeEulerResponse {
     /// The next attitude (Euler)
     #[prost(message, optional, tag = "1")]
-    pub attitude_euler: ::std::option::Option<EulerAngle>,
+    pub attitude_euler: ::core::option::Option<EulerAngle>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeAngularVelocityBodyRequest {}
@@ -60,7 +60,7 @@ pub struct SubscribeAttitudeAngularVelocityBodyRequest {}
 pub struct AttitudeAngularVelocityBodyResponse {
     /// The next angular velocity (rad/s)
     #[prost(message, optional, tag = "1")]
-    pub attitude_angular_velocity_body: ::std::option::Option<AngularVelocityBody>,
+    pub attitude_angular_velocity_body: ::core::option::Option<AngularVelocityBody>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCameraAttitudeQuaternionRequest {}
@@ -68,7 +68,7 @@ pub struct SubscribeCameraAttitudeQuaternionRequest {}
 pub struct CameraAttitudeQuaternionResponse {
     /// The next camera attitude (quaternion)
     #[prost(message, optional, tag = "1")]
-    pub attitude_quaternion: ::std::option::Option<Quaternion>,
+    pub attitude_quaternion: ::core::option::Option<Quaternion>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCameraAttitudeEulerRequest {}
@@ -76,7 +76,7 @@ pub struct SubscribeCameraAttitudeEulerRequest {}
 pub struct CameraAttitudeEulerResponse {
     /// The next camera attitude (Euler)
     #[prost(message, optional, tag = "1")]
-    pub attitude_euler: ::std::option::Option<EulerAngle>,
+    pub attitude_euler: ::core::option::Option<EulerAngle>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeVelocityNedRequest {}
@@ -84,7 +84,7 @@ pub struct SubscribeVelocityNedRequest {}
 pub struct VelocityNedResponse {
     /// The next velocity (NED)
     #[prost(message, optional, tag = "1")]
-    pub velocity_ned: ::std::option::Option<VelocityNed>,
+    pub velocity_ned: ::core::option::Option<VelocityNed>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeGpsInfoRequest {}
@@ -92,7 +92,7 @@ pub struct SubscribeGpsInfoRequest {}
 pub struct GpsInfoResponse {
     /// The next 'GPS info' state
     #[prost(message, optional, tag = "1")]
-    pub gps_info: ::std::option::Option<GpsInfo>,
+    pub gps_info: ::core::option::Option<GpsInfo>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeBatteryRequest {}
@@ -100,7 +100,7 @@ pub struct SubscribeBatteryRequest {}
 pub struct BatteryResponse {
     /// The next 'battery' state
     #[prost(message, optional, tag = "1")]
-    pub battery: ::std::option::Option<Battery>,
+    pub battery: ::core::option::Option<Battery>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeFlightModeRequest {}
@@ -116,7 +116,7 @@ pub struct SubscribeHealthRequest {}
 pub struct HealthResponse {
     /// The next 'health' state
     #[prost(message, optional, tag = "1")]
-    pub health: ::std::option::Option<Health>,
+    pub health: ::core::option::Option<Health>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeRcStatusRequest {}
@@ -124,7 +124,7 @@ pub struct SubscribeRcStatusRequest {}
 pub struct RcStatusResponse {
     /// The next RC status
     #[prost(message, optional, tag = "1")]
-    pub rc_status: ::std::option::Option<RcStatus>,
+    pub rc_status: ::core::option::Option<RcStatus>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeStatusTextRequest {}
@@ -132,7 +132,7 @@ pub struct SubscribeStatusTextRequest {}
 pub struct StatusTextResponse {
     /// The next 'status text'
     #[prost(message, optional, tag = "1")]
-    pub status_text: ::std::option::Option<StatusText>,
+    pub status_text: ::core::option::Option<StatusText>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeActuatorControlTargetRequest {}
@@ -140,7 +140,7 @@ pub struct SubscribeActuatorControlTargetRequest {}
 pub struct ActuatorControlTargetResponse {
     /// The next actuator control target
     #[prost(message, optional, tag = "1")]
-    pub actuator_control_target: ::std::option::Option<ActuatorControlTarget>,
+    pub actuator_control_target: ::core::option::Option<ActuatorControlTarget>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeActuatorOutputStatusRequest {}
@@ -148,7 +148,7 @@ pub struct SubscribeActuatorOutputStatusRequest {}
 pub struct ActuatorOutputStatusResponse {
     /// The next actuator output status
     #[prost(message, optional, tag = "1")]
-    pub actuator_output_status: ::std::option::Option<ActuatorOutputStatus>,
+    pub actuator_output_status: ::core::option::Option<ActuatorOutputStatus>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeOdometryRequest {}
@@ -156,7 +156,7 @@ pub struct SubscribeOdometryRequest {}
 pub struct OdometryResponse {
     /// The next odometry status
     #[prost(message, optional, tag = "1")]
-    pub odometry: ::std::option::Option<Odometry>,
+    pub odometry: ::core::option::Option<Odometry>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePositionVelocityNedRequest {}
@@ -164,7 +164,7 @@ pub struct SubscribePositionVelocityNedRequest {}
 pub struct PositionVelocityNedResponse {
     /// The next position and velocity status
     #[prost(message, optional, tag = "1")]
-    pub position_velocity_ned: ::std::option::Option<PositionVelocityNed>,
+    pub position_velocity_ned: ::core::option::Option<PositionVelocityNed>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeGroundTruthRequest {}
@@ -172,7 +172,7 @@ pub struct SubscribeGroundTruthRequest {}
 pub struct GroundTruthResponse {
     /// Ground truth position information available in simulation
     #[prost(message, optional, tag = "1")]
-    pub ground_truth: ::std::option::Option<GroundTruth>,
+    pub ground_truth: ::core::option::Option<GroundTruth>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeFixedwingMetricsRequest {}
@@ -180,7 +180,7 @@ pub struct SubscribeFixedwingMetricsRequest {}
 pub struct FixedwingMetricsResponse {
     /// The next fixedwing metrics
     #[prost(message, optional, tag = "1")]
-    pub fixedwing_metrics: ::std::option::Option<FixedwingMetrics>,
+    pub fixedwing_metrics: ::core::option::Option<FixedwingMetrics>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeImuRequest {}
@@ -188,7 +188,7 @@ pub struct SubscribeImuRequest {}
 pub struct ImuResponse {
     /// The next IMU status
     #[prost(message, optional, tag = "1")]
-    pub imu: ::std::option::Option<Imu>,
+    pub imu: ::core::option::Option<Imu>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHealthAllOkRequest {}
@@ -212,7 +212,7 @@ pub struct SubscribeDistanceSensorRequest {}
 pub struct DistanceSensorResponse {
     /// The next Distance Sensor status
     #[prost(message, optional, tag = "1")]
-    pub distance_sensor: ::std::option::Option<DistanceSensor>,
+    pub distance_sensor: ::core::option::Option<DistanceSensor>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionRequest {
@@ -223,7 +223,7 @@ pub struct SetRatePositionRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateHomeRequest {
@@ -234,7 +234,7 @@ pub struct SetRateHomeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateHomeResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateInAirRequest {
@@ -245,7 +245,7 @@ pub struct SetRateInAirRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateInAirResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateLandedStateRequest {
@@ -256,7 +256,7 @@ pub struct SetRateLandedStateRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateLandedStateResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeRequest {
@@ -267,7 +267,7 @@ pub struct SetRateAttitudeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeAngularVelocityBodyRequest {
@@ -278,7 +278,7 @@ pub struct SetRateAttitudeAngularVelocityBodyRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeAngularVelocityBodyResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeQuaternionRequest {
@@ -289,7 +289,7 @@ pub struct SetRateCameraAttitudeQuaternionRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeQuaternionResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeRequest {
@@ -300,7 +300,7 @@ pub struct SetRateCameraAttitudeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVelocityNedRequest {
@@ -311,7 +311,7 @@ pub struct SetRateVelocityNedRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGpsInfoRequest {
@@ -322,7 +322,7 @@ pub struct SetRateGpsInfoRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGpsInfoResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateBatteryRequest {
@@ -333,7 +333,7 @@ pub struct SetRateBatteryRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateBatteryResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRcStatusRequest {
@@ -344,7 +344,7 @@ pub struct SetRateRcStatusRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRcStatusResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorControlTargetRequest {
@@ -355,7 +355,7 @@ pub struct SetRateActuatorControlTargetRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorControlTargetResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorOutputStatusRequest {
@@ -366,7 +366,7 @@ pub struct SetRateActuatorOutputStatusRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorOutputStatusResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateOdometryRequest {
@@ -377,7 +377,7 @@ pub struct SetRateOdometryRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateOdometryResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionVelocityNedRequest {
@@ -388,7 +388,7 @@ pub struct SetRatePositionVelocityNedRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGroundTruthRequest {
@@ -399,7 +399,7 @@ pub struct SetRateGroundTruthRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGroundTruthResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateFixedwingMetricsRequest {
@@ -410,7 +410,7 @@ pub struct SetRateFixedwingMetricsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateFixedwingMetricsResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateImuRequest {
@@ -421,7 +421,7 @@ pub struct SetRateImuRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateImuResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateUnixEpochTimeRequest {
@@ -432,7 +432,7 @@ pub struct SetRateUnixEpochTimeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateUnixEpochTimeResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateDistanceSensorRequest {
@@ -443,16 +443,16 @@ pub struct SetRateDistanceSensorRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetRateDistanceSensorResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGpsGlobalOriginRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetGpsGlobalOriginResponse {
     #[prost(message, optional, tag = "1")]
-    pub telemetry_result: ::std::option::Option<TelemetryResult>,
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
     #[prost(message, optional, tag = "2")]
-    pub gps_global_origin: ::std::option::Option<GpsGlobalOrigin>,
+    pub gps_global_origin: ::core::option::Option<GpsGlobalOrigin>,
 }
 /// Position type in global coordinates.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -592,7 +592,7 @@ pub struct StatusText {
     pub r#type: i32,
     /// MAVLink status message
     #[prost(string, tag = "2")]
-    pub text: std::string::String,
+    pub text: ::prost::alloc::string::String,
 }
 /// Actuator control target type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -602,7 +602,7 @@ pub struct ActuatorControlTarget {
     pub group: i32,
     /// Controls normed from -1 to 1, where 0 is neutral position.
     #[prost(float, repeated, tag = "2")]
-    pub controls: ::std::vec::Vec<f32>,
+    pub controls: ::prost::alloc::vec::Vec<f32>,
 }
 /// Actuator output status type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -612,7 +612,7 @@ pub struct ActuatorOutputStatus {
     pub active: u32,
     /// Servo/motor output values
     #[prost(float, repeated, tag = "2")]
-    pub actuator: ::std::vec::Vec<f32>,
+    pub actuator: ::prost::alloc::vec::Vec<f32>,
 }
 ///
 /// Covariance type.
@@ -624,7 +624,7 @@ pub struct ActuatorOutputStatus {
 pub struct Covariance {
     /// Representation of a covariance matrix.
     #[prost(float, repeated, tag = "1")]
-    pub covariance_matrix: ::std::vec::Vec<f32>,
+    pub covariance_matrix: ::prost::alloc::vec::Vec<f32>,
 }
 /// Velocity type, represented in the Body (X Y Z) frame and in metres/second.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -666,23 +666,24 @@ pub struct Odometry {
     pub child_frame_id: i32,
     /// Position.
     #[prost(message, optional, tag = "4")]
-    pub position_body: ::std::option::Option<PositionBody>,
+    pub position_body: ::core::option::Option<PositionBody>,
     /// Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation).
     #[prost(message, optional, tag = "5")]
-    pub q: ::std::option::Option<Quaternion>,
+    pub q: ::core::option::Option<Quaternion>,
     /// Linear velocity (m/s).
     #[prost(message, optional, tag = "6")]
-    pub velocity_body: ::std::option::Option<VelocityBody>,
+    pub velocity_body: ::core::option::Option<VelocityBody>,
     /// Angular velocity (rad/s).
     #[prost(message, optional, tag = "7")]
-    pub angular_velocity_body: ::std::option::Option<AngularVelocityBody>,
+    pub angular_velocity_body: ::core::option::Option<AngularVelocityBody>,
     /// Pose cross-covariance matrix.
     #[prost(message, optional, tag = "8")]
-    pub pose_covariance: ::std::option::Option<Covariance>,
+    pub pose_covariance: ::core::option::Option<Covariance>,
     /// Velocity cross-covariance matrix.
     #[prost(message, optional, tag = "9")]
-    pub velocity_covariance: ::std::option::Option<Covariance>,
+    pub velocity_covariance: ::core::option::Option<Covariance>,
 }
+/// Nested message and enum types in `Odometry`.
 pub mod odometry {
     /// Mavlink frame id
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -742,10 +743,10 @@ pub struct VelocityNed {
 pub struct PositionVelocityNed {
     /// Position (NED)
     #[prost(message, optional, tag = "1")]
-    pub position: ::std::option::Option<PositionNed>,
+    pub position: ::core::option::Option<PositionNed>,
     /// Velocity (NED)
     #[prost(message, optional, tag = "2")]
-    pub velocity: ::std::option::Option<VelocityNed>,
+    pub velocity: ::core::option::Option<VelocityNed>,
 }
 /// GroundTruth message type.
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -817,13 +818,13 @@ pub struct MagneticFieldFrd {
 pub struct Imu {
     /// Acceleration
     #[prost(message, optional, tag = "1")]
-    pub acceleration_frd: ::std::option::Option<AccelerationFrd>,
+    pub acceleration_frd: ::core::option::Option<AccelerationFrd>,
     /// Angular velocity
     #[prost(message, optional, tag = "2")]
-    pub angular_velocity_frd: ::std::option::Option<AngularVelocityFrd>,
+    pub angular_velocity_frd: ::core::option::Option<AngularVelocityFrd>,
     /// Magnetic field
     #[prost(message, optional, tag = "3")]
-    pub magnetic_field_frd: ::std::option::Option<MagneticFieldFrd>,
+    pub magnetic_field_frd: ::core::option::Option<MagneticFieldFrd>,
     /// Temperature
     #[prost(float, tag = "4")]
     pub temperature_degc: f32,
@@ -849,8 +850,9 @@ pub struct TelemetryResult {
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
-    pub result_str: std::string::String,
+    pub result_str: ::prost::alloc::string::String,
 }
+/// Nested message and enum types in `TelemetryResult`.
 pub mod telemetry_result {
     /// Possible results returned for telemetry requests.
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -973,6 +975,7 @@ pub mod telemetry_service_client {
     #[doc = ""]
     #[doc = " Allow users to get vehicle telemetry and state information"]
     #[doc = " (e.g. battery, GPS, RC connection, flight mode etc.) and set telemetry update rates."]
+    #[derive(Debug, Clone)]
     pub struct TelemetryServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
@@ -990,17 +993,43 @@ pub mod telemetry_service_client {
     impl<T> TelemetryServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + HttpBody + Send + 'static,
+        T::ResponseBody: Body + Send + Sync + 'static,
         T::Error: Into<StdError>,
-        <T::ResponseBody as HttpBody>::Error: Into<StdError> + Send,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
             Self { inner }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = tonic::client::Grpc::with_interceptor(inner, interceptor);
-            Self { inner }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> TelemetryServiceClient<InterceptedService<T, F>>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            T: Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+                Into<StdError> + Send + Sync,
+        {
+            TelemetryServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        #[doc = r" Compress requests with `gzip`."]
+        #[doc = r""]
+        #[doc = r" This requires the server to support it otherwise it might respond with an"]
+        #[doc = r" error."]
+        pub fn send_gzip(mut self) -> Self {
+            self.inner = self.inner.send_gzip();
+            self
+        }
+        #[doc = r" Enable decompressing responses with `gzip`."]
+        pub fn accept_gzip(mut self) -> Self {
+            self.inner = self.inner.accept_gzip();
+            self
         }
         #[doc = " Subscribe to 'position' updates."]
         pub async fn subscribe_position(
@@ -1921,18 +1950,6 @@ pub mod telemetry_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
-    impl<T: Clone> Clone for TelemetryServiceClient<T> {
-        fn clone(&self) -> Self {
-            Self {
-                inner: self.inner.clone(),
-            }
-        }
-    }
-    impl<T> std::fmt::Debug for TelemetryServiceClient<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "TelemetryServiceClient {{ ... }}")
-        }
-    }
 }
 #[doc = r" Generated server implementations."]
 pub mod telemetry_service_server {
@@ -1942,7 +1959,7 @@ pub mod telemetry_service_server {
     #[async_trait]
     pub trait TelemetryService: Send + Sync + 'static {
         #[doc = "Server streaming response type for the SubscribePosition method."]
-        type SubscribePositionStream: Stream<Item = Result<super::PositionResponse, tonic::Status>>
+        type SubscribePositionStream: futures_core::Stream<Item = Result<super::PositionResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -1952,7 +1969,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribePositionRequest>,
         ) -> Result<tonic::Response<Self::SubscribePositionStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeHome method."]
-        type SubscribeHomeStream: Stream<Item = Result<super::HomeResponse, tonic::Status>>
+        type SubscribeHomeStream: futures_core::Stream<Item = Result<super::HomeResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -1962,7 +1979,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeHomeRequest>,
         ) -> Result<tonic::Response<Self::SubscribeHomeStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeInAir method."]
-        type SubscribeInAirStream: Stream<Item = Result<super::InAirResponse, tonic::Status>>
+        type SubscribeInAirStream: futures_core::Stream<Item = Result<super::InAirResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -1972,7 +1989,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeInAirRequest>,
         ) -> Result<tonic::Response<Self::SubscribeInAirStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeLandedState method."]
-        type SubscribeLandedStateStream: Stream<Item = Result<super::LandedStateResponse, tonic::Status>>
+        type SubscribeLandedStateStream: futures_core::Stream<Item = Result<super::LandedStateResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -1982,7 +1999,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeLandedStateRequest>,
         ) -> Result<tonic::Response<Self::SubscribeLandedStateStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeArmed method."]
-        type SubscribeArmedStream: Stream<Item = Result<super::ArmedResponse, tonic::Status>>
+        type SubscribeArmedStream: futures_core::Stream<Item = Result<super::ArmedResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -1992,7 +2009,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeArmedRequest>,
         ) -> Result<tonic::Response<Self::SubscribeArmedStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeAttitudeQuaternion method."]
-        type SubscribeAttitudeQuaternionStream: Stream<Item = Result<super::AttitudeQuaternionResponse, tonic::Status>>
+        type SubscribeAttitudeQuaternionStream: futures_core::Stream<Item = Result<super::AttitudeQuaternionResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2002,7 +2019,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeAttitudeQuaternionRequest>,
         ) -> Result<tonic::Response<Self::SubscribeAttitudeQuaternionStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeAttitudeEuler method."]
-        type SubscribeAttitudeEulerStream: Stream<Item = Result<super::AttitudeEulerResponse, tonic::Status>>
+        type SubscribeAttitudeEulerStream: futures_core::Stream<Item = Result<super::AttitudeEulerResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2012,8 +2029,9 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeAttitudeEulerRequest>,
         ) -> Result<tonic::Response<Self::SubscribeAttitudeEulerStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeAttitudeAngularVelocityBody method."]
-        type SubscribeAttitudeAngularVelocityBodyStream: Stream<Item = Result<super::AttitudeAngularVelocityBodyResponse, tonic::Status>>
-            + Send
+        type SubscribeAttitudeAngularVelocityBodyStream: futures_core::Stream<
+                Item = Result<super::AttitudeAngularVelocityBodyResponse, tonic::Status>,
+            > + Send
             + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (angular velocity)"]
@@ -2022,8 +2040,9 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeAttitudeAngularVelocityBodyRequest>,
         ) -> Result<tonic::Response<Self::SubscribeAttitudeAngularVelocityBodyStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeCameraAttitudeQuaternion method."]
-        type SubscribeCameraAttitudeQuaternionStream: Stream<Item = Result<super::CameraAttitudeQuaternionResponse, tonic::Status>>
-            + Send
+        type SubscribeCameraAttitudeQuaternionStream: futures_core::Stream<
+                Item = Result<super::CameraAttitudeQuaternionResponse, tonic::Status>,
+            > + Send
             + Sync
             + 'static;
         #[doc = " Subscribe to 'camera attitude' updates (quaternion)."]
@@ -2032,7 +2051,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeCameraAttitudeQuaternionRequest>,
         ) -> Result<tonic::Response<Self::SubscribeCameraAttitudeQuaternionStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeCameraAttitudeEuler method."]
-        type SubscribeCameraAttitudeEulerStream: Stream<Item = Result<super::CameraAttitudeEulerResponse, tonic::Status>>
+        type SubscribeCameraAttitudeEulerStream: futures_core::Stream<Item = Result<super::CameraAttitudeEulerResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2042,7 +2061,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeCameraAttitudeEulerRequest>,
         ) -> Result<tonic::Response<Self::SubscribeCameraAttitudeEulerStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeVelocityNed method."]
-        type SubscribeVelocityNedStream: Stream<Item = Result<super::VelocityNedResponse, tonic::Status>>
+        type SubscribeVelocityNedStream: futures_core::Stream<Item = Result<super::VelocityNedResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2052,7 +2071,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeVelocityNedRequest>,
         ) -> Result<tonic::Response<Self::SubscribeVelocityNedStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeGpsInfo method."]
-        type SubscribeGpsInfoStream: Stream<Item = Result<super::GpsInfoResponse, tonic::Status>>
+        type SubscribeGpsInfoStream: futures_core::Stream<Item = Result<super::GpsInfoResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2062,7 +2081,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeGpsInfoRequest>,
         ) -> Result<tonic::Response<Self::SubscribeGpsInfoStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeBattery method."]
-        type SubscribeBatteryStream: Stream<Item = Result<super::BatteryResponse, tonic::Status>>
+        type SubscribeBatteryStream: futures_core::Stream<Item = Result<super::BatteryResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2072,7 +2091,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeBatteryRequest>,
         ) -> Result<tonic::Response<Self::SubscribeBatteryStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeFlightMode method."]
-        type SubscribeFlightModeStream: Stream<Item = Result<super::FlightModeResponse, tonic::Status>>
+        type SubscribeFlightModeStream: futures_core::Stream<Item = Result<super::FlightModeResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2082,7 +2101,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeFlightModeRequest>,
         ) -> Result<tonic::Response<Self::SubscribeFlightModeStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeHealth method."]
-        type SubscribeHealthStream: Stream<Item = Result<super::HealthResponse, tonic::Status>>
+        type SubscribeHealthStream: futures_core::Stream<Item = Result<super::HealthResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2092,7 +2111,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeHealthRequest>,
         ) -> Result<tonic::Response<Self::SubscribeHealthStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeRcStatus method."]
-        type SubscribeRcStatusStream: Stream<Item = Result<super::RcStatusResponse, tonic::Status>>
+        type SubscribeRcStatusStream: futures_core::Stream<Item = Result<super::RcStatusResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2102,7 +2121,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeRcStatusRequest>,
         ) -> Result<tonic::Response<Self::SubscribeRcStatusStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeStatusText method."]
-        type SubscribeStatusTextStream: Stream<Item = Result<super::StatusTextResponse, tonic::Status>>
+        type SubscribeStatusTextStream: futures_core::Stream<Item = Result<super::StatusTextResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2112,7 +2131,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeStatusTextRequest>,
         ) -> Result<tonic::Response<Self::SubscribeStatusTextStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeActuatorControlTarget method."]
-        type SubscribeActuatorControlTargetStream: Stream<Item = Result<super::ActuatorControlTargetResponse, tonic::Status>>
+        type SubscribeActuatorControlTargetStream: futures_core::Stream<Item = Result<super::ActuatorControlTargetResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2122,7 +2141,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeActuatorControlTargetRequest>,
         ) -> Result<tonic::Response<Self::SubscribeActuatorControlTargetStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeActuatorOutputStatus method."]
-        type SubscribeActuatorOutputStatusStream: Stream<Item = Result<super::ActuatorOutputStatusResponse, tonic::Status>>
+        type SubscribeActuatorOutputStatusStream: futures_core::Stream<Item = Result<super::ActuatorOutputStatusResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2132,7 +2151,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeActuatorOutputStatusRequest>,
         ) -> Result<tonic::Response<Self::SubscribeActuatorOutputStatusStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeOdometry method."]
-        type SubscribeOdometryStream: Stream<Item = Result<super::OdometryResponse, tonic::Status>>
+        type SubscribeOdometryStream: futures_core::Stream<Item = Result<super::OdometryResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2142,7 +2161,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeOdometryRequest>,
         ) -> Result<tonic::Response<Self::SubscribeOdometryStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribePositionVelocityNed method."]
-        type SubscribePositionVelocityNedStream: Stream<Item = Result<super::PositionVelocityNedResponse, tonic::Status>>
+        type SubscribePositionVelocityNedStream: futures_core::Stream<Item = Result<super::PositionVelocityNedResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2152,7 +2171,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribePositionVelocityNedRequest>,
         ) -> Result<tonic::Response<Self::SubscribePositionVelocityNedStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeGroundTruth method."]
-        type SubscribeGroundTruthStream: Stream<Item = Result<super::GroundTruthResponse, tonic::Status>>
+        type SubscribeGroundTruthStream: futures_core::Stream<Item = Result<super::GroundTruthResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2162,7 +2181,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeGroundTruthRequest>,
         ) -> Result<tonic::Response<Self::SubscribeGroundTruthStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeFixedwingMetrics method."]
-        type SubscribeFixedwingMetricsStream: Stream<Item = Result<super::FixedwingMetricsResponse, tonic::Status>>
+        type SubscribeFixedwingMetricsStream: futures_core::Stream<Item = Result<super::FixedwingMetricsResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2172,7 +2191,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeFixedwingMetricsRequest>,
         ) -> Result<tonic::Response<Self::SubscribeFixedwingMetricsStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeImu method."]
-        type SubscribeImuStream: Stream<Item = Result<super::ImuResponse, tonic::Status>>
+        type SubscribeImuStream: futures_core::Stream<Item = Result<super::ImuResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2182,7 +2201,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeImuRequest>,
         ) -> Result<tonic::Response<Self::SubscribeImuStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeHealthAllOk method."]
-        type SubscribeHealthAllOkStream: Stream<Item = Result<super::HealthAllOkResponse, tonic::Status>>
+        type SubscribeHealthAllOkStream: futures_core::Stream<Item = Result<super::HealthAllOkResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2192,7 +2211,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeHealthAllOkRequest>,
         ) -> Result<tonic::Response<Self::SubscribeHealthAllOkStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeUnixEpochTime method."]
-        type SubscribeUnixEpochTimeStream: Stream<Item = Result<super::UnixEpochTimeResponse, tonic::Status>>
+        type SubscribeUnixEpochTimeStream: futures_core::Stream<Item = Result<super::UnixEpochTimeResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2202,7 +2221,7 @@ pub mod telemetry_service_server {
             request: tonic::Request<super::SubscribeUnixEpochTimeRequest>,
         ) -> Result<tonic::Response<Self::SubscribeUnixEpochTimeStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeDistanceSensor method."]
-        type SubscribeDistanceSensorStream: Stream<Item = Result<super::DistanceSensorResponse, tonic::Status>>
+        type SubscribeDistanceSensorStream: futures_core::Stream<Item = Result<super::DistanceSensorResponse, tonic::Status>>
             + Send
             + Sync
             + 'static;
@@ -2318,24 +2337,31 @@ pub mod telemetry_service_server {
     #[derive(Debug)]
     pub struct TelemetryServiceServer<T: TelemetryService> {
         inner: _Inner<T>,
+        accept_compression_encodings: (),
+        send_compression_encodings: (),
     }
-    struct _Inner<T>(Arc<T>, Option<tonic::Interceptor>);
+    struct _Inner<T>(Arc<T>);
     impl<T: TelemetryService> TelemetryServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
-            let inner = _Inner(inner, None);
-            Self { inner }
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+            }
         }
-        pub fn with_interceptor(inner: T, interceptor: impl Into<tonic::Interceptor>) -> Self {
-            let inner = Arc::new(inner);
-            let inner = _Inner(inner, Some(interceptor.into()));
-            Self { inner }
+        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        where
+            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
         }
     }
     impl<T, B> Service<http::Request<B>> for TelemetryServiceServer<T>
     where
         T: TelemetryService,
-        B: HttpBody + Send + Sync + 'static,
+        B: Body + Send + Sync + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -2367,17 +2393,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribePositionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2403,17 +2429,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeHomeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2439,17 +2465,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeInAirSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2475,17 +2501,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeLandedStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2511,17 +2537,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeArmedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2550,17 +2576,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeAttitudeQuaternionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2587,17 +2613,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeAttitudeEulerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2630,17 +2656,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeAttitudeAngularVelocityBodySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2671,17 +2697,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeCameraAttitudeQuaternionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2710,17 +2736,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeCameraAttitudeEulerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2746,17 +2772,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2782,17 +2808,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeGpsInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2818,17 +2844,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeBatterySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2854,17 +2880,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeFlightModeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2890,17 +2916,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeHealthSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2926,17 +2952,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeRcStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -2962,17 +2988,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeStatusTextSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3001,17 +3027,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeActuatorControlTargetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3040,17 +3066,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeActuatorOutputStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3076,17 +3102,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeOdometrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3115,17 +3141,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribePositionVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3151,17 +3177,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeGroundTruthSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3189,17 +3215,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeFixedwingMetricsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3225,17 +3251,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeImuSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3262,17 +3288,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeHealthAllOkSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3299,17 +3325,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeUnixEpochTimeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3336,17 +3362,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1;
                         let inner = inner.0;
                         let method = SubscribeDistanceSensorSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -3370,17 +3396,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRatePositionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3403,17 +3429,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateHomeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3437,17 +3463,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateInAirSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3471,17 +3497,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateLandedStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3505,17 +3531,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateAttitudeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3540,17 +3566,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateCameraAttitudeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3574,17 +3600,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3608,17 +3634,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateGpsInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3642,17 +3668,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateBatterySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3676,17 +3702,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateRcStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3712,17 +3738,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateActuatorControlTargetSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3748,17 +3774,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateActuatorOutputStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3782,17 +3808,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateOdometrySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3818,17 +3844,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRatePositionVelocityNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3852,17 +3878,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateGroundTruthSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3887,17 +3913,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateFixedwingMetricsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3920,17 +3946,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateImuSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3955,17 +3981,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateUnixEpochTimeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -3990,17 +4016,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = SetRateDistanceSensorSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -4024,17 +4050,17 @@ pub mod telemetry_service_server {
                             Box::pin(fut)
                         }
                     }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let interceptor = inner.1.clone();
                         let inner = inner.0;
                         let method = GetGpsGlobalOriginSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = if let Some(interceptor) = interceptor {
-                            tonic::server::Grpc::with_interceptor(codec, interceptor)
-                        } else {
-                            tonic::server::Grpc::new(codec)
-                        };
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -4044,7 +4070,8 @@ pub mod telemetry_service_server {
                     Ok(http::Response::builder()
                         .status(200)
                         .header("grpc-status", "12")
-                        .body(tonic::body::BoxBody::empty())
+                        .header("content-type", "application/grpc")
+                        .body(empty_body())
                         .unwrap())
                 }),
             }
@@ -4053,12 +4080,16 @@ pub mod telemetry_service_server {
     impl<T: TelemetryService> Clone for TelemetryServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
-            Self { inner }
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+            }
         }
     }
     impl<T: TelemetryService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
-            Self(self.0.clone(), self.1.clone())
+            Self(self.0.clone())
         }
     }
     impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
