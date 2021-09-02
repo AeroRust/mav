@@ -970,7 +970,7 @@ pub enum LandedState {
 }
 #[doc = r" Generated client implementations."]
 pub mod telemetry_service_client {
-    #![allow(unused_variables, dead_code, missing_docs)]
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     #[doc = ""]
     #[doc = " Allow users to get vehicle telemetry and state information"]
@@ -1006,14 +1006,14 @@ pub mod telemetry_service_client {
             interceptor: F,
         ) -> TelemetryServiceClient<InterceptedService<T, F>>
         where
-            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
-            T: Service<
+            F: tonic::service::Interceptor,
+            T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as Service<http::Request<tonic::body::BoxBody>>>::Error:
+            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
             TelemetryServiceClient::new(InterceptedService::new(inner, interceptor))
@@ -1953,7 +1953,7 @@ pub mod telemetry_service_client {
 }
 #[doc = r" Generated server implementations."]
 pub mod telemetry_service_server {
-    #![allow(unused_variables, dead_code, missing_docs)]
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     #[doc = "Generated trait containing gRPC methods that should be implemented for use with TelemetryServiceServer."]
     #[async_trait]
@@ -2353,12 +2353,12 @@ pub mod telemetry_service_server {
         }
         pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
         where
-            F: FnMut(tonic::Request<()>) -> Result<tonic::Request<()>, tonic::Status>,
+            F: tonic::service::Interceptor,
         {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> Service<http::Request<B>> for TelemetryServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for TelemetryServiceServer<T>
     where
         T: TelemetryService,
         B: Body + Send + Sync + 'static,

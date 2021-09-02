@@ -2,7 +2,6 @@
 
 pub use options::AsyncType;
 
-
 #[path = "grpc/mavsdk.options.rs"]
 mod options;
 
@@ -10,8 +9,8 @@ mod options;
 mod mavsdk_action;
 
 pub mod action {
-    
     pub use super::mavsdk_action::*;
+
     pub use action_service_client::ActionServiceClient;
     pub use action_service_server::{ActionServiceServer, ActionService};
 }
@@ -27,16 +26,44 @@ pub mod calibration {
 }
 
 #[path = "grpc/mavsdk.rpc.camera.rs"]
-pub mod camera;
+mod mavsdk_camera;
+
+pub mod camera {
+    pub use super::mavsdk_camera::*;
+    
+    pub use camera_service_client::CameraServiceClient;
+    pub use camera_service_server::{CameraService, CameraServiceServer};
+}
 
 #[path = "grpc/mavsdk.rpc.core.rs"]
-pub mod core;
+mod mavsdk_core;
+
+pub mod core {
+    pub use super::mavsdk_core::*;
+    
+    pub use core_service_client::CoreServiceClient;
+    pub use core_service_server::{CoreService, CoreServiceServer};
+}
 
 #[path = "grpc/mavsdk.rpc.geofence.rs"]
-pub mod geofence;
+mod mavsdk_geofence;
+
+pub mod geofence {
+    pub use super::mavsdk_geofence::*;
+    
+    pub use geofence_service_client::GeofenceServiceClient;
+    pub use geofence_service_server::{GeofenceService, GeofenceServiceServer};
+}
 
 #[path = "grpc/mavsdk.rpc.gimbal.rs"]
-pub mod gimbal;
+mod mavsdk_gimbal;
+
+pub mod gimbal {
+    pub use super::mavsdk_gimbal::*;
+    
+    pub use gimbal_service_client::GimbalServiceClient;
+    pub use gimbal_service_server::{GimbalService, GimbalServiceServer};
+}
 
 #[path = "grpc/mavsdk.rpc.info.rs"]
 mod mavsdk_info;
@@ -49,19 +76,54 @@ pub mod info {
 }
 
 #[path = "grpc/mavsdk.rpc.mission.rs"]
-pub mod mission;
+mod mavsdk_mission;
+
+pub mod mission {
+    pub use super::mavsdk_mission::*;
+    
+    pub use mission_service_client::MissionServiceClient;
+    pub use mission_service_server::{MissionServiceServer, MissionService};
+}
 
 #[path = "grpc/mavsdk.rpc.mocap.rs"]
-pub mod mocap;
+mod mavsdk_mocap;
+
+pub mod mocap {
+    pub use super::mavsdk_mocap::*;
+    
+    pub use mocap_service_client::MocapServiceClient;
+    pub use mocap_service_server::{MocapServiceServer, MocapService};
+}
 
 #[path = "grpc/mavsdk.rpc.offboard.rs"]
-pub mod offboard;
+mod mavsdk_offboard;
+
+pub mod offboard {
+    pub use super::mavsdk_offboard::*;
+    
+    pub use offboard_service_client::OffboardServiceClient;
+    pub use offboard_service_server::{OffboardServiceServer, OffboardService};
+}
 
 #[path = "grpc/mavsdk.rpc.param.rs"]
-pub mod param;
+mod mavsdk_param;
+
+pub mod param {
+    pub use super::mavsdk_param::*;
+    
+    pub use param_service_client::ParamServiceClient;
+    pub use param_service_server::{ParamServiceServer, ParamService};
+}
 
 #[path = "grpc/mavsdk.rpc.shell.rs"]
-pub mod shell;
+mod mavsdk_shell;
+
+pub mod shell {
+    pub use super::mavsdk_shell::*;
+    
+    pub use shell_service_client::ShellServiceClient;
+    pub use shell_service_server::{ShellServiceServer, ShellService};
+}
 
 #[path = "grpc/mavsdk.rpc.telemetry.rs"]
 mod mavsdk_telemetry;
