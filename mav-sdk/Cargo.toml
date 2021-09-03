@@ -12,7 +12,7 @@ Simple API (gRPC) for managing one or more vehicles,
 providing programmatic access to vehicle information and telemetry,
 and control over missions, movement and other operations.
 """
-keywords = ["mavlink", "mavsdk"]
+keywords = ["mavlink", "mavsdk", "grpc", "autopilot", "drones"]
 categories = ["api-bindings", "science::robotics"]
 include = ["src/", "LICENSE-*", "README.md", "CHANGELOG.md", "COPYRIGHT"]
 
