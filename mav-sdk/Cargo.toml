@@ -1,8 +1,26 @@
 [package]
-authors = ["Lachezar Lechev <elpiel93@gmail.com>"]
+authors = ["AeroRust"]
 edition = "2018"
 name = "mav-sdk"
 version = "0.1.0"
+license = "MIT OR Apache-2.0"
+readme = "../README.md"
+repository = "https://github.com/AeroRust/mav"
+documentation = "https://docs.rs/mav-sdk"
+description = """
+Simple API (gRPC) for managing one or more vehicles,
+providing programmatic access to vehicle information and telemetry,
+and control over missions, movement and other operations.
+"""
+keywords = ["mavlink", "mavsdk"]
+categories = ["api", "grpc"]
+include = ["src/", "LICENSE-*", "README.md", "CHANGELOG.md", "COPYRIGHT"]
+
+[package.metadata.docs.rs]
+# To build locally:
+# RUSTDOCFLAGS="--cfg doc_cfg" cargo +nightly doc --all-features --no-deps --open
+all-features = true
+rustdoc-args = ["--cfg", "doc_cfg"]
 
 [dependencies]
 
