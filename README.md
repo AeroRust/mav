@@ -60,6 +60,13 @@ Gazebo doesn't yet have built-in support for ArduPilot and it requires a plugin 
 
 - https://ardupilot.org/dev/docs/using-gazebo-simulator-with-sitl.html
 
+Connecting to remote gazebo server:
+
+https://answers.gazebosim.org/question/7117/running-gzserver-on-ec2-and-gzclient-locally-is-not-working/?answer=7172#post-id-7172
+
+```sh
+GAZEBO_IP=172.23.3.104 GAZEBO_MASTER_URI=172.23.1.170:12345 gzclient
+```
 #### MAVLink
 - MAVLink basics: https://ardupilot.org/dev/docs/mavlink-basics.html#mavlink-basics
 - MAVLink Routing in ArduPilot: https://ardupilot.org/dev/docs/mavlink-routing-in-ardupilot.html
