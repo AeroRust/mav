@@ -48,31 +48,41 @@ fn proto_include(plugin_name: &str) -> PathBuf {
 }
 
 /// build in grpc, adding all files to the build instead generating them one by one
-fn tonic_build_single(plugins: &[&str], mavsdk_options_include: PathBuf) -> Result<(), std::io::Error> {
+fn tonic_build_single(
+    plugins: &[&str],
+    mavsdk_options_include: PathBuf,
+) -> Result<(), std::io::Error> {
     let mavsdk_options_path = PathBuf::from(format!(
         "{submodule}/protos/{name}.proto",
         submodule = PROTO_GIT_SUBMODULE,
         name = MAVSDK_OPTIONS
     ));
 
-
-    let (proto_paths, proto_includes) = plugins
-        .iter()
-        .fold((vec![mavsdk_options_path], vec![mavsdk_options_include]), |(mut proto_paths, mut proto_includes, ), plugin| {
+    let (proto_paths, proto_includes) = plugins.iter().fold(
+        (vec![mavsdk_options_path], vec![mavsdk_options_include]),
+        |(mut proto_paths, mut proto_includes), plugin| {
             proto_paths.push(proto_path(plugin));
             proto_includes.push(proto_include(plugin));
 
             (proto_paths, proto_includes)
-        });
+        },
+    );
 
-        tonic_build::configure()
+    // let mut attributes = Attributes::default();
+    // attributes.push_struct("AttitudeQuaternionResponse", "#[derive(Serialize, Deserialize)]");
+
+    let derive_serde = "#[derive(serde::Serialize, serde::Deserialize)]";
+    tonic_build::configure()
         // .build_server(false)
+        // Quaternions
+        .type_attribute("Quaternion", derive_serde)
+        .type_attribute("AttitudeQuaternionResponse", derive_serde)
+        // GPS position types
+        .type_attribute("Position", derive_serde)
+        .type_attribute("PositionResponse", derive_serde)
         .format(true)
         .out_dir("src/grpc")
-        .compile(
-            &proto_paths,
-            &proto_includes,
-        )
+        .compile(&proto_paths, &proto_includes)
 }
 
 /// build in sub-dirs each of the plugins and finally adding `MAVSDK_OPTIONS`
@@ -81,7 +91,6 @@ fn _tonic_build(plugins: &[&str], mavsdk_options_include: PathBuf) -> Result<(),
     plugins
         .iter()
         .map(|plugin| {
-
             // (proto_path(plugin), proto_include(plugin))
             tonic_build::configure()
                 // .build_server(false)

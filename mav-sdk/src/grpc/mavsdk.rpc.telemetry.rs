@@ -1,6 +1,6 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePositionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionResponse {
     /// The next position
     #[prost(message, optional, tag = "1")]
@@ -40,7 +40,7 @@ pub struct ArmedResponse {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeQuaternionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeQuaternionResponse {
     /// The next attitude (quaternion)
     #[prost(message, optional, tag = "1")]
@@ -455,7 +455,7 @@ pub struct GetGpsGlobalOriginResponse {
     pub gps_global_origin: ::core::option::Option<GpsGlobalOrigin>,
 }
 /// Position type in global coordinates.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Position {
     /// Latitude in degrees (range: -90 to +90)
     #[prost(double, tag = "1")]
@@ -479,7 +479,7 @@ pub struct Position {
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
 /// For more info see: https://en.wikipedia.org/wiki/Quaternion
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
     #[prost(float, tag = "1")]

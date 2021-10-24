@@ -102,7 +102,7 @@ pub struct Covariance {
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
 /// For more info see: https://en.wikipedia.org/wiki/Quaternion
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
     #[prost(float, tag = "1")]

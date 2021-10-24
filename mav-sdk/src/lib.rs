@@ -13,7 +13,14 @@ use grpc::{
     geofence::GeofenceServiceClient, gimbal::GimbalServiceClient, mission::MissionServiceClient,
     offboard::OffboardServiceClient, param::ParamServiceClient, shell::ShellServiceClient,
 };
+
 use tonic::transport::{Channel, Endpoint};
+
+/// HTTP/2 server & client transport
+pub mod transport {
+    /// Re-export Channel
+    pub use tonic::transport::Channel;
+}
 
 pub const DEFAULT_URL: &str = "http://0.0.0.0:14540";
 pub const OFFBOARD_PORT: u16 = 14540;
@@ -52,7 +59,7 @@ impl Drone {
             offboard: OffboardServiceClient::new(channel.clone()),
             param: ParamServiceClient::new(channel.clone()),
             shell: ShellServiceClient::new(channel.clone()),
-            telemetry: TelemetryServiceClient::new(channel.clone()),
+            telemetry: TelemetryServiceClient::new(channel),
         })
     }
 }
