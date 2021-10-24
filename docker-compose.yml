@@ -5,12 +5,23 @@ services:
     image: jonasvautherin/px4-gazebo-headless:1.11.0
     container_name: gazebo-headless
     ports:
+      # for MAVLINK API/Offboard
       - "14540:14540"
+      # for MAVLINK QGroundControl
+      - "14550:14550"
+      # For Video Stream
+      # try the RTSP port https://github.com/JonasVautherin/px4-gazebo-headless/blob/master/sitl_rtsp_proxy/main.cpp#L12
+      - "127.0.0.1:8554:8554/tcp"
+      # try default UDP Gazebo port https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
+      - "5600:5600/udp"
     networks:
       - internal
       - external
     stdin_open: true
     tty: true
+    # Video stream is only supported on `Typhoon H480` see https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
+    # Proxy service from docker container using `H264`
+    command: -v typhoon_h480 -w baylands
   mavsdk-grpc-server:
     build:
       dockerfile: Dockerfile-server
@@ -27,3 +38,9 @@ networks:
   internal:
     internal: true
   external:
+  #   driver: bridge
+  #   ipam:
+  #     driver: default
+  #     config:
+  #     - subnet: 192.168.220.0/24
+
