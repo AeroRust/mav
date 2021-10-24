@@ -1,4 +1,4 @@
-use std::{time::Duration, thread::sleep};
+use std::{thread::sleep, time::Duration};
 
 use mav_sdk::Drone;
 
@@ -35,7 +35,6 @@ async fn main() {
     flight(drone).await;
 }
 
-
 async fn flight(mut drone: Drone) {
     print!("Arming drone... ");
 
@@ -69,14 +68,16 @@ async fn flight(mut drone: Drone) {
     println!("Telemetry - Subscribe for positions");
 
     let telemetry_request = mav_sdk::grpc::telemetry::SubscribePositionRequest {};
-    let mut telemetry_streaming = drone.telemetry.subscribe_position(telemetry_request).await.unwrap().into_inner();
-
+    let mut telemetry_streaming = drone
+        .telemetry
+        .subscribe_position(telemetry_request)
+        .await
+        .unwrap()
+        .into_inner();
 
     println!("Telemetry - Do we have a Position update?");
-
 
     if let Some(next_message) = telemetry_streaming.message().await.unwrap() {
         println!("{:?}", next_message);
     }
-
 }

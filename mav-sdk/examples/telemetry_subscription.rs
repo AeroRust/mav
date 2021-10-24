@@ -1,4 +1,4 @@
-use mav_sdk::{Drone, grpc::telemetry::AttitudeEulerResponse};
+use mav_sdk::{grpc::telemetry::AttitudeEulerResponse, Drone};
 
 const MAVSDK_SERVER: &str = "http://127.0.0.1:4000";
 
