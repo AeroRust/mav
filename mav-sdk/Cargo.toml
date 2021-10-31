@@ -1,5 +1,5 @@
 [package]
-authors = ["AeroRust"]
+authors = ["AeroRust <aerospace.rust@gmail.com>"]
 edition = "2018"
 name = "mav-sdk"
 version = "0.2.0-pre"
@@ -29,7 +29,8 @@ tonic = "=0.5.2"
 prost = "=0.8.0"
 
 # Used for serialization of generated responses
-serde = { version = "1.0", features = ["derive"]}
+serde = { version = "1.0", features = ["derive"], optional = true}
+# log = {version = "0.4", features = ["max_level_info"]}
 
 [dev-dependencies]
 tokio = {version = "1.8", features = ["macros", "rt-multi-thread", "signal"]}
@@ -38,4 +39,8 @@ serde_json = "1"
 [build-dependencies]
 tonic-build = {version = "=0.5.2"}
 
-[lib]
+[features]
+default = ["with_serde"]
+
+# with_serde = ["serde", "log/serde"]
+with_serde = ["serde"]

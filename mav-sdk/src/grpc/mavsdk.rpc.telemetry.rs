@@ -1,4 +1,4 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePositionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionResponse {
@@ -6,39 +6,39 @@ pub struct PositionResponse {
     #[prost(message, optional, tag = "1")]
     pub position: ::core::option::Option<Position>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHomeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HomeResponse {
     /// The next home position
     #[prost(message, optional, tag = "1")]
     pub home: ::core::option::Option<Position>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeInAirRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct InAirResponse {
     /// The next 'in-air' state
     #[prost(bool, tag = "1")]
     pub is_in_air: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeLandedStateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct LandedStateResponse {
     /// The next 'landed' state
     #[prost(enumeration = "LandedState", tag = "1")]
     pub landed_state: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeArmedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ArmedResponse {
     /// The next 'armed' state
     #[prost(bool, tag = "1")]
     pub is_armed: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeQuaternionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeQuaternionResponse {
@@ -46,408 +46,408 @@ pub struct AttitudeQuaternionResponse {
     #[prost(message, optional, tag = "1")]
     pub attitude_quaternion: ::core::option::Option<Quaternion>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeEulerRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeEulerResponse {
     /// The next attitude (Euler)
     #[prost(message, optional, tag = "1")]
     pub attitude_euler: ::core::option::Option<EulerAngle>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeAngularVelocityBodyRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeAngularVelocityBodyResponse {
     /// The next angular velocity (rad/s)
     #[prost(message, optional, tag = "1")]
     pub attitude_angular_velocity_body: ::core::option::Option<AngularVelocityBody>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCameraAttitudeQuaternionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CameraAttitudeQuaternionResponse {
     /// The next camera attitude (quaternion)
     #[prost(message, optional, tag = "1")]
     pub attitude_quaternion: ::core::option::Option<Quaternion>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCameraAttitudeEulerRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CameraAttitudeEulerResponse {
     /// The next camera attitude (Euler)
     #[prost(message, optional, tag = "1")]
     pub attitude_euler: ::core::option::Option<EulerAngle>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeVelocityNedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityNedResponse {
     /// The next velocity (NED)
     #[prost(message, optional, tag = "1")]
     pub velocity_ned: ::core::option::Option<VelocityNed>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeGpsInfoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GpsInfoResponse {
     /// The next 'GPS info' state
     #[prost(message, optional, tag = "1")]
     pub gps_info: ::core::option::Option<GpsInfo>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeBatteryRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct BatteryResponse {
     /// The next 'battery' state
     #[prost(message, optional, tag = "1")]
     pub battery: ::core::option::Option<Battery>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeFlightModeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FlightModeResponse {
     /// The next flight mode
     #[prost(enumeration = "FlightMode", tag = "1")]
     pub flight_mode: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHealthRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HealthResponse {
     /// The next 'health' state
     #[prost(message, optional, tag = "1")]
     pub health: ::core::option::Option<Health>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeRcStatusRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RcStatusResponse {
     /// The next RC status
     #[prost(message, optional, tag = "1")]
     pub rc_status: ::core::option::Option<RcStatus>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeStatusTextRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StatusTextResponse {
     /// The next 'status text'
     #[prost(message, optional, tag = "1")]
     pub status_text: ::core::option::Option<StatusText>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeActuatorControlTargetRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorControlTargetResponse {
     /// The next actuator control target
     #[prost(message, optional, tag = "1")]
     pub actuator_control_target: ::core::option::Option<ActuatorControlTarget>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeActuatorOutputStatusRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorOutputStatusResponse {
     /// The next actuator output status
     #[prost(message, optional, tag = "1")]
     pub actuator_output_status: ::core::option::Option<ActuatorOutputStatus>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeOdometryRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct OdometryResponse {
     /// The next odometry status
     #[prost(message, optional, tag = "1")]
     pub odometry: ::core::option::Option<Odometry>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePositionVelocityNedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionVelocityNedResponse {
     /// The next position and velocity status
     #[prost(message, optional, tag = "1")]
     pub position_velocity_ned: ::core::option::Option<PositionVelocityNed>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeGroundTruthRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GroundTruthResponse {
     /// Ground truth position information available in simulation
     #[prost(message, optional, tag = "1")]
     pub ground_truth: ::core::option::Option<GroundTruth>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeFixedwingMetricsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FixedwingMetricsResponse {
     /// The next fixedwing metrics
     #[prost(message, optional, tag = "1")]
     pub fixedwing_metrics: ::core::option::Option<FixedwingMetrics>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeImuRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ImuResponse {
     /// The next IMU status
     #[prost(message, optional, tag = "1")]
     pub imu: ::core::option::Option<Imu>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHealthAllOkRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HealthAllOkResponse {
     /// The next 'health all ok' status
     #[prost(bool, tag = "1")]
     pub is_health_all_ok: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeUnixEpochTimeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UnixEpochTimeResponse {
     /// The next 'unix epoch time' status
     #[prost(uint64, tag = "1")]
     pub time_us: u64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeDistanceSensorRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DistanceSensorResponse {
     /// The next Distance Sensor status
     #[prost(message, optional, tag = "1")]
     pub distance_sensor: ::core::option::Option<DistanceSensor>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateHomeRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateHomeResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateInAirRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateInAirResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateLandedStateRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateLandedStateResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeAngularVelocityBodyRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateAttitudeAngularVelocityBodyResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeQuaternionRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeQuaternionResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateCameraAttitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVelocityNedRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGpsInfoRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGpsInfoResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateBatteryRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateBatteryResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRcStatusRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRcStatusResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorControlTargetRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorControlTargetResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorOutputStatusRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateActuatorOutputStatusResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateOdometryRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateOdometryResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionVelocityNedRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGroundTruthRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateGroundTruthResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateFixedwingMetricsRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateFixedwingMetricsResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateImuRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateImuResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateUnixEpochTimeRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateUnixEpochTimeResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateDistanceSensorRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateDistanceSensorResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetGpsGlobalOriginRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetGpsGlobalOriginResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
@@ -501,7 +501,7 @@ pub struct Quaternion {
 /// The Euler angles follow the convention of a 3-2-1 intrinsic Tait-Bryan rotation sequence.
 ///
 /// For more info see https://en.wikipedia.org/wiki/Euler_angles
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct EulerAngle {
     /// Roll angle in degrees, positive is banking to the right
     #[prost(float, tag = "1")]
@@ -514,7 +514,7 @@ pub struct EulerAngle {
     pub yaw_deg: f32,
 }
 /// Angular velocity type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AngularVelocityBody {
     /// Roll angular velocity
     #[prost(float, tag = "1")]
@@ -527,7 +527,7 @@ pub struct AngularVelocityBody {
     pub yaw_rad_s: f32,
 }
 /// GPS information type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GpsInfo {
     /// Number of visible satellites in use
     #[prost(int32, tag = "1")]
@@ -537,7 +537,7 @@ pub struct GpsInfo {
     pub fix_type: i32,
 }
 /// Battery type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Battery {
     /// Voltage in volts
     #[prost(float, tag = "1")]
@@ -547,7 +547,7 @@ pub struct Battery {
     pub remaining_percent: f32,
 }
 /// Health type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Health {
     /// True if the gyrometer is calibrated
     #[prost(bool, tag = "1")]
@@ -572,7 +572,7 @@ pub struct Health {
     pub is_home_position_ok: bool,
 }
 /// Remote control status type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RcStatus {
     /// True if an RC signal has been available once
     #[prost(bool, tag = "1")]
@@ -585,7 +585,7 @@ pub struct RcStatus {
     pub signal_strength_percent: f32,
 }
 /// StatusText information type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StatusText {
     /// Message type
     #[prost(enumeration = "StatusTextType", tag = "1")]
@@ -595,7 +595,7 @@ pub struct StatusText {
     pub text: ::prost::alloc::string::String,
 }
 /// Actuator control target type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorControlTarget {
     /// An actuator control group is e.g. 'attitude' for the core flight controls, or 'gimbal' for a payload.
     #[prost(int32, tag = "1")]
@@ -605,7 +605,7 @@ pub struct ActuatorControlTarget {
     pub controls: ::prost::alloc::vec::Vec<f32>,
 }
 /// Actuator output status type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorOutputStatus {
     /// Active outputs
     #[prost(uint32, tag = "1")]
@@ -620,14 +620,14 @@ pub struct ActuatorOutputStatus {
 /// Row-major representation of a 6x6 cross-covariance matrix
 /// upper right triangle.
 /// Set first to NaN if unknown.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Covariance {
     /// Representation of a covariance matrix.
     #[prost(float, repeated, tag = "1")]
     pub covariance_matrix: ::prost::alloc::vec::Vec<f32>,
 }
 /// Velocity type, represented in the Body (X Y Z) frame and in metres/second.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityBody {
     /// Velocity in X in metres/second
     #[prost(float, tag = "1")]
@@ -640,7 +640,7 @@ pub struct VelocityBody {
     pub z_m_s: f32,
 }
 /// Position type, represented in the Body (X Y Z) frame
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionBody {
     /// X Position in metres.
     #[prost(float, tag = "1")]
@@ -653,7 +653,7 @@ pub struct PositionBody {
     pub z_m: f32,
 }
 /// Odometry message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Odometry {
     /// Timestamp (0 to use Backend timestamp).
     #[prost(uint64, tag = "1")]
@@ -700,7 +700,7 @@ pub mod odometry {
     }
 }
 /// DistanceSensor message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DistanceSensor {
     /// Minimum distance the sensor can measure, NaN if unknown.
     #[prost(float, tag = "1")]
@@ -713,7 +713,7 @@ pub struct DistanceSensor {
     pub current_distance_m: f32,
 }
 /// PositionNed message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionNed {
     /// Position along north direction in metres
     #[prost(float, tag = "1")]
@@ -726,7 +726,7 @@ pub struct PositionNed {
     pub down_m: f32,
 }
 /// VelocityNed message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityNed {
     /// Velocity along north direction in metres per second
     #[prost(float, tag = "1")]
@@ -739,7 +739,7 @@ pub struct VelocityNed {
     pub down_m_s: f32,
 }
 /// PositionVelocityNed message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionVelocityNed {
     /// Position (NED)
     #[prost(message, optional, tag = "1")]
@@ -749,7 +749,7 @@ pub struct PositionVelocityNed {
     pub velocity: ::core::option::Option<VelocityNed>,
 }
 /// GroundTruth message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GroundTruth {
     /// Latitude in degrees (range: -90 to +90)
     #[prost(double, tag = "1")]
@@ -762,7 +762,7 @@ pub struct GroundTruth {
     pub absolute_altitude_m: f32,
 }
 /// FixedwingMetrics message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FixedwingMetrics {
     /// Current indicated airspeed (IAS) in metres per second
     #[prost(float, tag = "1")]
@@ -775,7 +775,7 @@ pub struct FixedwingMetrics {
     pub climb_rate_m_s: f32,
 }
 /// AccelerationFrd message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AccelerationFrd {
     /// Acceleration in forward direction in metres per second^2
     #[prost(float, tag = "1")]
@@ -788,7 +788,7 @@ pub struct AccelerationFrd {
     pub down_m_s2: f32,
 }
 /// AngularVelocityFrd message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AngularVelocityFrd {
     /// Angular velocity in forward direction in radians per second
     #[prost(float, tag = "1")]
@@ -801,7 +801,7 @@ pub struct AngularVelocityFrd {
     pub down_rad_s: f32,
 }
 /// MagneticFieldFrd message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MagneticFieldFrd {
     /// Magnetic field in forward direction measured in Gauss
     #[prost(float, tag = "1")]
@@ -814,7 +814,7 @@ pub struct MagneticFieldFrd {
     pub down_gauss: f32,
 }
 /// Imu message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Imu {
     /// Acceleration
     #[prost(message, optional, tag = "1")]
@@ -830,7 +830,7 @@ pub struct Imu {
     pub temperature_degc: f32,
 }
 /// Gps global origin type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GpsGlobalOrigin {
     /// Latitude of the origin
     #[prost(double, tag = "1")]
@@ -843,7 +843,7 @@ pub struct GpsGlobalOrigin {
     pub altitude_m: f32,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TelemetryResult {
     /// Result enum value
     #[prost(enumeration = "telemetry_result::Result", tag = "1")]

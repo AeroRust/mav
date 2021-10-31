@@ -231,7 +231,7 @@ pub struct Quaternion {
 /// The Euler angles follow the convention of a 3-2-1 intrinsic Tait-Bryan rotation sequence.
 ///
 /// For more info see https://en.wikipedia.org/wiki/Euler_angles
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct EulerAngle {
     /// Roll angle in degrees, positive is banking to the right
     #[prost(float, tag = "1")]

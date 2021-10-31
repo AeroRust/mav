@@ -1,38 +1,38 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVisionPositionEstimateRequest {
     /// The vision position estimate
     #[prost(message, optional, tag = "1")]
     pub vision_position_estimate: ::core::option::Option<VisionPositionEstimate>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVisionPositionEstimateResponse {
     #[prost(message, optional, tag = "1")]
     pub mocap_result: ::core::option::Option<MocapResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudePositionMocapRequest {
     /// The attitude and position data
     #[prost(message, optional, tag = "1")]
     pub attitude_position_mocap: ::core::option::Option<AttitudePositionMocap>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudePositionMocapResponse {
     #[prost(message, optional, tag = "1")]
     pub mocap_result: ::core::option::Option<MocapResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetOdometryRequest {
     /// The odometry data
     #[prost(message, optional, tag = "1")]
     pub odometry: ::core::option::Option<Odometry>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetOdometryResponse {
     #[prost(message, optional, tag = "1")]
     pub mocap_result: ::core::option::Option<MocapResult>,
 }
 /// Body position type
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionBody {
     /// X position in metres.
     #[prost(float, tag = "1")]
@@ -45,7 +45,7 @@ pub struct PositionBody {
     pub z_m: f32,
 }
 /// Body angle type
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AngleBody {
     /// Roll angle in radians.
     #[prost(float, tag = "1")]
@@ -58,7 +58,7 @@ pub struct AngleBody {
     pub yaw_rad: f32,
 }
 /// Speed type, represented in the Body (X Y Z) frame and in metres/second.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SpeedBody {
     /// Velocity in X in metres/second.
     #[prost(float, tag = "1")]
@@ -71,7 +71,7 @@ pub struct SpeedBody {
     pub z_m_s: f32,
 }
 /// Angular velocity type
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AngularVelocityBody {
     /// Roll angular velocity in radians/second.
     #[prost(float, tag = "1")]
@@ -87,7 +87,7 @@ pub struct AngularVelocityBody {
 /// Row-major representation of a 6x6 cross-covariance matrix upper
 /// right triangle.
 /// Needs to be 21 entries or 1 entry with NaN if unknown.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Covariance {
     /// The covariance matrix
     #[prost(float, repeated, tag = "1")]
@@ -118,7 +118,7 @@ pub struct Quaternion {
     pub z: f32,
 }
 /// Global position/attitude estimate from a vision source.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VisionPositionEstimate {
     /// PositionBody frame timestamp UNIX Epoch time (0 to use Backend timestamp)
     #[prost(uint64, tag = "1")]
@@ -134,7 +134,7 @@ pub struct VisionPositionEstimate {
     pub pose_covariance: ::core::option::Option<Covariance>,
 }
 /// Motion capture attitude and position
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudePositionMocap {
     /// PositionBody frame timestamp UNIX Epoch time (0 to use Backend timestamp)
     #[prost(uint64, tag = "1")]
@@ -150,7 +150,7 @@ pub struct AttitudePositionMocap {
     pub pose_covariance: ::core::option::Option<Covariance>,
 }
 /// Odometry message to communicate odometry information with an external interface.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Odometry {
     /// Timestamp (0 to use Backend timestamp).
     #[prost(uint64, tag = "1")]
@@ -190,7 +190,7 @@ pub mod odometry {
     }
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MocapResult {
     /// Result enum value
     #[prost(enumeration = "mocap_result::Result", tag = "1")]

@@ -1,6 +1,29 @@
-/// Generated services
+#![warn(
+    missing_debug_implementations,
+    // missing_docs,
+    rust_2018_idioms,
+    // unreachable_pub
+)]
+#![deny(unused_must_use)]
+#![cfg_attr(docsrs, deny(rustdoc::broken_intra_doc_links))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+
+//! mav-sdk is a WIP gRPC (HTTP/2 enabled) client/server for communication with the MAVLink protocol.
+//! 
+//! It is used to connect to drones and other vehicles that use MAVLink.
+//! Well-known autopilots that support MAVLink are [PX4] & [ArduPilot].
+//! 
+//! 
+//! ## Features:
+//! - `serde` - Enables `serde` for (de)serializations of `Response`s, `Request`s and types used inside. (WIP)
+//! 
+//! [PX4]: https://px4.io/
+//! [ArduPilot]: https://ardupilot.org
+
+/// Generated MAVSDK services for client/server implementations.
 pub mod grpc;
 
+/// A result using [`tonic::transport::Error`].
 pub type Result<T> = std::result::Result<T, tonic::transport::Error>;
 
 use self::grpc::{
@@ -19,7 +42,7 @@ use tonic::transport::{Channel, Endpoint};
 /// HTTP/2 server & client transport
 pub mod transport {
     /// Re-export Channel
-    pub use tonic::transport::Channel;
+    pub use tonic::transport::{Channel, Error};
 }
 
 pub const DEFAULT_URL: &str = "http://0.0.0.0:14540";
@@ -43,7 +66,11 @@ pub struct Drone {
 }
 
 impl Drone {
+    /// Connects to a MAVSDK (gRPC) server with a valid URI
+    ///
     pub async fn connect(url: &'static str) -> Result<Self> {
+        // TODO: Add timeout
+        // TODO: Evaluate adding concurrency limit for a request
         let channel = Endpoint::new(url)?.connect().await?;
 
         Ok(Self {
