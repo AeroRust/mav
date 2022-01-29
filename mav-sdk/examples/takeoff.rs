@@ -14,7 +14,7 @@ async fn main() {
     let version = version_response.get_ref().version.as_ref().unwrap();
 
     println!(
-        "We have a PX4 version: v{}.{}",
+        "We have PX4 version: v{}.{}",
         version.flight_sw_major, version.flight_sw_minor
     );
 
