@@ -1,9 +1,296 @@
-use std::path::PathBuf;
+use once_cell::sync::Lazy;
+use std::{collections::HashSet, path::PathBuf};
 
 const PROTO_GIT_SUBMODULE: &str = "mavsdk-proto";
 const MAVSDK_OPTIONS: &str = "mavsdk_options";
 
-const TELEMETRY: [&str; 126] = [
+const PLUGINS: [&str; 13] = [
+    "action",
+    "calibration",
+    "camera",
+    "core",
+    "geofence",
+    "gimbal",
+    "info",
+    "mission",
+    "mocap",
+    "offboard",
+    "param",
+    "shell",
+    "telemetry",
+];
+
+const COMMON_TYPE_NAMES: [&str; 1] = ["Result"];
+
+const ACTION: [&str; 37] = [
+    "ActionResult",
+    "ArmRequest",
+    "ArmResponse",
+    "DisarmRequest",
+    "DisarmResponse",
+    "GetMaximumSpeedRequest",
+    "GetMaximumSpeedResponse",
+    "GetReturnToLaunchAltitudeRequest",
+    "GetReturnToLaunchAltitudeResponse",
+    "GetTakeoffAltitudeRequest",
+    "GetTakeoffAltitudeResponse",
+    "GotoLocationRequest",
+    "GotoLocationResponse",
+    "KillRequest",
+    "KillResponse",
+    "LandRequest",
+    "LandResponse",
+    "RebootRequest",
+    "RebootResponse",
+    "ReturnToLaunchRequest",
+    "ReturnToLaunchResponse",
+    "SetMaximumSpeedRequest",
+    "SetMaximumSpeedResponse",
+    "SetReturnToLaunchAltitudeRequest",
+    "SetReturnToLaunchAltitudeResponse",
+    "SetTakeoffAltitudeRequest",
+    "SetTakeoffAltitudeResponse",
+    "ShutdownRequest",
+    "ShutdownResponse",
+    "TakeoffRequest",
+    "TakeoffResponse",
+    "TerminateRequest",
+    "TerminateResponse",
+    "TransitionToFixedwingRequest",
+    "TransitionToFixedwingResponse",
+    "TransitionToMulticopterRequest",
+    "TransitionToMulticopterResponse",
+];
+
+const CALIBRATION: [&str; 14] = [
+    "CalibrateAccelerometerResponse",
+    "CalibrateGimbalAccelerometerResponse",
+    "CalibrateGyroResponse",
+    "CalibrateLevelHorizonResponse",
+    "CalibrateMagnetometerResponse",
+    "CalibrationResult",
+    "CancelRequest",
+    "CancelResponse",
+    "ProgressData",
+    "SubscribeCalibrateAccelerometerRequest",
+    "SubscribeCalibrateGimbalAccelerometerRequest",
+    "SubscribeCalibrateGyroRequest",
+    "SubscribeCalibrateLevelHorizonRequest",
+    "SubscribeCalibrateMagnetometerRequest",
+];
+
+const CAMERA: [&str; 51] = [
+    "CameraResult",
+    "CaptureInfo",
+    "CaptureInfoResponse",
+    "CurrentSettingsResponse",
+    "EulerAngle",
+    "FormatStorageRequest",
+    "FormatStorageResponse",
+    "GetSettingRequest",
+    "GetSettingResponse",
+    "Information",
+    "InformationResponse",
+    "ModeResponse",
+    "Option",
+    "Position",
+    "PossibleSettingOptionsResponse",
+    "Result",
+    "Quaternion",
+    "SetModeRequest",
+    "SetModeResponse",
+    "SetSettingRequest",
+    "SetSettingResponse",
+    "Setting",
+    "SettingOptions",
+    "StartPhotoIntervalRequest",
+    "StartPhotoIntervalResponse",
+    "StartVideoRequest",
+    "StartVideoResponse",
+    "StartVideoStreamingRequest",
+    "StartVideoStreamingResponse",
+    "Status",
+    "StorageStatus",
+    "StatusResponse",
+    "StopPhotoIntervalRequest",
+    "StopPhotoIntervalResponse",
+    "StopVideoRequest",
+    "StopVideoResponse",
+    "StopVideoStreamingRequest",
+    "StopVideoStreamingResponse",
+    "SubscribeCaptureInfoRequest",
+    "SubscribeCurrentSettingsRequest",
+    "SubscribeInformationRequest",
+    "SubscribeModeRequest",
+    "SubscribePossibleSettingOptionsRequest",
+    "SubscribeStatusRequest",
+    "SubscribeVideoStreamInfoRequest",
+    "TakePhotoRequest",
+    "TakePhotoResponse",
+    "VideoStreamInfo",
+    "VideoStreamInfoResponse",
+    "VideoStreamSettings",
+    "Mode",
+];
+
+static CORE: [&str; 6] = [
+    "ConnectionState",
+    "ConnectionStateResponse",
+    "ListRunningPluginsRequest",
+    "ListRunningPluginsResponse",
+    "PluginInfo",
+    "SubscribeConnectionStateRequest",
+];
+
+static GEOFENCE: [&str; 6] = [
+    "GeofenceResult",
+    "Point",
+    "Polygon",
+    "FenceType",
+    "UploadGeofenceRequest",
+    "UploadGeofenceResponse",
+];
+
+static GIMBAL: [&str; 8] = [
+    "GimbalResult",
+    "SetModeRequest",
+    "SetModeResponse",
+    "SetPitchAndYawRequest",
+    "SetPitchAndYawResponse",
+    "SetRoiLocationRequest",
+    "SetRoiLocationResponse",
+    "GimbalMode",
+];
+
+static INFO: [&str; 15] = [
+    "FlightInfo",
+    "GetFlightInformationRequest",
+    "GetFlightInformationResponse",
+    "GetIdentificationRequest",
+    "GetIdentificationResponse",
+    "GetProductRequest",
+    "GetProductResponse",
+    "GetSpeedFactorRequest",
+    "GetSpeedFactorResponse",
+    "GetVersionRequest",
+    "GetVersionResponse",
+    "Identification",
+    "InfoResult",
+    "Product",
+    "Version",
+];
+
+static MISSION: [&str; 31] = [
+    "CancelMissionDownloadRequest",
+    "CancelMissionDownloadResponse",
+    "CancelMissionUploadRequest",
+    "CancelMissionUploadResponse",
+    "ClearMissionRequest",
+    "ClearMissionResponse",
+    "DownloadMissionRequest",
+    "DownloadMissionResponse",
+    "GetReturnToLaunchAfterMissionRequest",
+    "GetReturnToLaunchAfterMissionResponse",
+    "ImportQgroundcontrolMissionRequest",
+    "ImportQgroundcontrolMissionResponse",
+    "IsMissionFinishedRequest",
+    "IsMissionFinishedResponse",
+    "MissionItem",
+    "CameraAction",
+    "MissionPlan",
+    "MissionProgress",
+    "MissionProgressResponse",
+    "MissionResult",
+    "PauseMissionRequest",
+    "PauseMissionResponse",
+    "SetCurrentMissionItemRequest",
+    "SetCurrentMissionItemResponse",
+    "SetReturnToLaunchAfterMissionRequest",
+    "SetReturnToLaunchAfterMissionResponse",
+    "StartMissionRequest",
+    "StartMissionResponse",
+    "SubscribeMissionProgressRequest",
+    "UploadMissionRequest",
+    "UploadMissionResponse",
+];
+
+const MOCAP: [&str; 17] = [
+    "AngleBody",
+    "AngularVelocityBody",
+    "AttitudePositionMocap",
+    "Covariance",
+    "MocapResult",
+    "Odometry",
+    "MavFrame",
+    "PositionBody",
+    "Quaternion",
+    "SetAttitudePositionMocapRequest",
+    "SetAttitudePositionMocapResponse",
+    "SetOdometryRequest",
+    "SetOdometryResponse",
+    "SetVisionPositionEstimateRequest",
+    "SetVisionPositionEstimateResponse",
+    "SpeedBody",
+    "VisionPositionEstimate",
+];
+
+static OFFBOARD: [&str; 28] = [
+    "ActuatorControl",
+    "ActuatorControlGroup",
+    "Attitude",
+    "AttitudeRate",
+    "IsActiveRequest",
+    "IsActiveResponse",
+    "OffboardResult",
+    "PositionNedYaw",
+    "SetActuatorControlRequest",
+    "SetActuatorControlResponse",
+    "SetAttitudeRateRequest",
+    "SetAttitudeRateResponse",
+    "SetAttitudeRequest",
+    "SetAttitudeResponse",
+    "SetPositionNedRequest",
+    "SetPositionNedResponse",
+    "SetPositionVelocityNedRequest",
+    "SetPositionVelocityNedResponse",
+    "SetVelocityBodyRequest",
+    "SetVelocityBodyResponse",
+    "SetVelocityNedRequest",
+    "SetVelocityNedResponse",
+    "StartRequest",
+    "StartResponse",
+    "StopRequest",
+    "StopResponse",
+    "VelocityBodyYawspeed",
+    "VelocityNedYaw",
+];
+
+static PARAM: [&str; 14] = [
+    "AllParams",
+    "FloatParam",
+    "GetAllParamsRequest",
+    "GetAllParamsResponse",
+    "GetParamFloatRequest",
+    "GetParamFloatResponse",
+    "GetParamIntRequest",
+    "GetParamIntResponse",
+    "IntParam",
+    "ParamResult",
+    "SetParamFloatRequest",
+    "SetParamFloatResponse",
+    "SetParamIntRequest",
+    "SetParamIntResponse",
+];
+
+static SHELL: [&str; 5] = [
+    "ReceiveResponse",
+    "SendRequest",
+    "SendResponse",
+    "ShellResult",
+    "SubscribeReceiveRequest",
+];
+
+const TELEMETRY: [&str; 131] = [
     "AccelerationFrd",
     "ActuatorControlTarget",
     "ActuatorControlTargetResponse",
@@ -44,6 +331,7 @@ const TELEMETRY: [&str; 126] = [
     "MagneticFieldFrd",
     "Odometry",
     "OdometryResponse",
+    "MavFrame",
     "Position",
     "PositionBody",
     "PositionNed",
@@ -130,50 +418,38 @@ const TELEMETRY: [&str; 126] = [
     "Velocity",
     "VelocityNed",
     "VelocityNedResponse",
+    "FixType",
+    "FlightMode",
+    "LandedState",
+    "StatusTextType",
 ];
 
-const MOCAP: [&str; 16] = [
-    "AngleBody",
-    "AngularVelocityBody",
-    "AttitudePositionMocap",
-    "Covariance",
-    "MocapResult",
-    "Odometry",
-    "PositionBody",
-    "Quaternion",
-    "SetAttitudePositionMocapRequest",
-    "SetAttitudePositionMocapResponse",
-    "SetOdometryRequest",
-    "SetOdometryResponse",
-    "SetVisionPositionEstimateRequest",
-    "SetVisionPositionEstimateResponse",
-    "SpeedBody",
-    "VisionPositionEstimate",
-];
-
+static DERIVE_SERDE_FOR: Lazy<HashSet<&str>> = Lazy::new(|| {
+    COMMON_TYPE_NAMES
+        .to_vec()
+        .into_iter()
+        .chain(ACTION.to_vec())
+        .chain(CALIBRATION.to_vec())
+        .chain(CAMERA.to_vec())
+        .chain(CORE.to_vec())
+        .chain(GEOFENCE.to_vec())
+        .chain(GIMBAL.to_vec())
+        .chain(INFO.to_vec())
+        .chain(MISSION.to_vec())
+        .chain(MOCAP.to_vec())
+        .chain(OFFBOARD.to_vec())
+        .chain(PARAM.to_vec())
+        .chain(SHELL.to_vec())
+        .chain(TELEMETRY.to_vec())
+        .collect()
+});
 
 fn main() -> Result<(), std::io::Error> {
-    let plugins = [
-        "action",
-        "calibration",
-        "camera",
-        "core",
-        "geofence",
-        "gimbal",
-        "info",
-        "mission",
-        "mocap",
-        "offboard",
-        "param",
-        "shell",
-        "telemetry",
-    ];
-
     let mavsdk_options_include = format!("{submodule}/protos", submodule = PROTO_GIT_SUBMODULE);
 
     // tonic_build(&plugins, mavsdk_options_include.into())
 
-    tonic_build_single(&plugins, mavsdk_options_include.into())
+    tonic_build_single(&PLUGINS, mavsdk_options_include.into())
 }
 
 fn proto_path(plugin_name: &str) -> PathBuf {
@@ -217,9 +493,6 @@ fn tonic_build_single(
         },
     );
 
-    // let mut attributes = Attributes::default();
-    // attributes.push_struct("AttitudeQuaternionResponse", "#[derive(Serialize, Deserialize)]");
-
     let builder = tonic_build::configure();
 
     #[cfg(feature = "with_serde")]
@@ -236,14 +509,10 @@ fn tonic_build_single(
 fn derive_serde(mut builder: tonic_build::Builder) -> tonic_build::Builder {
     let derive_serde = "#[derive(serde::Serialize, serde::Deserialize)]";
 
-    // Telemetry
-    for telemetry in TELEMETRY {
-        builder = builder.type_attribute(telemetry, derive_serde);
+    for derive_for_type in DERIVE_SERDE_FOR.iter() {
+        builder = builder.type_attribute(derive_for_type, derive_serde);
     }
 
-    for mocap in MOCAP {
-        builder = builder.type_attribute(mocap, derive_serde);
-    }
     builder
 }
 

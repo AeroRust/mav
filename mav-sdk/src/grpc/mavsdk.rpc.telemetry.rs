@@ -478,7 +478,7 @@ pub struct Position {
 /// A zero-rotation quaternion is represented by (1,0,0,0).
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
-/// For more info see: https://en.wikipedia.org/wiki/Quaternion
+/// For more info see: <https://en.wikipedia.org/wiki/Quaternion>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
@@ -500,7 +500,7 @@ pub struct Quaternion {
 /// All rotations and axis systems follow the right-hand rule.
 /// The Euler angles follow the convention of a 3-2-1 intrinsic Tait-Bryan rotation sequence.
 ///
-/// For more info see https://en.wikipedia.org/wiki/Euler_angles
+/// For more info see <https://en.wikipedia.org/wiki/Euler_angles>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct EulerAngle {
     /// Roll angle in degrees, positive is banking to the right
@@ -686,7 +686,19 @@ pub struct Odometry {
 /// Nested message and enum types in `Odometry`.
 pub mod odometry {
     /// Mavlink frame id
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum MavFrame {
         /// Frame is undefined.
@@ -855,7 +867,19 @@ pub struct TelemetryResult {
 /// Nested message and enum types in `TelemetryResult`.
 pub mod telemetry_result {
     /// Possible results returned for telemetry requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -875,7 +899,19 @@ pub mod telemetry_result {
     }
 }
 /// GPS fix type.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum FixType {
     /// No GPS connected
@@ -897,8 +933,20 @@ pub enum FixType {
 /// Flight modes.
 ///
 /// For more information about flight modes, check out
-/// https://docs.px4.io/master/en/config/flight_mode.html.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+/// <https://docs.px4.io/master/en/config/flight_mode.html.>
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum FlightMode {
     /// Mode not known
@@ -933,7 +981,19 @@ pub enum FlightMode {
     Rattitude = 14,
 }
 /// Status types.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum StatusTextType {
     /// Debug
@@ -954,7 +1014,19 @@ pub enum StatusTextType {
     Emergency = 7,
 }
 /// Landed State enumeration.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum LandedState {
     /// Landed state is unknown
@@ -993,7 +1065,7 @@ pub mod telemetry_service_client {
     impl<T> TelemetryServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -1961,7 +2033,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribePosition method."]
         type SubscribePositionStream: futures_core::Stream<Item = Result<super::PositionResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'position' updates."]
         async fn subscribe_position(
@@ -1971,7 +2042,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeHome method."]
         type SubscribeHomeStream: futures_core::Stream<Item = Result<super::HomeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'home position' updates."]
         async fn subscribe_home(
@@ -1981,7 +2051,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeInAir method."]
         type SubscribeInAirStream: futures_core::Stream<Item = Result<super::InAirResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to in-air updates."]
         async fn subscribe_in_air(
@@ -1991,7 +2060,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeLandedState method."]
         type SubscribeLandedStateStream: futures_core::Stream<Item = Result<super::LandedStateResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to landed state updates"]
         async fn subscribe_landed_state(
@@ -2001,7 +2069,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeArmed method."]
         type SubscribeArmedStream: futures_core::Stream<Item = Result<super::ArmedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to armed updates."]
         async fn subscribe_armed(
@@ -2011,7 +2078,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeAttitudeQuaternion method."]
         type SubscribeAttitudeQuaternionStream: futures_core::Stream<Item = Result<super::AttitudeQuaternionResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (quaternion)."]
         async fn subscribe_attitude_quaternion(
@@ -2021,7 +2087,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeAttitudeEuler method."]
         type SubscribeAttitudeEulerStream: futures_core::Stream<Item = Result<super::AttitudeEulerResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (Euler)."]
         async fn subscribe_attitude_euler(
@@ -2032,7 +2097,6 @@ pub mod telemetry_service_server {
         type SubscribeAttitudeAngularVelocityBodyStream: futures_core::Stream<
                 Item = Result<super::AttitudeAngularVelocityBodyResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (angular velocity)"]
         async fn subscribe_attitude_angular_velocity_body(
@@ -2043,7 +2107,6 @@ pub mod telemetry_service_server {
         type SubscribeCameraAttitudeQuaternionStream: futures_core::Stream<
                 Item = Result<super::CameraAttitudeQuaternionResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'camera attitude' updates (quaternion)."]
         async fn subscribe_camera_attitude_quaternion(
@@ -2053,7 +2116,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeCameraAttitudeEuler method."]
         type SubscribeCameraAttitudeEulerStream: futures_core::Stream<Item = Result<super::CameraAttitudeEulerResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'camera attitude' updates (Euler)."]
         async fn subscribe_camera_attitude_euler(
@@ -2063,7 +2125,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeVelocityNed method."]
         type SubscribeVelocityNedStream: futures_core::Stream<Item = Result<super::VelocityNedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'ground speed' updates (NED)."]
         async fn subscribe_velocity_ned(
@@ -2073,7 +2134,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeGpsInfo method."]
         type SubscribeGpsInfoStream: futures_core::Stream<Item = Result<super::GpsInfoResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'GPS info' updates."]
         async fn subscribe_gps_info(
@@ -2083,7 +2143,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeBattery method."]
         type SubscribeBatteryStream: futures_core::Stream<Item = Result<super::BatteryResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'battery' updates."]
         async fn subscribe_battery(
@@ -2093,7 +2152,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeFlightMode method."]
         type SubscribeFlightModeStream: futures_core::Stream<Item = Result<super::FlightModeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'flight mode' updates."]
         async fn subscribe_flight_mode(
@@ -2103,7 +2161,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeHealth method."]
         type SubscribeHealthStream: futures_core::Stream<Item = Result<super::HealthResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'health' updates."]
         async fn subscribe_health(
@@ -2113,7 +2170,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeRcStatus method."]
         type SubscribeRcStatusStream: futures_core::Stream<Item = Result<super::RcStatusResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'RC status' updates."]
         async fn subscribe_rc_status(
@@ -2123,7 +2179,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeStatusText method."]
         type SubscribeStatusTextStream: futures_core::Stream<Item = Result<super::StatusTextResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'status text' updates."]
         async fn subscribe_status_text(
@@ -2133,7 +2188,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeActuatorControlTarget method."]
         type SubscribeActuatorControlTargetStream: futures_core::Stream<Item = Result<super::ActuatorControlTargetResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'actuator control target' updates."]
         async fn subscribe_actuator_control_target(
@@ -2143,7 +2197,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeActuatorOutputStatus method."]
         type SubscribeActuatorOutputStatusStream: futures_core::Stream<Item = Result<super::ActuatorOutputStatusResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'actuator output status' updates."]
         async fn subscribe_actuator_output_status(
@@ -2153,7 +2206,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeOdometry method."]
         type SubscribeOdometryStream: futures_core::Stream<Item = Result<super::OdometryResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'odometry' updates."]
         async fn subscribe_odometry(
@@ -2163,7 +2215,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribePositionVelocityNed method."]
         type SubscribePositionVelocityNedStream: futures_core::Stream<Item = Result<super::PositionVelocityNedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'position velocity' updates."]
         async fn subscribe_position_velocity_ned(
@@ -2173,7 +2224,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeGroundTruth method."]
         type SubscribeGroundTruthStream: futures_core::Stream<Item = Result<super::GroundTruthResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'ground truth' updates."]
         async fn subscribe_ground_truth(
@@ -2183,7 +2233,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeFixedwingMetrics method."]
         type SubscribeFixedwingMetricsStream: futures_core::Stream<Item = Result<super::FixedwingMetricsResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'fixedwing metrics' updates."]
         async fn subscribe_fixedwing_metrics(
@@ -2193,7 +2242,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeImu method."]
         type SubscribeImuStream: futures_core::Stream<Item = Result<super::ImuResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'IMU' updates."]
         async fn subscribe_imu(
@@ -2203,7 +2251,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeHealthAllOk method."]
         type SubscribeHealthAllOkStream: futures_core::Stream<Item = Result<super::HealthAllOkResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'HealthAllOk' updates."]
         async fn subscribe_health_all_ok(
@@ -2213,7 +2260,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeUnixEpochTime method."]
         type SubscribeUnixEpochTimeStream: futures_core::Stream<Item = Result<super::UnixEpochTimeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'unix epoch time' updates."]
         async fn subscribe_unix_epoch_time(
@@ -2223,7 +2269,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeDistanceSensor method."]
         type SubscribeDistanceSensorStream: futures_core::Stream<Item = Result<super::DistanceSensorResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'Distance Sensor' updates."]
         async fn subscribe_distance_sensor(
@@ -2361,7 +2406,7 @@ pub mod telemetry_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for TelemetryServiceServer<T>
     where
         T: TelemetryService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

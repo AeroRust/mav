@@ -1,5 +1,5 @@
 /// Point type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Point {
     /// Latitude in degrees (range: -90 to +90)
     #[prost(double, tag = "1")]
@@ -9,7 +9,7 @@ pub struct Point {
     pub longitude_deg: f64,
 }
 /// Polygon type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Polygon {
     /// Points defining the polygon
     #[prost(message, repeated, tag = "1")]
@@ -21,7 +21,19 @@ pub struct Polygon {
 /// Nested message and enum types in `Polygon`.
 pub mod polygon {
     /// Geofence polygon types.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum FenceType {
         /// Type representing an inclusion fence
@@ -30,19 +42,19 @@ pub mod polygon {
         Exclusion = 1,
     }
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadGeofenceRequest {
     /// Polygon(s) representing the geofence(s)
     #[prost(message, repeated, tag = "1")]
     pub polygons: ::prost::alloc::vec::Vec<Polygon>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadGeofenceResponse {
     #[prost(message, optional, tag = "1")]
     pub geofence_result: ::core::option::Option<GeofenceResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GeofenceResult {
     /// Result enum value
     #[prost(enumeration = "geofence_result::Result", tag = "1")]
@@ -54,7 +66,19 @@ pub struct GeofenceResult {
 /// Nested message and enum types in `GeofenceResult`.
 pub mod geofence_result {
     /// Possible results returned for geofence requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -96,7 +120,7 @@ pub mod geofence_service_client {
     impl<T> GeofenceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -202,7 +226,7 @@ pub mod geofence_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for GeofenceServiceServer<T>
     where
         T: GeofenceService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

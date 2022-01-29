@@ -1,67 +1,67 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ArmRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ArmResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DisarmRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DisarmResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeoffRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeoffResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct LandRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct LandResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RebootRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RebootResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ShutdownRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ShutdownResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TerminateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TerminateResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct KillRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct KillResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReturnToLaunchRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReturnToLaunchResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GotoLocationRequest {
     /// Latitude (in degrees)
     #[prost(double, tag = "1")]
@@ -76,28 +76,28 @@ pub struct GotoLocationRequest {
     #[prost(float, tag = "4")]
     pub yaw_deg: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GotoLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToFixedwingRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToFixedwingResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToMulticopterRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToMulticopterResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetTakeoffAltitudeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetTakeoffAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -105,20 +105,20 @@ pub struct GetTakeoffAltitudeResponse {
     #[prost(float, tag = "2")]
     pub altitude: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetTakeoffAltitudeRequest {
     /// Takeoff altitude relative to ground/takeoff location (in meters)
     #[prost(float, tag = "1")]
     pub altitude: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetTakeoffAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetMaximumSpeedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetMaximumSpeedResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -126,20 +126,20 @@ pub struct GetMaximumSpeedResponse {
     #[prost(float, tag = "2")]
     pub speed: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMaximumSpeedRequest {
     /// Maximum speed (in metres/second)
     #[prost(float, tag = "1")]
     pub speed: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMaximumSpeedResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAltitudeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -147,19 +147,19 @@ pub struct GetReturnToLaunchAltitudeResponse {
     #[prost(float, tag = "2")]
     pub relative_altitude_m: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAltitudeRequest {
     /// Return altitude relative to takeoff location (in meters)
     #[prost(float, tag = "1")]
     pub relative_altitude_m: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActionResult {
     /// Result enum value
     #[prost(enumeration = "action_result::Result", tag = "1")]
@@ -171,7 +171,19 @@ pub struct ActionResult {
 /// Nested message and enum types in `ActionResult`.
 pub mod action_result {
     /// Possible results returned for action requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -223,7 +235,7 @@ pub mod action_service_client {
     impl<T> ActionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -807,7 +819,7 @@ pub mod action_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ActionServiceServer<T>
     where
         T: ActionService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

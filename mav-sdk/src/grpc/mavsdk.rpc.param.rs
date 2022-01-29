@@ -1,10 +1,10 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetParamIntRequest {
     /// Name of the parameter
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetParamIntResponse {
     #[prost(message, optional, tag = "1")]
     pub param_result: ::core::option::Option<ParamResult>,
@@ -12,7 +12,7 @@ pub struct GetParamIntResponse {
     #[prost(int32, tag = "2")]
     pub value: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetParamIntRequest {
     /// Name of the parameter to set
     #[prost(string, tag = "1")]
@@ -21,18 +21,18 @@ pub struct SetParamIntRequest {
     #[prost(int32, tag = "2")]
     pub value: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetParamIntResponse {
     #[prost(message, optional, tag = "1")]
     pub param_result: ::core::option::Option<ParamResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetParamFloatRequest {
     /// Name of the parameter
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetParamFloatResponse {
     #[prost(message, optional, tag = "1")]
     pub param_result: ::core::option::Option<ParamResult>,
@@ -40,7 +40,7 @@ pub struct GetParamFloatResponse {
     #[prost(float, tag = "2")]
     pub value: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetParamFloatRequest {
     /// Name of the parameter to set
     #[prost(string, tag = "1")]
@@ -49,14 +49,14 @@ pub struct SetParamFloatRequest {
     #[prost(float, tag = "2")]
     pub value: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetParamFloatResponse {
     #[prost(message, optional, tag = "1")]
     pub param_result: ::core::option::Option<ParamResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetAllParamsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetAllParamsResponse {
     /// Collection of all parameters
     #[prost(message, optional, tag = "1")]
@@ -64,7 +64,7 @@ pub struct GetAllParamsResponse {
 }
 ///
 /// Type for integer parameters.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct IntParam {
     /// Name of the parameter
     #[prost(string, tag = "1")]
@@ -75,7 +75,7 @@ pub struct IntParam {
 }
 ///
 /// Type for float paramters.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FloatParam {
     /// Name of the parameter
     #[prost(string, tag = "1")]
@@ -86,7 +86,7 @@ pub struct FloatParam {
 }
 ///
 /// Type collecting all integer and float parameters.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AllParams {
     /// Collection of all parameter names and values of type int
     #[prost(message, repeated, tag = "1")]
@@ -96,7 +96,7 @@ pub struct AllParams {
     pub float_params: ::prost::alloc::vec::Vec<FloatParam>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ParamResult {
     /// Result enum value
     #[prost(enumeration = "param_result::Result", tag = "1")]
@@ -108,7 +108,19 @@ pub struct ParamResult {
 /// Nested message and enum types in `ParamResult`.
 pub mod param_result {
     /// Possible results returned for param requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -148,7 +160,7 @@ pub mod param_service_client {
     impl<T> ParamServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -357,7 +369,7 @@ pub mod param_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ParamServiceServer<T>
     where
         T: ParamService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

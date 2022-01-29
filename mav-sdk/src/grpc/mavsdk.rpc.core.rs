@@ -1,21 +1,21 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeConnectionStateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ConnectionStateResponse {
     /// Connection state
     #[prost(message, optional, tag = "1")]
     pub connection_state: ::core::option::Option<ConnectionState>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ListRunningPluginsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ListRunningPluginsResponse {
     /// Plugin info
     #[prost(message, repeated, tag = "1")]
     pub plugin_info: ::prost::alloc::vec::Vec<PluginInfo>,
 }
 /// Connection state type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ConnectionState {
     /// UUID of the vehicle
     #[prost(uint64, tag = "1")]
@@ -25,7 +25,7 @@ pub struct ConnectionState {
     pub is_connected: bool,
 }
 /// Plugin info type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PluginInfo {
     /// Name of the plugin
     #[prost(string, tag = "1")]
@@ -60,7 +60,7 @@ pub mod core_service_client {
     impl<T> CoreServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -149,7 +149,6 @@ pub mod core_service_server {
         #[doc = "Server streaming response type for the SubscribeConnectionState method."]
         type SubscribeConnectionStateStream: futures_core::Stream<Item = Result<super::ConnectionStateResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'connection state' updates."]
         async fn subscribe_connection_state(
@@ -190,7 +189,7 @@ pub mod core_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CoreServiceServer<T>
     where
         T: CoreService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

@@ -1,92 +1,92 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct IsActiveRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct IsActiveResponse {
     /// True if offboard is active
     #[prost(bool, tag = "1")]
     pub is_active: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeRequest {
     /// Attitude roll, pitch and yaw along with thrust
     #[prost(message, optional, tag = "1")]
     pub attitude: ::core::option::Option<Attitude>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorControlRequest {
     /// Actuator control values
     #[prost(message, optional, tag = "1")]
     pub actuator_control: ::core::option::Option<ActuatorControl>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorControlResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeRateRequest {
     /// Attitude rate roll, pitch and yaw angular rate along with thrust
     #[prost(message, optional, tag = "1")]
     pub attitude_rate: ::core::option::Option<AttitudeRate>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAttitudeRateResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionNedRequest {
     /// Position and yaw
     #[prost(message, optional, tag = "1")]
     pub position_ned_yaw: ::core::option::Option<PositionNedYaw>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityBodyRequest {
     /// Velocity and yaw angular rate
     #[prost(message, optional, tag = "1")]
     pub velocity_body_yawspeed: ::core::option::Option<VelocityBodyYawspeed>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityBodyResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityNedRequest {
     /// Velocity and yaw
     #[prost(message, optional, tag = "1")]
     pub velocity_ned_yaw: ::core::option::Option<VelocityNedYaw>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionVelocityNedRequest {
     /// Position and yaw
     #[prost(message, optional, tag = "1")]
@@ -95,13 +95,13 @@ pub struct SetPositionVelocityNedRequest {
     #[prost(message, optional, tag = "2")]
     pub velocity_ned_yaw: ::core::option::Option<VelocityNedYaw>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
 /// Type for attitude body angles in NED reference frame (roll, pitch, yaw and thrust)
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Attitude {
     /// Roll angle (in degrees, positive is right side down)
     #[prost(float, tag = "1")]
@@ -119,7 +119,7 @@ pub struct Attitude {
 ///
 /// Eight controls that will be given to the group. Each control is a normalized
 /// (-1..+1) command value, which will be mapped and scaled through the mixer.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorControlGroup {
     /// Controls in the group
     #[prost(float, repeated, tag = "1")]
@@ -140,15 +140,15 @@ pub struct ActuatorControlGroup {
 /// MAVLink messages are actually sent.
 ///
 /// In PX4 v1.9.0 Only first four Control Groups are supported
-/// (https://github.com/PX4/Firmware/blob/v1.9.0/src/modules/mavlink/mavlink_receiver.cpp#L980).
-#[derive(Clone, PartialEq, ::prost::Message)]
+/// (<https://github.com/PX4/Firmware/blob/v1.9.0/src/modules/mavlink/mavlink_receiver.cpp#L980>).
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActuatorControl {
     /// Control groups.
     #[prost(message, repeated, tag = "1")]
     pub groups: ::prost::alloc::vec::Vec<ActuatorControlGroup>,
 }
 /// Type for attitude rate commands in body coordinates (roll, pitch, yaw angular rate and thrust)
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeRate {
     /// Roll angular rate (in degrees/second, positive for clock-wise looking from front)
     #[prost(float, tag = "1")]
@@ -164,7 +164,7 @@ pub struct AttitudeRate {
     pub thrust_value: f32,
 }
 /// Type for position commands in NED (North East Down) coordinates and yaw.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionNedYaw {
     /// Position North (in metres)
     #[prost(float, tag = "1")]
@@ -180,7 +180,7 @@ pub struct PositionNedYaw {
     pub yaw_deg: f32,
 }
 /// Type for velocity commands in body coordinates.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityBodyYawspeed {
     /// Velocity forward (in metres/second)
     #[prost(float, tag = "1")]
@@ -196,7 +196,7 @@ pub struct VelocityBodyYawspeed {
     pub yawspeed_deg_s: f32,
 }
 /// Type for velocity commands in NED (North East Down) coordinates and yaw.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityNedYaw {
     /// Velocity North (in metres/second)
     #[prost(float, tag = "1")]
@@ -212,7 +212,7 @@ pub struct VelocityNedYaw {
     pub yaw_deg: f32,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct OffboardResult {
     /// Result enum value
     #[prost(enumeration = "offboard_result::Result", tag = "1")]
@@ -224,7 +224,19 @@ pub struct OffboardResult {
 /// Nested message and enum types in `OffboardResult`.
 pub mod offboard_result {
     /// Possible results returned for offboard requests
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -276,7 +288,7 @@ pub mod offboard_service_client {
     impl<T> OffboardServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -614,7 +626,7 @@ pub mod offboard_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for OffboardServiceServer<T>
     where
         T: OffboardService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

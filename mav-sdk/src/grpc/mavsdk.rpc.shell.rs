@@ -1,24 +1,24 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SendRequest {
     /// The command line to send
     #[prost(string, tag = "1")]
     pub command: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SendResponse {
     #[prost(message, optional, tag = "1")]
     pub shell_result: ::core::option::Option<ShellResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeReceiveRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReceiveResponse {
     /// Received data.
     #[prost(string, tag = "1")]
     pub data: ::prost::alloc::string::String,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ShellResult {
     /// Result enum value
     #[prost(enumeration = "shell_result::Result", tag = "1")]
@@ -30,7 +30,19 @@ pub struct ShellResult {
 /// Nested message and enum types in `ShellResult`.
 pub mod shell_result {
     /// Possible results returned for shell requests
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -71,7 +83,7 @@ pub mod shell_service_client {
     impl<T> ShellServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -166,7 +178,6 @@ pub mod shell_service_server {
         #[doc = "Server streaming response type for the SubscribeReceive method."]
         type SubscribeReceiveStream: futures_core::Stream<Item = Result<super::ReceiveResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Receive feedback from a sent command line."]
@@ -206,7 +217,7 @@ pub mod shell_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ShellServiceServer<T>
     where
         T: ShellService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

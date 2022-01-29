@@ -1,24 +1,24 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadMissionRequest {
     /// The mission plan
     #[prost(message, optional, tag = "1")]
     pub mission_plan: ::core::option::Option<MissionPlan>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
@@ -26,48 +26,48 @@ pub struct DownloadMissionResponse {
     #[prost(message, optional, tag = "2")]
     pub mission_plan: ::core::option::Option<MissionPlan>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemRequest {
     /// Index of the mission item to be set as the next one (0-based)
     #[prost(int32, tag = "1")]
     pub index: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct IsMissionFinishedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct IsMissionFinishedResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
@@ -75,17 +75,17 @@ pub struct IsMissionFinishedResponse {
     #[prost(bool, tag = "2")]
     pub is_finished: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeMissionProgressRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionProgressResponse {
     /// Mission progress
     #[prost(message, optional, tag = "1")]
     pub mission_progress: ::core::option::Option<MissionProgress>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAfterMissionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAfterMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
@@ -93,24 +93,24 @@ pub struct GetReturnToLaunchAfterMissionResponse {
     #[prost(bool, tag = "2")]
     pub enable: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAfterMissionRequest {
     /// If true, trigger an RTL at the end of the mission
     #[prost(bool, tag = "1")]
     pub enable: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAfterMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ImportQgroundcontrolMissionRequest {
     /// File path of the QGC plan
     #[prost(string, tag = "1")]
     pub qgc_plan_path: ::prost::alloc::string::String,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ImportQgroundcontrolMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
@@ -125,7 +125,7 @@ pub struct ImportQgroundcontrolMissionResponse {
 /// Mission items are building blocks to assemble a mission,
 /// which can be sent to (or received from) a system.
 /// They cannot be used independently.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionItem {
     /// Latitude in degrees (range: -90 to +90)
     #[prost(double, tag = "1")]
@@ -161,7 +161,19 @@ pub struct MissionItem {
 /// Nested message and enum types in `MissionItem`.
 pub mod mission_item {
     /// Possible camera actions at a mission item.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum CameraAction {
         /// No action
@@ -179,14 +191,14 @@ pub mod mission_item {
     }
 }
 /// Mission plan type
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionPlan {
     /// The mission items
     #[prost(message, repeated, tag = "1")]
     pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
 }
 /// Mission progress type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionProgress {
     /// Current mission item index (0-based)
     #[prost(int32, tag = "1")]
@@ -196,7 +208,7 @@ pub struct MissionProgress {
     pub total: i32,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionResult {
     /// Result enum value
     #[prost(enumeration = "mission_result::Result", tag = "1")]
@@ -208,7 +220,19 @@ pub struct MissionResult {
 /// Nested message and enum types in `MissionResult`.
 pub mod mission_result {
     /// Possible results returned for action requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -262,7 +286,7 @@ pub mod mission_service_client {
     impl<T> MissionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -655,7 +679,6 @@ pub mod mission_service_server {
         #[doc = "Server streaming response type for the SubscribeMissionProgress method."]
         type SubscribeMissionProgressStream: futures_core::Stream<Item = Result<super::MissionProgressResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to mission progress updates."]
@@ -719,7 +742,7 @@ pub mod mission_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for MissionServiceServer<T>
     where
         T: MissionService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

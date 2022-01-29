@@ -1,4 +1,4 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPitchAndYawRequest {
     /// Pitch angle in degrees (negative points down)
     #[prost(float, tag = "1")]
@@ -7,23 +7,23 @@ pub struct SetPitchAndYawRequest {
     #[prost(float, tag = "2")]
     pub yaw_deg: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPitchAndYawResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetModeRequest {
     /// The mode to be set.
     #[prost(enumeration = "GimbalMode", tag = "1")]
     pub gimbal_mode: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetModeResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRoiLocationRequest {
     /// Latitude in degrees
     #[prost(double, tag = "1")]
@@ -35,13 +35,13 @@ pub struct SetRoiLocationRequest {
     #[prost(float, tag = "3")]
     pub altitude_m: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRoiLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GimbalResult {
     /// Result enum value
     #[prost(enumeration = "gimbal_result::Result", tag = "1")]
@@ -53,7 +53,19 @@ pub struct GimbalResult {
 /// Nested message and enum types in `GimbalResult`.
 pub mod gimbal_result {
     /// Possible results returned for gimbal commands.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -69,7 +81,19 @@ pub mod gimbal_result {
     }
 }
 /// Gimbal mode type.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum GimbalMode {
     /// Yaw follow will point the gimbal to the vehicle heading
@@ -100,7 +124,7 @@ pub mod gimbal_service_client {
     impl<T> GimbalServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -277,7 +301,7 @@ pub mod gimbal_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for GimbalServiceServer<T>
     where
         T: GimbalService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
