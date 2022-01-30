@@ -64,6 +64,17 @@ pub struct SetPositionNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetPositionGlobalRequest {
+    /// Position and yaw
+    #[prost(message, optional, tag = "1")]
+    pub position_global_yaw: ::core::option::Option<PositionGlobalYaw>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetPositionGlobalResponse {
+    #[prost(message, optional, tag = "1")]
+    pub offboard_result: ::core::option::Option<OffboardResult>,
+}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetVelocityBodyRequest {
     /// Velocity and yaw angular rate
@@ -97,6 +108,17 @@ pub struct SetPositionVelocityNedRequest {
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionVelocityNedResponse {
+    #[prost(message, optional, tag = "1")]
+    pub offboard_result: ::core::option::Option<OffboardResult>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetAccelerationNedRequest {
+    /// Acceleration
+    #[prost(message, optional, tag = "1")]
+    pub acceleration_ned: ::core::option::Option<AccelerationNed>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetAccelerationNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
@@ -179,6 +201,39 @@ pub struct PositionNedYaw {
     #[prost(float, tag = "4")]
     pub yaw_deg: f32,
 }
+/// Type for position commands in Global (Latitude, Longitude, Altitude) coordinates and yaw.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PositionGlobalYaw {
+    /// Latitude (in degrees)
+    #[prost(double, tag = "1")]
+    pub lat_deg: f64,
+    /// Longitude (in degrees)
+    #[prost(double, tag = "2")]
+    pub lon_deg: f64,
+    /// altitude (in metres)
+    #[prost(float, tag = "3")]
+    pub alt_m: f32,
+    /// Yaw in degrees (0 North, positive is clock-wise looking from above)
+    #[prost(float, tag = "4")]
+    pub yaw_deg: f32,
+    /// altitude type for this position
+    #[prost(enumeration = "position_global_yaw::AltitudeType", tag = "5")]
+    pub altitude_type: i32,
+}
+/// Nested message and enum types in `PositionGlobalYaw`.
+pub mod position_global_yaw {
+    /// Possible altitude options
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum AltitudeType {
+        /// Altitude relative to the Home position
+        RelHome = 0,
+        /// Altitude above mean sea level (AMSL)
+        Amsl = 1,
+        /// Altitude above ground level (AGL)
+        Agl = 2,
+    }
+}
 /// Type for velocity commands in body coordinates.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VelocityBodyYawspeed {
@@ -210,6 +265,19 @@ pub struct VelocityNedYaw {
     /// Yaw in degrees (0 North, positive is clock-wise looking from above)
     #[prost(float, tag = "4")]
     pub yaw_deg: f32,
+}
+/// Type for acceleration commands in NED (North East Down) coordinates.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AccelerationNed {
+    /// Acceleration North (in metres/second^2)
+    #[prost(float, tag = "1")]
+    pub north_m_s2: f32,
+    /// Acceleration East (in metres/second^2)
+    #[prost(float, tag = "2")]
+    pub east_m_s2: f32,
+    /// Acceleration Down (in metres/second^2)
+    #[prost(float, tag = "3")]
+    pub down_m_s2: f32,
 }
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -459,6 +527,24 @@ pub mod offboard_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
+        #[doc = " Set the position in Global coordinates (latitude, longitude, altitude) and yaw"]
+        pub async fn set_position_global(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetPositionGlobalRequest>,
+        ) -> Result<tonic::Response<super::SetPositionGlobalResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.offboard.OffboardService/SetPositionGlobal",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
         #[doc = " Set the velocity in body coordinates and yaw angular rate. Not available for fixed-wing aircraft."]
         pub async fn set_velocity_body(
             &mut self,
@@ -509,6 +595,24 @@ pub mod offboard_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.offboard.OffboardService/SetPositionVelocityNed",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Set the acceleration in NED coordinates."]
+        pub async fn set_acceleration_ned(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetAccelerationNedRequest>,
+        ) -> Result<tonic::Response<super::SetAccelerationNedResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.offboard.OffboardService/SetAccelerationNed",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -572,6 +676,12 @@ pub mod offboard_service_server {
             request: tonic::Request<super::SetPositionNedRequest>,
         ) -> Result<tonic::Response<super::SetPositionNedResponse>, tonic::Status>;
         #[doc = ""]
+        #[doc = " Set the position in Global coordinates (latitude, longitude, altitude) and yaw"]
+        async fn set_position_global(
+            &self,
+            request: tonic::Request<super::SetPositionGlobalRequest>,
+        ) -> Result<tonic::Response<super::SetPositionGlobalResponse>, tonic::Status>;
+        #[doc = ""]
         #[doc = " Set the velocity in body coordinates and yaw angular rate. Not available for fixed-wing aircraft."]
         async fn set_velocity_body(
             &self,
@@ -589,6 +699,12 @@ pub mod offboard_service_server {
             &self,
             request: tonic::Request<super::SetPositionVelocityNedRequest>,
         ) -> Result<tonic::Response<super::SetPositionVelocityNedResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Set the acceleration in NED coordinates."]
+        async fn set_acceleration_ned(
+            &self,
+            request: tonic::Request<super::SetAccelerationNedRequest>,
+        ) -> Result<tonic::Response<super::SetAccelerationNedResponse>, tonic::Status>;
     }
     #[doc = "*"]
     #[doc = " Control a drone with position, velocity, attitude or motor commands."]
@@ -866,6 +982,40 @@ pub mod offboard_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/mavsdk.rpc.offboard.OffboardService/SetPositionGlobal" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetPositionGlobalSvc<T: OffboardService>(pub Arc<T>);
+                    impl<T: OffboardService>
+                        tonic::server::UnaryService<super::SetPositionGlobalRequest>
+                        for SetPositionGlobalSvc<T>
+                    {
+                        type Response = super::SetPositionGlobalResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetPositionGlobalRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_position_global(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetPositionGlobalSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/mavsdk.rpc.offboard.OffboardService/SetVelocityBody" => {
                     #[allow(non_camel_case_types)]
                     struct SetVelocityBodySvc<T: OffboardService>(pub Arc<T>);
@@ -959,6 +1109,40 @@ pub mod offboard_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetPositionVelocityNedSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.offboard.OffboardService/SetAccelerationNed" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetAccelerationNedSvc<T: OffboardService>(pub Arc<T>);
+                    impl<T: OffboardService>
+                        tonic::server::UnaryService<super::SetAccelerationNedRequest>
+                        for SetAccelerationNedSvc<T>
+                    {
+                        type Response = super::SetAccelerationNedResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetAccelerationNedRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_acceleration_ned(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetAccelerationNedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

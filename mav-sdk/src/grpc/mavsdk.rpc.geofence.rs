@@ -53,6 +53,13 @@ pub struct UploadGeofenceResponse {
     #[prost(message, optional, tag = "1")]
     pub geofence_result: ::core::option::Option<GeofenceResult>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClearGeofenceRequest {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClearGeofenceResponse {
+    #[prost(message, optional, tag = "1")]
+    pub geofence_result: ::core::option::Option<GeofenceResult>,
+}
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GeofenceResult {
@@ -95,6 +102,8 @@ pub mod geofence_result {
         Timeout = 5,
         /// Invalid argument
         InvalidArgument = 6,
+        /// No system connected
+        NoSystem = 7,
     }
 }
 #[doc = r" Generated client implementations."]
@@ -179,6 +188,24 @@ pub mod geofence_service_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        #[doc = ""]
+        #[doc = " Clear all geofences saved on the vehicle."]
+        pub async fn clear_geofence(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ClearGeofenceRequest>,
+        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 #[doc = r" Generated server implementations."]
@@ -197,6 +224,12 @@ pub mod geofence_service_server {
             &self,
             request: tonic::Request<super::UploadGeofenceRequest>,
         ) -> Result<tonic::Response<super::UploadGeofenceResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Clear all geofences saved on the vehicle."]
+        async fn clear_geofence(
+            &self,
+            request: tonic::Request<super::ClearGeofenceRequest>,
+        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status>;
     }
     #[doc = " Enable setting a geofence."]
     #[derive(Debug)]
@@ -262,6 +295,40 @@ pub mod geofence_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = UploadGeofenceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence" => {
+                    #[allow(non_camel_case_types)]
+                    struct ClearGeofenceSvc<T: GeofenceService>(pub Arc<T>);
+                    impl<T: GeofenceService>
+                        tonic::server::UnaryService<super::ClearGeofenceRequest>
+                        for ClearGeofenceSvc<T>
+                    {
+                        type Response = super::ClearGeofenceResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ClearGeofenceRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).clear_geofence(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ClearGeofenceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

@@ -33,9 +33,11 @@ pub type Result<T> = std::result::Result<T, tonic::transport::Error>;
 use grpc::{
     action::ActionServiceClient, calibration::CalibrationServiceClient,
     camera::CameraServiceClient, core::CoreServiceClient, geofence::GeofenceServiceClient,
-    gimbal::GimbalServiceClient, info::InfoServiceClient, mission::MissionServiceClient,
-    mocap::mocap_service_client::MocapServiceClient, offboard::OffboardServiceClient,
-    param::ParamServiceClient, shell::ShellServiceClient, telemetry::TelemetryServiceClient,
+    gimbal::GimbalServiceClient, info::InfoServiceClient,
+    manual_control::manual_control_service_client::ManualControlServiceClient,
+    mission::MissionServiceClient, mocap::mocap_service_client::MocapServiceClient,
+    offboard::OffboardServiceClient, param::ParamServiceClient, shell::ShellServiceClient,
+    telemetry::TelemetryServiceClient,
 };
 
 use tonic::transport::{Channel, Endpoint};

@@ -75,6 +75,16 @@ pub mod info {
     pub use info_service_server::{InfoService, InfoServiceServer};
 }
 
+#[path = "grpc/mavsdk.rpc.manual_control.rs"]
+mod mavsdk_manual_control;
+
+pub mod manual_control {
+    pub use super::mavsdk_manual_control::*;
+
+    pub use manual_control_service_client::ManualControlServiceClient;
+    pub use manual_control_service_server::{ManualControlService, ManualControlServiceServer};
+}
+
 #[path = "grpc/mavsdk.rpc.mission.rs"]
 mod mavsdk_mission;
 

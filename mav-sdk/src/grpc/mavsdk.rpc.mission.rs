@@ -9,6 +9,20 @@ pub struct UploadMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeUploadMissionWithProgressRequest {
+    /// The mission plan
+    #[prost(message, optional, tag = "1")]
+    pub mission_plan: ::core::option::Option<MissionPlan>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UploadMissionWithProgressResponse {
+    #[prost(message, optional, tag = "1")]
+    pub mission_result: ::core::option::Option<MissionResult>,
+    /// The progress data
+    #[prost(message, optional, tag = "2")]
+    pub progress_data: ::core::option::Option<ProgressData>,
+}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -25,6 +39,16 @@ pub struct DownloadMissionResponse {
     /// The mission plan
     #[prost(message, optional, tag = "2")]
     pub mission_plan: ::core::option::Option<MissionPlan>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeDownloadMissionWithProgressRequest {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DownloadMissionWithProgressResponse {
+    #[prost(message, optional, tag = "1")]
+    pub mission_result: ::core::option::Option<MissionResult>,
+    /// The progress data, or the mission plan (when the download is finished)
+    #[prost(message, optional, tag = "2")]
+    pub progress_data: ::core::option::Option<ProgressDataOrMission>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadRequest {}
@@ -104,20 +128,6 @@ pub struct SetReturnToLaunchAfterMissionResponse {
     #[prost(message, optional, tag = "1")]
     pub mission_result: ::core::option::Option<MissionResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ImportQgroundcontrolMissionRequest {
-    /// File path of the QGC plan
-    #[prost(string, tag = "1")]
-    pub qgc_plan_path: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ImportQgroundcontrolMissionResponse {
-    #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// The mission plan
-    #[prost(message, optional, tag = "2")]
-    pub mission_plan: ::core::option::Option<MissionPlan>,
-}
 ///
 /// Type representing a mission item.
 ///
@@ -157,6 +167,15 @@ pub struct MissionItem {
     /// Camera photo interval to use after this mission item (in seconds)
     #[prost(double, tag = "10")]
     pub camera_photo_interval_s: f64,
+    /// Radius for completing a mission item (in metres)
+    #[prost(float, tag = "11")]
+    pub acceptance_radius_m: f32,
+    /// Absolute yaw angle (in degrees)
+    #[prost(float, tag = "12")]
+    pub yaw_deg: f32,
+    /// Camera photo distance to use after this mission item (in meters)
+    #[prost(float, tag = "13")]
+    pub camera_photo_distance_m: f32,
 }
 /// Nested message and enum types in `MissionItem`.
 pub mod mission_item {
@@ -188,6 +207,10 @@ pub mod mission_item {
         StartVideo = 4,
         /// Stop capturing video
         StopVideo = 5,
+        /// Start capturing photos at regular distance
+        StartPhotoDistance = 6,
+        /// Stop capturing photos at regular distance
+        StopPhotoDistance = 7,
     }
 }
 /// Mission plan type
@@ -200,7 +223,7 @@ pub struct MissionPlan {
 /// Mission progress type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct MissionProgress {
-    /// Current mission item index (0-based)
+    /// Current mission item index (0-based), if equal to total, the mission is finished
     #[prost(int32, tag = "1")]
     pub current: i32,
     /// Total number of mission items
@@ -253,15 +276,38 @@ pub mod mission_result {
         Unsupported = 7,
         /// No mission available on the system
         NoMissionAvailable = 8,
-        /// Failed to open the QGroundControl plan
-        FailedToOpenQgcPlan = 9,
-        /// Failed to parse the QGroundControl plan
-        FailedToParseQgcPlan = 10,
         /// Unsupported mission command
         UnsupportedMissionCmd = 11,
         /// Mission transfer (upload or download) has been cancelled
         TransferCancelled = 12,
+        /// No system connected
+        NoSystem = 13,
+        /// Intermediate message showing progress
+        Next = 14,
     }
+}
+/// Progress data coming from mission upload.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ProgressData {
+    /// Progress (0..1.0)
+    #[prost(float, tag = "1")]
+    pub progress: f32,
+}
+/// Progress data coming from mission download, or the mission itself (if the transfer succeeds).
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ProgressDataOrMission {
+    /// Whether this ProgressData contains a 'progress' status or not
+    #[prost(bool, tag = "1")]
+    pub has_progress: bool,
+    /// Progress (0..1.0)
+    #[prost(float, tag = "2")]
+    pub progress: f32,
+    /// Whether this ProgressData contains a 'mission_plan' or not
+    #[prost(bool, tag = "3")]
+    pub has_mission: bool,
+    /// Mission plan
+    #[prost(message, optional, tag = "4")]
+    pub mission_plan: ::core::option::Option<MissionPlan>,
 }
 #[doc = r" Generated client implementations."]
 pub mod mission_service_client {
@@ -346,6 +392,32 @@ pub mod mission_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
+        #[doc = " Upload a list of mission items to the system and report upload progress."]
+        #[doc = ""]
+        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
+        #[doc = " executed even if the connection is lost."]
+        pub async fn subscribe_upload_mission_with_progress(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeUploadMissionWithProgressRequest>,
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::UploadMissionWithProgressResponse>>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.mission.MissionService/SubscribeUploadMissionWithProgress",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = ""]
         #[doc = " Cancel an ongoing mission upload."]
         pub async fn cancel_mission_upload(
             &mut self,
@@ -383,6 +455,32 @@ pub mod mission_service_client {
                 "/mavsdk.rpc.mission.MissionService/DownloadMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Download a list of mission items from the system (asynchronous) and report progress."]
+        #[doc = ""]
+        #[doc = " Will fail if any of the downloaded mission items are not supported"]
+        #[doc = " by the MAVSDK API."]
+        pub async fn subscribe_download_mission_with_progress(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeDownloadMissionWithProgressRequest>,
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::DownloadMissionWithProgressResponse>>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.mission.MissionService/SubscribeDownloadMissionWithProgress",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
         }
         #[doc = ""]
         #[doc = " Cancel an ongoing mission download."]
@@ -572,28 +670,6 @@ pub mod mission_service_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = ""]
-        #[doc = " Import a QGroundControl (QGC) mission plan."]
-        #[doc = ""]
-        #[doc = " The method will fail if any of the imported mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
-        pub async fn import_qgroundcontrol_mission(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ImportQgroundcontrolMissionRequest>,
-        ) -> Result<tonic::Response<super::ImportQgroundcontrolMissionResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/ImportQgroundcontrolMission",
-            );
-            self.inner.unary(request.into_request(), path, codec).await
-        }
     }
 }
 #[doc = r" Generated server implementations."]
@@ -612,6 +688,20 @@ pub mod mission_service_server {
             &self,
             request: tonic::Request<super::UploadMissionRequest>,
         ) -> Result<tonic::Response<super::UploadMissionResponse>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeUploadMissionWithProgress method."]
+        type SubscribeUploadMissionWithProgressStream: futures_core::Stream<
+                Item = Result<super::UploadMissionWithProgressResponse, tonic::Status>,
+            > + Send
+            + 'static;
+        #[doc = ""]
+        #[doc = " Upload a list of mission items to the system and report upload progress."]
+        #[doc = ""]
+        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
+        #[doc = " executed even if the connection is lost."]
+        async fn subscribe_upload_mission_with_progress(
+            &self,
+            request: tonic::Request<super::SubscribeUploadMissionWithProgressRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeUploadMissionWithProgressStream>, tonic::Status>;
         #[doc = ""]
         #[doc = " Cancel an ongoing mission upload."]
         async fn cancel_mission_upload(
@@ -627,6 +717,20 @@ pub mod mission_service_server {
             &self,
             request: tonic::Request<super::DownloadMissionRequest>,
         ) -> Result<tonic::Response<super::DownloadMissionResponse>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeDownloadMissionWithProgress method."]
+        type SubscribeDownloadMissionWithProgressStream: futures_core::Stream<
+                Item = Result<super::DownloadMissionWithProgressResponse, tonic::Status>,
+            > + Send
+            + 'static;
+        #[doc = ""]
+        #[doc = " Download a list of mission items from the system (asynchronous) and report progress."]
+        #[doc = ""]
+        #[doc = " Will fail if any of the downloaded mission items are not supported"]
+        #[doc = " by the MAVSDK API."]
+        async fn subscribe_download_mission_with_progress(
+            &self,
+            request: tonic::Request<super::SubscribeDownloadMissionWithProgressRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeDownloadMissionWithProgressStream>, tonic::Status>;
         #[doc = ""]
         #[doc = " Cancel an ongoing mission download."]
         async fn cancel_mission_download(
@@ -704,15 +808,6 @@ pub mod mission_service_server {
             &self,
             request: tonic::Request<super::SetReturnToLaunchAfterMissionRequest>,
         ) -> Result<tonic::Response<super::SetReturnToLaunchAfterMissionResponse>, tonic::Status>;
-        #[doc = ""]
-        #[doc = " Import a QGroundControl (QGC) mission plan."]
-        #[doc = ""]
-        #[doc = " The method will fail if any of the imported mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
-        async fn import_qgroundcontrol_mission(
-            &self,
-            request: tonic::Request<super::ImportQgroundcontrolMissionRequest>,
-        ) -> Result<tonic::Response<super::ImportQgroundcontrolMissionResponse>, tonic::Status>;
     }
     #[doc = " Enable waypoint missions."]
     #[derive(Debug)]
@@ -787,6 +882,49 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/mavsdk.rpc.mission.MissionService/SubscribeUploadMissionWithProgress" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeUploadMissionWithProgressSvc<T: MissionService>(pub Arc<T>);
+                    impl<T: MissionService>
+                        tonic::server::ServerStreamingService<
+                            super::SubscribeUploadMissionWithProgressRequest,
+                        > for SubscribeUploadMissionWithProgressSvc<T>
+                    {
+                        type Response = super::UploadMissionWithProgressResponse;
+                        type ResponseStream = T::SubscribeUploadMissionWithProgressStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::SubscribeUploadMissionWithProgressRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner)
+                                    .subscribe_upload_mission_with_progress(request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeUploadMissionWithProgressSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/mavsdk.rpc.mission.MissionService/CancelMissionUpload" => {
                     #[allow(non_camel_case_types)]
                     struct CancelMissionUploadSvc<T: MissionService>(pub Arc<T>);
@@ -851,6 +989,49 @@ pub mod mission_service_server {
                             send_compression_encodings,
                         );
                         let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.mission.MissionService/SubscribeDownloadMissionWithProgress" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeDownloadMissionWithProgressSvc<T: MissionService>(pub Arc<T>);
+                    impl<T: MissionService>
+                        tonic::server::ServerStreamingService<
+                            super::SubscribeDownloadMissionWithProgressRequest,
+                        > for SubscribeDownloadMissionWithProgressSvc<T>
+                    {
+                        type Response = super::DownloadMissionWithProgressResponse;
+                        type ResponseStream = T::SubscribeDownloadMissionWithProgressStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::SubscribeDownloadMissionWithProgressRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner)
+                                    .subscribe_download_mission_with_progress(request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeDownloadMissionWithProgressSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -1158,42 +1339,6 @@ pub mod mission_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetReturnToLaunchAfterMissionSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.mission.MissionService/ImportQgroundcontrolMission" => {
-                    #[allow(non_camel_case_types)]
-                    struct ImportQgroundcontrolMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::UnaryService<super::ImportQgroundcontrolMissionRequest>
-                        for ImportQgroundcontrolMissionSvc<T>
-                    {
-                        type Response = super::ImportQgroundcontrolMissionResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::ImportQgroundcontrolMissionRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move {
-                                (*inner).import_qgroundcontrol_mission(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = ImportQgroundcontrolMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

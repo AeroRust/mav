@@ -64,6 +64,9 @@ pub struct Identification {
     /// UID of the hardware. This refers to uid2 of MAVLink. If the system does not support uid2 yet, this is all zeros.
     #[prost(string, tag = "1")]
     pub hardware_uid: ::prost::alloc::string::String,
+    /// Legacy UID of the hardware, referred to as uid in MAVLink (formerly exposed during system discovery as UUID).
+    #[prost(uint64, tag = "2")]
+    pub legacy_uid: u64,
 }
 /// System product information.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -152,6 +155,8 @@ pub mod info_result {
         Success = 1,
         /// Information has not been received yet
         InformationNotReceivedYet = 2,
+        /// No system is connected
+        NoSystem = 3,
     }
 }
 #[doc = r" Generated client implementations."]

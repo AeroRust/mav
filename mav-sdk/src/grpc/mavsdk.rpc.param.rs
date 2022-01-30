@@ -74,7 +74,7 @@ pub struct IntParam {
     pub value: i32,
 }
 ///
-/// Type for float paramters.
+/// Type for float parameters.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FloatParam {
     /// Name of the parameter
@@ -135,6 +135,8 @@ pub mod param_result {
         WrongType = 4,
         /// Parameter name too long (> 16)
         ParamNameTooLong = 5,
+        /// No system connected
+        NoSystem = 6,
     }
 }
 #[doc = r" Generated client implementations."]

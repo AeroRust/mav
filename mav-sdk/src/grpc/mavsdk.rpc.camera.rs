@@ -1,3 +1,10 @@
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PrepareRequest {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PrepareResponse {
+    #[prost(message, optional, tag = "1")]
+    pub camera_result: ::core::option::Option<CameraResult>,
+}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakePhotoRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -61,6 +68,20 @@ pub struct SetModeRequest {
 pub struct SetModeResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPhotosRequest {
+    /// Which photos should be listed (all or since connection)
+    #[prost(enumeration = "PhotosRange", tag = "1")]
+    pub photos_range: i32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPhotosResponse {
+    #[prost(message, optional, tag = "1")]
+    pub camera_result: ::core::option::Option<CameraResult>,
+    /// List of capture infos (representing the photos)
+    #[prost(message, repeated, tag = "2")]
+    pub capture_infos: ::prost::alloc::vec::Vec<CaptureInfo>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeInformationRequest {}
@@ -188,12 +209,14 @@ pub mod camera_result {
         Busy = 3,
         /// Camera denied the command
         Denied = 4,
-        /// An error has occured while executing the command
+        /// An error has occurred while executing the command
         Error = 5,
         /// Command timed out
         Timeout = 6,
         /// Command has wrong argument(s)
         WrongArgument = 7,
+        /// No system connected
+        NoSystem = 8,
     }
 }
 /// Position type in global coordinates.
@@ -301,6 +324,9 @@ pub struct VideoStreamSettings {
     /// Video stream URI
     #[prost(string, tag = "6")]
     pub uri: ::prost::alloc::string::String,
+    /// Horizontal fov in degrees
+    #[prost(float, tag = "7")]
+    pub horizontal_fov_deg: f32,
 }
 /// Information about the video stream.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -309,31 +335,33 @@ pub struct VideoStreamInfo {
     #[prost(message, optional, tag = "1")]
     pub settings: ::core::option::Option<VideoStreamSettings>,
     /// Current status of video streaming
-    #[prost(enumeration = "video_stream_info::Status", tag = "2")]
+    #[prost(enumeration = "video_stream_info::VideoStreamStatus", tag = "2")]
     pub status: i32,
+    /// Light-spectrum of the video stream
+    #[prost(enumeration = "video_stream_info::VideoStreamSpectrum", tag = "3")]
+    pub spectrum: i32,
 }
 /// Nested message and enum types in `VideoStreamInfo`.
 pub mod video_stream_info {
     /// Video stream status type.
-    #[derive(
-        serde::Serialize,
-        serde::Deserialize,
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration,
-    )]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
-    pub enum Status {
+    pub enum VideoStreamStatus {
         /// Video stream is not running
         NotRunning = 0,
         /// Video stream is running
         InProgress = 1,
+    }
+    /// Video stream light spectrum type
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum VideoStreamSpectrum {
+        /// Unknown
+        Unknown = 0,
+        /// Visible light
+        VisibleLight = 1,
+        /// Infrared
+        Infrared = 2,
     }
 }
 /// Information about the camera status.
@@ -363,6 +391,12 @@ pub struct Status {
     /// Storage status
     #[prost(enumeration = "status::StorageStatus", tag = "8")]
     pub storage_status: i32,
+    /// Storage ID starting at 1
+    #[prost(uint32, tag = "9")]
+    pub storage_id: u32,
+    /// Storage type
+    #[prost(enumeration = "status::StorageType", tag = "10")]
+    pub storage_type: i32,
 }
 /// Nested message and enum types in `Status`.
 pub mod status {
@@ -388,6 +422,25 @@ pub mod status {
         Unformatted = 1,
         /// Storage is formatted (i.e. has recognized a file system)
         Formatted = 2,
+        /// Storage status is not supported
+        NotSupported = 3,
+    }
+    /// Storage type.
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[repr(i32)]
+    pub enum StorageType {
+        /// Storage type unknown
+        Unknown = 0,
+        /// Storage type USB stick
+        UsbStick = 1,
+        /// Storage type SD card
+        Sd = 2,
+        /// Storage type MicroSD card
+        Microsd = 3,
+        /// Storage type HD mass storage
+        Hd = 7,
+        /// Storage type other, not listed
+        Other = 254,
     }
 }
 /// Type to represent a setting option.
@@ -441,6 +494,21 @@ pub struct Information {
     /// Name of the camera model
     #[prost(string, tag = "2")]
     pub model_name: ::prost::alloc::string::String,
+    /// Focal length
+    #[prost(float, tag = "3")]
+    pub focal_length_mm: f32,
+    /// Horizontal sensor size
+    #[prost(float, tag = "4")]
+    pub horizontal_sensor_size_mm: f32,
+    /// Vertical sensor size
+    #[prost(float, tag = "5")]
+    pub vertical_sensor_size_mm: f32,
+    /// Horizontal image resolution in pixels
+    #[prost(uint32, tag = "6")]
+    pub horizontal_resolution_px: u32,
+    /// Vertical image resolution in pixels
+    #[prost(uint32, tag = "7")]
+    pub vertical_resolution_px: u32,
 }
 /// Camera mode type.
 #[derive(
@@ -464,6 +532,15 @@ pub enum Mode {
     Photo = 1,
     /// Video mode
     Video = 2,
+}
+/// Photos range type.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PhotosRange {
+    /// All the photos present on the camera
+    All = 0,
+    /// Photos taken since MAVSDK got connected
+    SinceConnection = 1,
 }
 #[doc = r" Generated client implementations."]
 pub mod camera_service_client {
@@ -532,6 +609,23 @@ pub mod camera_service_client {
         pub fn accept_gzip(mut self) -> Self {
             self.inner = self.inner.accept_gzip();
             self
+        }
+        #[doc = ""]
+        #[doc = " Prepare the camera plugin (e.g. download the camera definition, etc)."]
+        pub async fn prepare(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PrepareRequest>,
+        ) -> Result<tonic::Response<super::PrepareResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/Prepare");
+            self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
         #[doc = " Take one photo."]
@@ -671,6 +765,23 @@ pub mod camera_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path =
                 http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/SetMode");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " List photos available on the camera."]
+        pub async fn list_photos(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListPhotosRequest>,
+        ) -> Result<tonic::Response<super::ListPhotosResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/ListPhotos");
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
@@ -898,6 +1009,12 @@ pub mod camera_service_server {
     #[async_trait]
     pub trait CameraService: Send + Sync + 'static {
         #[doc = ""]
+        #[doc = " Prepare the camera plugin (e.g. download the camera definition, etc)."]
+        async fn prepare(
+            &self,
+            request: tonic::Request<super::PrepareRequest>,
+        ) -> Result<tonic::Response<super::PrepareResponse>, tonic::Status>;
+        #[doc = ""]
         #[doc = " Take one photo."]
         async fn take_photo(
             &self,
@@ -945,6 +1062,12 @@ pub mod camera_service_server {
             &self,
             request: tonic::Request<super::SetModeRequest>,
         ) -> Result<tonic::Response<super::SetModeResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " List photos available on the camera."]
+        async fn list_photos(
+            &self,
+            request: tonic::Request<super::ListPhotosRequest>,
+        ) -> Result<tonic::Response<super::ListPhotosResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeMode method."]
         type SubscribeModeStream: futures_core::Stream<Item = Result<super::ModeResponse, tonic::Status>>
             + Send
@@ -1088,6 +1211,37 @@ pub mod camera_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
+                "/mavsdk.rpc.camera.CameraService/Prepare" => {
+                    #[allow(non_camel_case_types)]
+                    struct PrepareSvc<T: CameraService>(pub Arc<T>);
+                    impl<T: CameraService> tonic::server::UnaryService<super::PrepareRequest> for PrepareSvc<T> {
+                        type Response = super::PrepareResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PrepareRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).prepare(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = PrepareSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/mavsdk.rpc.camera.CameraService/TakePhoto" => {
                     #[allow(non_camel_case_types)]
                     struct TakePhotoSvc<T: CameraService>(pub Arc<T>);
@@ -1338,6 +1492,37 @@ pub mod camera_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetModeSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.camera.CameraService/ListPhotos" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListPhotosSvc<T: CameraService>(pub Arc<T>);
+                    impl<T: CameraService> tonic::server::UnaryService<super::ListPhotosRequest> for ListPhotosSvc<T> {
+                        type Response = super::ListPhotosResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListPhotosRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).list_photos(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ListPhotosSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

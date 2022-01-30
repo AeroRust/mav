@@ -51,7 +51,10 @@ pub struct CalibrateGimbalAccelerometerResponse {
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct CancelResponse {}
+pub struct CancelResponse {
+    #[prost(message, optional, tag = "1")]
+    pub calibration_result: ::core::option::Option<CalibrationResult>,
+}
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrationResult {

@@ -81,6 +81,53 @@ pub struct GotoLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DoOrbitRequest {
+    /// Radius of circle (in meters)
+    #[prost(float, tag = "1")]
+    pub radius_m: f32,
+    /// Tangential velocity (in m/s)
+    #[prost(float, tag = "2")]
+    pub velocity_ms: f32,
+    /// Yaw behavior of vehicle (ORBIT_YAW_BEHAVIOUR)
+    #[prost(enumeration = "OrbitYawBehavior", tag = "3")]
+    pub yaw_behavior: i32,
+    /// Center point latitude in degrees. NAN: use current latitude for center
+    #[prost(double, tag = "5")]
+    pub latitude_deg: f64,
+    /// Center point longitude in degrees. NAN: use current longitude for center
+    #[prost(double, tag = "6")]
+    pub longitude_deg: f64,
+    /// Center point altitude in meters. NAN: use current altitude for center
+    #[prost(double, tag = "7")]
+    pub absolute_altitude_m: f64,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DoOrbitResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HoldRequest {}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HoldResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetActuatorRequest {
+    /// Index of actuator (starting with 1)
+    #[prost(int32, tag = "1")]
+    pub index: i32,
+    /// Value to set the actuator to (normalized from \[-1..1\])
+    #[prost(float, tag = "2")]
+    pub value: f32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetActuatorResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToFixedwingRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -211,6 +258,21 @@ pub mod action_result {
         /// Error getting or setting parameter
         ParameterError = 11,
     }
+}
+/// Yaw behaviour during orbit flight.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum OrbitYawBehavior {
+    /// Vehicle front points to the center (default)
+    HoldFrontToCircleCenter = 0,
+    /// Vehicle front holds heading when message received
+    HoldInitialHeading = 1,
+    /// Yaw uncontrolled
+    Uncontrolled = 2,
+    /// Vehicle front follows flight path (tangential to circle)
+    HoldFrontTangentToCircle = 3,
+    /// Yaw controlled by RC input
+    RcControlled = 4,
 }
 #[doc = r" Generated client implementations."]
 pub mod action_service_client {
@@ -478,6 +540,66 @@ pub mod action_service_client {
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
+        #[doc = " Send command do orbit to the drone."]
+        #[doc = ""]
+        #[doc = " This will run the orbit routine with the given parameters."]
+        pub async fn do_orbit(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DoOrbitRequest>,
+        ) -> Result<tonic::Response<super::DoOrbitResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.action.ActionService/DoOrbit");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Send command to hold position (a.k.a. \"Loiter\")."]
+        #[doc = ""]
+        #[doc = " Sends a command to drone to change to Hold flight mode, causing the"]
+        #[doc = " vehicle to stop and maintain its current GPS position and altitude."]
+        #[doc = ""]
+        #[doc = " Note: this command is specific to the PX4 Autopilot flight stack as"]
+        #[doc = " it implies a change to a PX4-specific mode."]
+        pub async fn hold(
+            &mut self,
+            request: impl tonic::IntoRequest<super::HoldRequest>,
+        ) -> Result<tonic::Response<super::HoldResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.action.ActionService/Hold");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Send command to set the value of an actuator."]
+        pub async fn set_actuator(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetActuatorRequest>,
+        ) -> Result<tonic::Response<super::SetActuatorResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.action.ActionService/SetActuator",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
         #[doc = " Send command to transition the drone to fixedwing."]
         #[doc = ""]
         #[doc = " The associated action will only be executed for VTOL vehicles (on other vehicle types the"]
@@ -734,6 +856,32 @@ pub mod action_service_server {
             &self,
             request: tonic::Request<super::GotoLocationRequest>,
         ) -> Result<tonic::Response<super::GotoLocationResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Send command do orbit to the drone."]
+        #[doc = ""]
+        #[doc = " This will run the orbit routine with the given parameters."]
+        async fn do_orbit(
+            &self,
+            request: tonic::Request<super::DoOrbitRequest>,
+        ) -> Result<tonic::Response<super::DoOrbitResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Send command to hold position (a.k.a. \"Loiter\")."]
+        #[doc = ""]
+        #[doc = " Sends a command to drone to change to Hold flight mode, causing the"]
+        #[doc = " vehicle to stop and maintain its current GPS position and altitude."]
+        #[doc = ""]
+        #[doc = " Note: this command is specific to the PX4 Autopilot flight stack as"]
+        #[doc = " it implies a change to a PX4-specific mode."]
+        async fn hold(
+            &self,
+            request: tonic::Request<super::HoldRequest>,
+        ) -> Result<tonic::Response<super::HoldResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Send command to set the value of an actuator."]
+        async fn set_actuator(
+            &self,
+            request: tonic::Request<super::SetActuatorRequest>,
+        ) -> Result<tonic::Response<super::SetActuatorResponse>, tonic::Status>;
         #[doc = ""]
         #[doc = " Send command to transition the drone to fixedwing."]
         #[doc = ""]
@@ -1135,6 +1283,101 @@ pub mod action_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GotoLocationSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/DoOrbit" => {
+                    #[allow(non_camel_case_types)]
+                    struct DoOrbitSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::DoOrbitRequest> for DoOrbitSvc<T> {
+                        type Response = super::DoOrbitResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::DoOrbitRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).do_orbit(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = DoOrbitSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/Hold" => {
+                    #[allow(non_camel_case_types)]
+                    struct HoldSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::HoldRequest> for HoldSvc<T> {
+                        type Response = super::HoldResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::HoldRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).hold(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = HoldSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/SetActuator" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetActuatorSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::SetActuatorRequest>
+                        for SetActuatorSvc<T>
+                    {
+                        type Response = super::SetActuatorResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetActuatorRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_actuator(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetActuatorSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

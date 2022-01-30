@@ -4,7 +4,7 @@ use std::{collections::HashSet, path::PathBuf};
 const PROTO_GIT_SUBMODULE: &str = "mavsdk-proto";
 const MAVSDK_OPTIONS: &str = "mavsdk_options";
 
-const PLUGINS: [&str; 13] = [
+const PLUGINS: [&str; 14] = [
     "action",
     "calibration",
     "camera",
@@ -12,6 +12,8 @@ const PLUGINS: [&str; 13] = [
     "geofence",
     "gimbal",
     "info",
+    // TODO: Add derive structs for serde
+    "manual_control",
     "mission",
     "mocap",
     "offboard",
