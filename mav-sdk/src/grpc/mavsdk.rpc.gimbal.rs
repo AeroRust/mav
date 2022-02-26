@@ -12,7 +12,7 @@ pub struct SetPitchAndYawResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPitchRateAndYawRateRequest {
     /// Angular rate around pitch axis in degrees/second (negative downward)
     #[prost(float, tag = "1")]
@@ -21,7 +21,7 @@ pub struct SetPitchRateAndYawRateRequest {
     #[prost(float, tag = "2")]
     pub yaw_rate_deg_s: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPitchRateAndYawRateResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
@@ -54,34 +54,34 @@ pub struct SetRoiLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeControlRequest {
     /// Control mode (primary or secondary)
     #[prost(enumeration = "ControlMode", tag = "1")]
     pub control_mode: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeControlResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReleaseControlRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReleaseControlResponse {
     #[prost(message, optional, tag = "1")]
     pub gimbal_result: ::core::option::Option<GimbalResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeControlRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ControlResponse {
     /// Control status
     #[prost(message, optional, tag = "1")]
     pub control_status: ::core::option::Option<ControlStatus>,
 }
 /// Control status
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ControlStatus {
     /// Control mode (none, primary or secondary)
     #[prost(enumeration = "ControlMode", tag = "1")]
@@ -163,7 +163,19 @@ pub enum GimbalMode {
     YawLock = 1,
 }
 /// Control mode
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum ControlMode {
     /// Indicates that the component does not have control over the gimbal

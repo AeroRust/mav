@@ -1,6 +1,6 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PrepareRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PrepareResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
@@ -69,13 +69,13 @@ pub struct SetModeResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ListPhotosRequest {
     /// Which photos should be listed (all or since connection)
     #[prost(enumeration = "PhotosRange", tag = "1")]
     pub photos_range: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ListPhotosResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
@@ -344,7 +344,19 @@ pub struct VideoStreamInfo {
 /// Nested message and enum types in `VideoStreamInfo`.
 pub mod video_stream_info {
     /// Video stream status type.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum VideoStreamStatus {
         /// Video stream is not running
@@ -353,7 +365,19 @@ pub mod video_stream_info {
         InProgress = 1,
     }
     /// Video stream light spectrum type
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum VideoStreamSpectrum {
         /// Unknown
@@ -426,7 +450,19 @@ pub mod status {
         NotSupported = 3,
     }
     /// Storage type.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum StorageType {
         /// Storage type unknown
@@ -534,7 +570,19 @@ pub enum Mode {
     Video = 2,
 }
 /// Photos range type.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum PhotosRange {
     /// All the photos present on the camera

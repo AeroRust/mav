@@ -1,78 +1,64 @@
-/// Point type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct Point {
-    /// Latitude in degrees (range: -90 to +90)
-    #[prost(double, tag = "1")]
-    pub latitude_deg: f64,
-    /// Longitude in degrees (range: -180 to +180)
-    #[prost(double, tag = "2")]
-    pub longitude_deg: f64,
-}
-/// Polygon type.
+pub struct GetEntriesRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct Polygon {
-    /// Points defining the polygon
-    #[prost(message, repeated, tag = "1")]
-    pub points: ::prost::alloc::vec::Vec<Point>,
-    /// Fence type
-    #[prost(enumeration = "polygon::FenceType", tag = "2")]
-    pub fence_type: i32,
-}
-/// Nested message and enum types in `Polygon`.
-pub mod polygon {
-    /// Geofence polygon types.
-    #[derive(
-        serde::Serialize,
-        serde::Deserialize,
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration,
-    )]
-    #[repr(i32)]
-    pub enum FenceType {
-        /// Type representing an inclusion fence
-        Inclusion = 0,
-        /// Type representing an exclusion fence
-        Exclusion = 1,
-    }
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct UploadGeofenceRequest {
-    /// Polygon(s) representing the geofence(s)
-    #[prost(message, repeated, tag = "1")]
-    pub polygons: ::prost::alloc::vec::Vec<Polygon>,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct UploadGeofenceResponse {
+pub struct GetEntriesResponse {
     #[prost(message, optional, tag = "1")]
-    pub geofence_result: ::core::option::Option<GeofenceResult>,
+    pub log_files_result: ::core::option::Option<LogFilesResult>,
+    /// List of entries
+    #[prost(message, repeated, tag = "2")]
+    pub entries: ::prost::alloc::vec::Vec<Entry>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ClearGeofenceRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ClearGeofenceResponse {
+pub struct SubscribeDownloadLogFileRequest {
+    /// Entry of the log file to download.
     #[prost(message, optional, tag = "1")]
-    pub geofence_result: ::core::option::Option<GeofenceResult>,
+    pub entry: ::core::option::Option<Entry>,
+    /// Path of where to download log file to.
+    #[prost(string, tag = "2")]
+    pub path: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct DownloadLogFileResponse {
+    #[prost(message, optional, tag = "1")]
+    pub log_files_result: ::core::option::Option<LogFilesResult>,
+    /// Progress if result is progress
+    #[prost(message, optional, tag = "2")]
+    pub progress: ::core::option::Option<ProgressData>,
+}
+///
+/// Progress data coming when downloading a log file.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ProgressData {
+    /// Progress from 0 to 1
+    #[prost(float, tag = "1")]
+    pub progress: f32,
+}
+/// Log file entry type.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct Entry {
+    /// ID of the log file, to specify a file to be downloaded
+    #[prost(uint32, tag = "1")]
+    pub id: u32,
+    /// Date of the log file in UTC in ISO 8601 format "yyyy-mm-ddThh:mm:ssZ"
+    #[prost(string, tag = "2")]
+    pub date: ::prost::alloc::string::String,
+    /// Size of file in bytes
+    #[prost(uint32, tag = "3")]
+    pub size_bytes: u32,
 }
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GeofenceResult {
+pub struct LogFilesResult {
     /// Result enum value
-    #[prost(enumeration = "geofence_result::Result", tag = "1")]
+    #[prost(enumeration = "log_files_result::Result", tag = "1")]
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
     pub result_str: ::prost::alloc::string::String,
 }
-/// Nested message and enum types in `GeofenceResult`.
-pub mod geofence_result {
-    /// Possible results returned for geofence requests.
+/// Nested message and enum types in `LogFilesResult`.
+pub mod log_files_result {
+    /// Possible results returned for calibration commands
     #[derive(
         serde::Serialize,
         serde::Deserialize,
@@ -92,30 +78,31 @@ pub mod geofence_result {
         Unknown = 0,
         /// Request succeeded
         Success = 1,
-        /// Error
-        Error = 2,
-        /// Too many Polygon objects in the geofence
-        TooManyGeofenceItems = 3,
-        /// Vehicle is busy
-        Busy = 4,
-        /// Request timed out
-        Timeout = 5,
+        /// Progress update
+        Next = 2,
+        /// No log files found
+        NoLogfiles = 3,
+        /// A timeout happened
+        Timeout = 4,
         /// Invalid argument
-        InvalidArgument = 6,
-        /// No system connected
+        InvalidArgument = 5,
+        /// File open failed
+        FileOpenFailed = 6,
+        /// No system is connected
         NoSystem = 7,
     }
 }
 #[doc = r" Generated client implementations."]
-pub mod geofence_service_client {
+pub mod log_files_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Enable setting a geofence."]
+    #[doc = " Allow to download log files from the vehicle after a flight is complete."]
+    #[doc = " For log streaming during flight check the logging plugin."]
     #[derive(Debug, Clone)]
-    pub struct GeofenceServiceClient<T> {
+    pub struct LogFilesServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl GeofenceServiceClient<tonic::transport::Channel> {
+    impl LogFilesServiceClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -126,7 +113,7 @@ pub mod geofence_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> GeofenceServiceClient<T>
+    impl<T> LogFilesServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -140,7 +127,7 @@ pub mod geofence_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> GeofenceServiceClient<InterceptedService<T, F>>
+        ) -> LogFilesServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -152,7 +139,7 @@ pub mod geofence_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            GeofenceServiceClient::new(InterceptedService::new(inner, interceptor))
+            LogFilesServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -167,15 +154,11 @@ pub mod geofence_service_client {
             self.inner = self.inner.accept_gzip();
             self
         }
-        #[doc = ""]
-        #[doc = " Upload a geofence."]
-        #[doc = ""]
-        #[doc = " Polygons are uploaded to a drone. Once uploaded, the geofence will remain"]
-        #[doc = " on the drone even if a connection is lost."]
-        pub async fn upload_geofence(
+        #[doc = " Get List of log files."]
+        pub async fn get_entries(
             &mut self,
-            request: impl tonic::IntoRequest<super::UploadGeofenceRequest>,
-        ) -> Result<tonic::Response<super::UploadGeofenceResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::GetEntriesRequest>,
+        ) -> Result<tonic::Response<super::GetEntriesResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -184,16 +167,18 @@ pub mod geofence_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.geofence.GeofenceService/UploadGeofence",
+                "/mavsdk.rpc.log_files.LogFilesService/GetEntries",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = ""]
-        #[doc = " Clear all geofences saved on the vehicle."]
-        pub async fn clear_geofence(
+        #[doc = " Download log file."]
+        pub async fn subscribe_download_log_file(
             &mut self,
-            request: impl tonic::IntoRequest<super::ClearGeofenceRequest>,
-        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::SubscribeDownloadLogFileRequest>,
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::DownloadLogFileResponse>>,
+            tonic::Status,
+        > {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -202,44 +187,46 @@ pub mod geofence_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence",
+                "/mavsdk.rpc.log_files.LogFilesService/SubscribeDownloadLogFile",
             );
-            self.inner.unary(request.into_request(), path, codec).await
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
         }
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod geofence_service_server {
+pub mod log_files_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with GeofenceServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with LogFilesServiceServer."]
     #[async_trait]
-    pub trait GeofenceService: Send + Sync + 'static {
-        #[doc = ""]
-        #[doc = " Upload a geofence."]
-        #[doc = ""]
-        #[doc = " Polygons are uploaded to a drone. Once uploaded, the geofence will remain"]
-        #[doc = " on the drone even if a connection is lost."]
-        async fn upload_geofence(
+    pub trait LogFilesService: Send + Sync + 'static {
+        #[doc = " Get List of log files."]
+        async fn get_entries(
             &self,
-            request: tonic::Request<super::UploadGeofenceRequest>,
-        ) -> Result<tonic::Response<super::UploadGeofenceResponse>, tonic::Status>;
-        #[doc = ""]
-        #[doc = " Clear all geofences saved on the vehicle."]
-        async fn clear_geofence(
+            request: tonic::Request<super::GetEntriesRequest>,
+        ) -> Result<tonic::Response<super::GetEntriesResponse>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeDownloadLogFile method."]
+        type SubscribeDownloadLogFileStream: futures_core::Stream<Item = Result<super::DownloadLogFileResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Download log file."]
+        async fn subscribe_download_log_file(
             &self,
-            request: tonic::Request<super::ClearGeofenceRequest>,
-        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status>;
+            request: tonic::Request<super::SubscribeDownloadLogFileRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeDownloadLogFileStream>, tonic::Status>;
     }
-    #[doc = " Enable setting a geofence."]
+    #[doc = " Allow to download log files from the vehicle after a flight is complete."]
+    #[doc = " For log streaming during flight check the logging plugin."]
     #[derive(Debug)]
-    pub struct GeofenceServiceServer<T: GeofenceService> {
+    pub struct LogFilesServiceServer<T: LogFilesService> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: GeofenceService> GeofenceServiceServer<T> {
+    impl<T: LogFilesService> LogFilesServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -256,9 +243,9 @@ pub mod geofence_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for GeofenceServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for LogFilesServiceServer<T>
     where
-        T: GeofenceService,
+        T: LogFilesService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -271,21 +258,20 @@ pub mod geofence_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/mavsdk.rpc.geofence.GeofenceService/UploadGeofence" => {
+                "/mavsdk.rpc.log_files.LogFilesService/GetEntries" => {
                     #[allow(non_camel_case_types)]
-                    struct UploadGeofenceSvc<T: GeofenceService>(pub Arc<T>);
-                    impl<T: GeofenceService>
-                        tonic::server::UnaryService<super::UploadGeofenceRequest>
-                        for UploadGeofenceSvc<T>
+                    struct GetEntriesSvc<T: LogFilesService>(pub Arc<T>);
+                    impl<T: LogFilesService> tonic::server::UnaryService<super::GetEntriesRequest>
+                        for GetEntriesSvc<T>
                     {
-                        type Response = super::UploadGeofenceResponse;
+                        type Response = super::GetEntriesResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::UploadGeofenceRequest>,
+                            request: tonic::Request<super::GetEntriesRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).upload_geofence(request).await };
+                            let fut = async move { (*inner).get_entries(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -294,7 +280,7 @@ pub mod geofence_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = UploadGeofenceSvc(inner);
+                        let method = GetEntriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -305,21 +291,25 @@ pub mod geofence_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence" => {
+                "/mavsdk.rpc.log_files.LogFilesService/SubscribeDownloadLogFile" => {
                     #[allow(non_camel_case_types)]
-                    struct ClearGeofenceSvc<T: GeofenceService>(pub Arc<T>);
-                    impl<T: GeofenceService>
-                        tonic::server::UnaryService<super::ClearGeofenceRequest>
-                        for ClearGeofenceSvc<T>
+                    struct SubscribeDownloadLogFileSvc<T: LogFilesService>(pub Arc<T>);
+                    impl<T: LogFilesService>
+                        tonic::server::ServerStreamingService<
+                            super::SubscribeDownloadLogFileRequest,
+                        > for SubscribeDownloadLogFileSvc<T>
                     {
-                        type Response = super::ClearGeofenceResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::DownloadLogFileResponse;
+                        type ResponseStream = T::SubscribeDownloadLogFileStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ClearGeofenceRequest>,
+                            request: tonic::Request<super::SubscribeDownloadLogFileRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).clear_geofence(request).await };
+                            let fut =
+                                async move { (*inner).subscribe_download_log_file(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -328,13 +318,13 @@ pub mod geofence_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ClearGeofenceSvc(inner);
+                        let method = SubscribeDownloadLogFileSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
                         );
-                        let res = grpc.unary(method, req).await;
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -350,7 +340,7 @@ pub mod geofence_service_server {
             }
         }
     }
-    impl<T: GeofenceService> Clone for GeofenceServiceServer<T> {
+    impl<T: LogFilesService> Clone for LogFilesServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -360,7 +350,7 @@ pub mod geofence_service_server {
             }
         }
     }
-    impl<T: GeofenceService> Clone for _Inner<T> {
+    impl<T: LogFilesService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -370,7 +360,7 @@ pub mod geofence_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: GeofenceService> tonic::transport::NamedService for GeofenceServiceServer<T> {
-        const NAME: &'static str = "mavsdk.rpc.geofence.GeofenceService";
+    impl<T: LogFilesService> tonic::transport::NamedService for LogFilesServiceServer<T> {
+        const NAME: &'static str = "mavsdk.rpc.log_files.LogFilesService";
     }
 }

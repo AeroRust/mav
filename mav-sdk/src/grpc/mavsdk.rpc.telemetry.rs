@@ -38,9 +38,9 @@ pub struct ArmedResponse {
     #[prost(bool, tag = "1")]
     pub is_armed: bool,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeVtolStateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VtolStateResponse {
     /// The next 'vtol' state
     #[prost(enumeration = "VtolState", tag = "1")]
@@ -102,9 +102,9 @@ pub struct GpsInfoResponse {
     #[prost(message, optional, tag = "1")]
     pub gps_info: ::core::option::Option<GpsInfo>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeRawGpsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RawGpsResponse {
     /// The next 'Raw GPS' state. Warning: this is an advanced feature, use `Position` updates to get the location of the drone!
     #[prost(message, optional, tag = "1")]
@@ -206,17 +206,17 @@ pub struct ImuResponse {
     #[prost(message, optional, tag = "1")]
     pub imu: ::core::option::Option<Imu>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeScaledImuRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ScaledImuResponse {
     /// The next scaled IMU status
     #[prost(message, optional, tag = "1")]
     pub imu: ::core::option::Option<Imu>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeRawImuRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RawImuResponse {
     /// The next raw IMU status
     #[prost(message, optional, tag = "1")]
@@ -246,17 +246,17 @@ pub struct DistanceSensorResponse {
     #[prost(message, optional, tag = "1")]
     pub distance_sensor: ::core::option::Option<DistanceSensor>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeScaledPressureRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ScaledPressureResponse {
     /// The next Scaled Pressure status
     #[prost(message, optional, tag = "1")]
     pub scaled_pressure: ::core::option::Option<ScaledPressure>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHeadingRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HeadingResponse {
     /// The next heading (yaw) in degrees
     #[prost(message, optional, tag = "1")]
@@ -306,13 +306,13 @@ pub struct SetRateLandedStateResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVtolStateRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateVtolStateResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
@@ -383,7 +383,7 @@ pub struct SetRateGpsInfoResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRawGpsRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
@@ -488,24 +488,24 @@ pub struct SetRateImuResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateScaledImuRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateScaledImuResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRawImuRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
     pub rate_hz: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateRawImuResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
@@ -558,7 +558,7 @@ pub struct Position {
     pub relative_altitude_m: f32,
 }
 /// Heading type used for global position
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Heading {
     /// Heading in degrees (range: 0 to +360)
     #[prost(double, tag = "1")]
@@ -641,7 +641,7 @@ pub struct GpsInfo {
 ///
 /// Warning: this is an advanced type! If you want the location of the drone, use
 /// the position instead. This message exposes the raw values of the GNSS sensor.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RawGps {
     /// Timestamp in microseconds (UNIX Epoch time or time since system boot, to be inferred)
     #[prost(uint64, tag = "1")]
@@ -878,7 +878,7 @@ pub struct DistanceSensor {
     pub current_distance_m: f32,
 }
 /// Scaled Pressure message type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ScaledPressure {
     /// Timestamp (time since system boot)
     #[prost(uint64, tag = "1")]
@@ -1218,7 +1218,19 @@ pub enum LandedState {
     Landing = 4,
 }
 /// VTOL State enumeration
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum VtolState {
     /// MAV is not configured as VTOL

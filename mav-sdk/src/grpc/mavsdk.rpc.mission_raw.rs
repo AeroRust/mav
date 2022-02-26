@@ -1,82 +1,58 @@
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadMissionRequest {
-    /// The mission plan
-    #[prost(message, optional, tag = "1")]
-    pub mission_plan: ::core::option::Option<MissionPlan>,
+    /// The mission items
+    #[prost(message, repeated, tag = "1")]
+    pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeUploadMissionWithProgressRequest {
-    /// The mission plan
-    #[prost(message, optional, tag = "1")]
-    pub mission_plan: ::core::option::Option<MissionPlan>,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct UploadMissionWithProgressResponse {
-    #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// The progress data
-    #[prost(message, optional, tag = "2")]
-    pub progress_data: ::core::option::Option<ProgressData>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionUploadResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DownloadMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// The mission plan
-    #[prost(message, optional, tag = "2")]
-    pub mission_plan: ::core::option::Option<MissionPlan>,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeDownloadMissionWithProgressRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct DownloadMissionWithProgressResponse {
-    #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// The progress data, or the mission plan (when the download is finished)
-    #[prost(message, optional, tag = "2")]
-    pub progress_data: ::core::option::Option<ProgressDataOrMission>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
+    /// The mission items
+    #[prost(message, repeated, tag = "2")]
+    pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelMissionDownloadResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PauseMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ClearMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemRequest {
@@ -87,17 +63,7 @@ pub struct SetCurrentMissionItemRequest {
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetCurrentMissionItemResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct IsMissionFinishedRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct IsMissionFinishedResponse {
-    #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// True if the mission is finished and the last mission item has been reached
-    #[prost(bool, tag = "2")]
-    pub is_finished: bool,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeMissionProgressRequest {}
@@ -108,117 +74,26 @@ pub struct MissionProgressResponse {
     pub mission_progress: ::core::option::Option<MissionProgress>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetReturnToLaunchAfterMissionRequest {}
+pub struct SubscribeMissionChangedRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetReturnToLaunchAfterMissionResponse {
-    #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-    /// If true, trigger an RTL at the end of the mission
-    #[prost(bool, tag = "2")]
-    pub enable: bool,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetReturnToLaunchAfterMissionRequest {
-    /// If true, trigger an RTL at the end of the mission
+pub struct MissionChangedResponse {
+    /// Mission has changed
     #[prost(bool, tag = "1")]
-    pub enable: bool,
+    pub mission_changed: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetReturnToLaunchAfterMissionResponse {
+pub struct ImportQgroundcontrolMissionRequest {
+    /// File path of the QGC plan
+    #[prost(string, tag = "1")]
+    pub qgc_plan_path: ::prost::alloc::string::String,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ImportQgroundcontrolMissionResponse {
     #[prost(message, optional, tag = "1")]
-    pub mission_result: ::core::option::Option<MissionResult>,
-}
-///
-/// Type representing a mission item.
-///
-/// A MissionItem can contain a position and/or actions.
-/// Mission items are building blocks to assemble a mission,
-/// which can be sent to (or received from) a system.
-/// They cannot be used independently.
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct MissionItem {
-    /// Latitude in degrees (range: -90 to +90)
-    #[prost(double, tag = "1")]
-    pub latitude_deg: f64,
-    /// Longitude in degrees (range: -180 to +180)
-    #[prost(double, tag = "2")]
-    pub longitude_deg: f64,
-    /// Altitude relative to takeoff altitude in metres
-    #[prost(float, tag = "3")]
-    pub relative_altitude_m: f32,
-    /// Speed to use after this mission item (in metres/second)
-    #[prost(float, tag = "4")]
-    pub speed_m_s: f32,
-    /// True will make the drone fly through without stopping, while false will make the drone stop on the waypoint
-    #[prost(bool, tag = "5")]
-    pub is_fly_through: bool,
-    /// Gimbal pitch (in degrees)
-    #[prost(float, tag = "6")]
-    pub gimbal_pitch_deg: f32,
-    /// Gimbal yaw (in degrees)
-    #[prost(float, tag = "7")]
-    pub gimbal_yaw_deg: f32,
-    /// Camera action to trigger at this mission item
-    #[prost(enumeration = "mission_item::CameraAction", tag = "8")]
-    pub camera_action: i32,
-    /// Loiter time (in seconds)
-    #[prost(float, tag = "9")]
-    pub loiter_time_s: f32,
-    /// Camera photo interval to use after this mission item (in seconds)
-    #[prost(double, tag = "10")]
-    pub camera_photo_interval_s: f64,
-    /// Radius for completing a mission item (in metres)
-    #[prost(float, tag = "11")]
-    pub acceptance_radius_m: f32,
-    /// Absolute yaw angle (in degrees)
-    #[prost(float, tag = "12")]
-    pub yaw_deg: f32,
-    /// Camera photo distance to use after this mission item (in meters)
-    #[prost(float, tag = "13")]
-    pub camera_photo_distance_m: f32,
-}
-/// Nested message and enum types in `MissionItem`.
-pub mod mission_item {
-    /// Possible camera actions at a mission item.
-    #[derive(
-        serde::Serialize,
-        serde::Deserialize,
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration,
-    )]
-    #[repr(i32)]
-    pub enum CameraAction {
-        /// No action
-        None = 0,
-        /// Take a single photo
-        TakePhoto = 1,
-        /// Start capturing photos at regular intervals
-        StartPhotoInterval = 2,
-        /// Stop capturing photos at regular intervals
-        StopPhotoInterval = 3,
-        /// Start capturing video
-        StartVideo = 4,
-        /// Stop capturing video
-        StopVideo = 5,
-        /// Start capturing photos at regular distance
-        StartPhotoDistance = 6,
-        /// Stop capturing photos at regular distance
-        StopPhotoDistance = 7,
-    }
-}
-/// Mission plan type
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct MissionPlan {
-    /// The mission items
-    #[prost(message, repeated, tag = "1")]
-    pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
+    pub mission_raw_result: ::core::option::Option<MissionRawResult>,
+    /// The imported mission data
+    #[prost(message, optional, tag = "2")]
+    pub mission_import_data: ::core::option::Option<MissionImportData>,
 }
 /// Mission progress type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -230,18 +105,74 @@ pub struct MissionProgress {
     #[prost(int32, tag = "2")]
     pub total: i32,
 }
+/// Mission item exactly identical to MAVLink MISSION_ITEM_INT.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct MissionItem {
+    /// Sequence (uint16_t)
+    #[prost(uint32, tag = "1")]
+    pub seq: u32,
+    /// The coordinate system of the waypoint (actually uint8_t)
+    #[prost(uint32, tag = "2")]
+    pub frame: u32,
+    /// The scheduled action for the waypoint (actually uint16_t)
+    #[prost(uint32, tag = "3")]
+    pub command: u32,
+    /// false:0, true:1 (actually uint8_t)
+    #[prost(uint32, tag = "4")]
+    pub current: u32,
+    /// Autocontinue to next waypoint (actually uint8_t)
+    #[prost(uint32, tag = "5")]
+    pub autocontinue: u32,
+    /// PARAM1, see MAV_CMD enum
+    #[prost(float, tag = "6")]
+    pub param1: f32,
+    /// PARAM2, see MAV_CMD enum
+    #[prost(float, tag = "7")]
+    pub param2: f32,
+    /// PARAM3, see MAV_CMD enum
+    #[prost(float, tag = "8")]
+    pub param3: f32,
+    /// PARAM4, see MAV_CMD enum
+    #[prost(float, tag = "9")]
+    pub param4: f32,
+    /// PARAM5 / local: x position in meters * 1e4, global: latitude in degrees * 10^7
+    #[prost(int32, tag = "10")]
+    pub x: i32,
+    /// PARAM6 / y position: local: x position in meters * 1e4, global: longitude in degrees *10^7
+    #[prost(int32, tag = "11")]
+    pub y: i32,
+    /// PARAM7 / local: Z coordinate, global: altitude (relative or absolute, depending on frame)
+    #[prost(float, tag = "12")]
+    pub z: f32,
+    /// Mission type (actually uint8_t)
+    #[prost(uint32, tag = "13")]
+    pub mission_type: u32,
+}
+/// Mission import data
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct MissionImportData {
+    /// Mission items
+    #[prost(message, repeated, tag = "1")]
+    pub mission_items: ::prost::alloc::vec::Vec<MissionItem>,
+    /// Geofence items
+    #[prost(message, repeated, tag = "2")]
+    pub geofence_items: ::prost::alloc::vec::Vec<MissionItem>,
+    /// Rally items
+    #[prost(message, repeated, tag = "3")]
+    pub rally_items: ::prost::alloc::vec::Vec<MissionItem>,
+}
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct MissionResult {
+pub struct MissionRawResult {
     /// Result enum value
-    #[prost(enumeration = "mission_result::Result", tag = "1")]
+    #[prost(enumeration = "mission_raw_result::Result", tag = "1")]
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
     pub result_str: ::prost::alloc::string::String,
 }
-/// Nested message and enum types in `MissionResult`.
-pub mod mission_result {
+/// Nested message and enum types in `MissionRawResult`.
+pub mod mission_raw_result {
     /// Possible results returned for action requests.
     #[derive(
         serde::Serialize,
@@ -276,49 +207,26 @@ pub mod mission_result {
         Unsupported = 7,
         /// No mission available on the system
         NoMissionAvailable = 8,
-        /// Unsupported mission command
-        UnsupportedMissionCmd = 11,
         /// Mission transfer (upload or download) has been cancelled
-        TransferCancelled = 12,
+        TransferCancelled = 9,
+        /// Failed to open the QGroundControl plan
+        FailedToOpenQgcPlan = 10,
+        /// Failed to parse the QGroundControl plan
+        FailedToParseQgcPlan = 11,
         /// No system connected
-        NoSystem = 13,
-        /// Intermediate message showing progress
-        Next = 14,
+        NoSystem = 12,
     }
-}
-/// Progress data coming from mission upload.
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ProgressData {
-    /// Progress (0..1.0)
-    #[prost(float, tag = "1")]
-    pub progress: f32,
-}
-/// Progress data coming from mission download, or the mission itself (if the transfer succeeds).
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ProgressDataOrMission {
-    /// Whether this ProgressData contains a 'progress' status or not
-    #[prost(bool, tag = "1")]
-    pub has_progress: bool,
-    /// Progress (0..1.0)
-    #[prost(float, tag = "2")]
-    pub progress: f32,
-    /// Whether this ProgressData contains a 'mission_plan' or not
-    #[prost(bool, tag = "3")]
-    pub has_mission: bool,
-    /// Mission plan
-    #[prost(message, optional, tag = "4")]
-    pub mission_plan: ::core::option::Option<MissionPlan>,
 }
 #[doc = r" Generated client implementations."]
-pub mod mission_service_client {
+pub mod mission_raw_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Enable waypoint missions."]
+    #[doc = " Enable raw missions as exposed by MAVLink."]
     #[derive(Debug, Clone)]
-    pub struct MissionServiceClient<T> {
+    pub struct MissionRawServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl MissionServiceClient<tonic::transport::Channel> {
+    impl MissionRawServiceClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -329,7 +237,7 @@ pub mod mission_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> MissionServiceClient<T>
+    impl<T> MissionRawServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -343,7 +251,7 @@ pub mod mission_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> MissionServiceClient<InterceptedService<T, F>>
+        ) -> MissionRawServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -355,7 +263,7 @@ pub mod mission_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            MissionServiceClient::new(InterceptedService::new(inner, interceptor))
+            MissionRawServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -371,10 +279,10 @@ pub mod mission_service_client {
             self
         }
         #[doc = ""]
-        #[doc = " Upload a list of mission items to the system."]
+        #[doc = " Upload a list of raw mission items to the system."]
         #[doc = ""]
-        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
-        #[doc = " executed even if the connection is lost."]
+        #[doc = " The raw mission items are uploaded to a drone. Once uploaded the mission"]
+        #[doc = " can be started and executed even if the connection is lost."]
         pub async fn upload_mission(
             &mut self,
             request: impl tonic::IntoRequest<super::UploadMissionRequest>,
@@ -387,35 +295,9 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/UploadMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/UploadMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Upload a list of mission items to the system and report upload progress."]
-        #[doc = ""]
-        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
-        #[doc = " executed even if the connection is lost."]
-        pub async fn subscribe_upload_mission_with_progress(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SubscribeUploadMissionWithProgressRequest>,
-        ) -> Result<
-            tonic::Response<tonic::codec::Streaming<super::UploadMissionWithProgressResponse>>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/SubscribeUploadMissionWithProgress",
-            );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
         }
         #[doc = ""]
         #[doc = " Cancel an ongoing mission upload."]
@@ -431,15 +313,12 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/CancelMissionUpload",
+                "/mavsdk.rpc.mission_raw.MissionRawService/CancelMissionUpload",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
-        #[doc = " Download a list of mission items from the system (asynchronous)."]
-        #[doc = ""]
-        #[doc = " Will fail if any of the downloaded mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
+        #[doc = " Download a list of raw mission items from the system (asynchronous)."]
         pub async fn download_mission(
             &mut self,
             request: impl tonic::IntoRequest<super::DownloadMissionRequest>,
@@ -452,35 +331,9 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/DownloadMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/DownloadMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Download a list of mission items from the system (asynchronous) and report progress."]
-        #[doc = ""]
-        #[doc = " Will fail if any of the downloaded mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
-        pub async fn subscribe_download_mission_with_progress(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SubscribeDownloadMissionWithProgressRequest>,
-        ) -> Result<
-            tonic::Response<tonic::codec::Streaming<super::DownloadMissionWithProgressResponse>>,
-            tonic::Status,
-        > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/SubscribeDownloadMissionWithProgress",
-            );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
         }
         #[doc = ""]
         #[doc = " Cancel an ongoing mission download."]
@@ -496,7 +349,7 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/CancelMissionDownload",
+                "/mavsdk.rpc.mission_raw.MissionRawService/CancelMissionDownload",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -516,7 +369,7 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/StartMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/StartMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -539,7 +392,7 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/PauseMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/PauseMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -557,18 +410,15 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/ClearMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/ClearMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
-        #[doc = " Sets the mission item index to go to."]
+        #[doc = " Sets the raw mission item index to go to."]
         #[doc = ""]
         #[doc = " By setting the current index to 0, the mission is restarted from the beginning. If it is set"]
-        #[doc = " to a specific index of a mission item, the mission will be set to this item."]
-        #[doc = ""]
-        #[doc = " Note that this is not necessarily true for general missions using MAVLink if loop counters"]
-        #[doc = " are used."]
+        #[doc = " to a specific index of a raw mission item, the mission will be set to this item."]
         pub async fn set_current_mission_item(
             &mut self,
             request: impl tonic::IntoRequest<super::SetCurrentMissionItemRequest>,
@@ -581,25 +431,7 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/SetCurrentMissionItem",
-            );
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Check if the mission has been finished."]
-        pub async fn is_mission_finished(
-            &mut self,
-            request: impl tonic::IntoRequest<super::IsMissionFinishedRequest>,
-        ) -> Result<tonic::Response<super::IsMissionFinishedResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/IsMissionFinished",
+                "/mavsdk.rpc.mission_raw.MissionRawService/SetCurrentMissionItem",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -620,21 +452,52 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/SubscribeMissionProgress",
+                "/mavsdk.rpc.mission_raw.MissionRawService/SubscribeMissionProgress",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = "*"]
+        #[doc = " Subscribes to mission changed."]
+        #[doc = ""]
+        #[doc = " This notification can be used to be informed if a ground station has"]
+        #[doc = " been uploaded or changed by a ground station or companion computer."]
+        #[doc = ""]
+        #[doc = " @param callback Callback to notify about change."]
+        pub async fn subscribe_mission_changed(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeMissionChangedRequest>,
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::MissionChangedResponse>>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.mission_raw.MissionRawService/SubscribeMissionChanged",
             );
             self.inner
                 .server_streaming(request.into_request(), path, codec)
                 .await
         }
         #[doc = ""]
-        #[doc = " Get whether to trigger Return-to-Launch (RTL) after mission is complete."]
+        #[doc = " Import a QGroundControl missions in JSON .plan format."]
         #[doc = ""]
-        #[doc = " Before getting this option, it needs to be set, or a mission"]
-        #[doc = " needs to be downloaded."]
-        pub async fn get_return_to_launch_after_mission(
+        #[doc = " Supported:"]
+        #[doc = " - Waypoints"]
+        #[doc = " - Survey"]
+        #[doc = " Not supported:"]
+        #[doc = " - Structure Scan"]
+        pub async fn import_qgroundcontrol_mission(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetReturnToLaunchAfterMissionRequest>,
-        ) -> Result<tonic::Response<super::GetReturnToLaunchAfterMissionResponse>, tonic::Status>
+            request: impl tonic::IntoRequest<super::ImportQgroundcontrolMissionRequest>,
+        ) -> Result<tonic::Response<super::ImportQgroundcontrolMissionResponse>, tonic::Status>
         {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
@@ -644,64 +507,28 @@ pub mod mission_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/GetReturnToLaunchAfterMission",
-            );
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Set whether to trigger Return-to-Launch (RTL) after the mission is complete."]
-        #[doc = ""]
-        #[doc = " This will only take effect for the next mission upload, meaning that"]
-        #[doc = " the mission may have to be uploaded again."]
-        pub async fn set_return_to_launch_after_mission(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SetReturnToLaunchAfterMissionRequest>,
-        ) -> Result<tonic::Response<super::SetReturnToLaunchAfterMissionResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.mission.MissionService/SetReturnToLaunchAfterMission",
+                "/mavsdk.rpc.mission_raw.MissionRawService/ImportQgroundcontrolMission",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod mission_service_server {
+pub mod mission_raw_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with MissionServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with MissionRawServiceServer."]
     #[async_trait]
-    pub trait MissionService: Send + Sync + 'static {
+    pub trait MissionRawService: Send + Sync + 'static {
         #[doc = ""]
-        #[doc = " Upload a list of mission items to the system."]
+        #[doc = " Upload a list of raw mission items to the system."]
         #[doc = ""]
-        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
-        #[doc = " executed even if the connection is lost."]
+        #[doc = " The raw mission items are uploaded to a drone. Once uploaded the mission"]
+        #[doc = " can be started and executed even if the connection is lost."]
         async fn upload_mission(
             &self,
             request: tonic::Request<super::UploadMissionRequest>,
         ) -> Result<tonic::Response<super::UploadMissionResponse>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeUploadMissionWithProgress method."]
-        type SubscribeUploadMissionWithProgressStream: futures_core::Stream<
-                Item = Result<super::UploadMissionWithProgressResponse, tonic::Status>,
-            > + Send
-            + 'static;
-        #[doc = ""]
-        #[doc = " Upload a list of mission items to the system and report upload progress."]
-        #[doc = ""]
-        #[doc = " The mission items are uploaded to a drone. Once uploaded the mission can be started and"]
-        #[doc = " executed even if the connection is lost."]
-        async fn subscribe_upload_mission_with_progress(
-            &self,
-            request: tonic::Request<super::SubscribeUploadMissionWithProgressRequest>,
-        ) -> Result<tonic::Response<Self::SubscribeUploadMissionWithProgressStream>, tonic::Status>;
         #[doc = ""]
         #[doc = " Cancel an ongoing mission upload."]
         async fn cancel_mission_upload(
@@ -709,28 +536,11 @@ pub mod mission_service_server {
             request: tonic::Request<super::CancelMissionUploadRequest>,
         ) -> Result<tonic::Response<super::CancelMissionUploadResponse>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Download a list of mission items from the system (asynchronous)."]
-        #[doc = ""]
-        #[doc = " Will fail if any of the downloaded mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
+        #[doc = " Download a list of raw mission items from the system (asynchronous)."]
         async fn download_mission(
             &self,
             request: tonic::Request<super::DownloadMissionRequest>,
         ) -> Result<tonic::Response<super::DownloadMissionResponse>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeDownloadMissionWithProgress method."]
-        type SubscribeDownloadMissionWithProgressStream: futures_core::Stream<
-                Item = Result<super::DownloadMissionWithProgressResponse, tonic::Status>,
-            > + Send
-            + 'static;
-        #[doc = ""]
-        #[doc = " Download a list of mission items from the system (asynchronous) and report progress."]
-        #[doc = ""]
-        #[doc = " Will fail if any of the downloaded mission items are not supported"]
-        #[doc = " by the MAVSDK API."]
-        async fn subscribe_download_mission_with_progress(
-            &self,
-            request: tonic::Request<super::SubscribeDownloadMissionWithProgressRequest>,
-        ) -> Result<tonic::Response<Self::SubscribeDownloadMissionWithProgressStream>, tonic::Status>;
         #[doc = ""]
         #[doc = " Cancel an ongoing mission download."]
         async fn cancel_mission_download(
@@ -763,23 +573,14 @@ pub mod mission_service_server {
             request: tonic::Request<super::ClearMissionRequest>,
         ) -> Result<tonic::Response<super::ClearMissionResponse>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Sets the mission item index to go to."]
+        #[doc = " Sets the raw mission item index to go to."]
         #[doc = ""]
         #[doc = " By setting the current index to 0, the mission is restarted from the beginning. If it is set"]
-        #[doc = " to a specific index of a mission item, the mission will be set to this item."]
-        #[doc = ""]
-        #[doc = " Note that this is not necessarily true for general missions using MAVLink if loop counters"]
-        #[doc = " are used."]
+        #[doc = " to a specific index of a raw mission item, the mission will be set to this item."]
         async fn set_current_mission_item(
             &self,
             request: tonic::Request<super::SetCurrentMissionItemRequest>,
         ) -> Result<tonic::Response<super::SetCurrentMissionItemResponse>, tonic::Status>;
-        #[doc = ""]
-        #[doc = " Check if the mission has been finished."]
-        async fn is_mission_finished(
-            &self,
-            request: tonic::Request<super::IsMissionFinishedRequest>,
-        ) -> Result<tonic::Response<super::IsMissionFinishedResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeMissionProgress method."]
         type SubscribeMissionProgressStream: futures_core::Stream<Item = Result<super::MissionProgressResponse, tonic::Status>>
             + Send
@@ -790,34 +591,43 @@ pub mod mission_service_server {
             &self,
             request: tonic::Request<super::SubscribeMissionProgressRequest>,
         ) -> Result<tonic::Response<Self::SubscribeMissionProgressStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeMissionChanged method."]
+        type SubscribeMissionChangedStream: futures_core::Stream<Item = Result<super::MissionChangedResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = "*"]
+        #[doc = " Subscribes to mission changed."]
         #[doc = ""]
-        #[doc = " Get whether to trigger Return-to-Launch (RTL) after mission is complete."]
+        #[doc = " This notification can be used to be informed if a ground station has"]
+        #[doc = " been uploaded or changed by a ground station or companion computer."]
         #[doc = ""]
-        #[doc = " Before getting this option, it needs to be set, or a mission"]
-        #[doc = " needs to be downloaded."]
-        async fn get_return_to_launch_after_mission(
+        #[doc = " @param callback Callback to notify about change."]
+        async fn subscribe_mission_changed(
             &self,
-            request: tonic::Request<super::GetReturnToLaunchAfterMissionRequest>,
-        ) -> Result<tonic::Response<super::GetReturnToLaunchAfterMissionResponse>, tonic::Status>;
+            request: tonic::Request<super::SubscribeMissionChangedRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeMissionChangedStream>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Set whether to trigger Return-to-Launch (RTL) after the mission is complete."]
+        #[doc = " Import a QGroundControl missions in JSON .plan format."]
         #[doc = ""]
-        #[doc = " This will only take effect for the next mission upload, meaning that"]
-        #[doc = " the mission may have to be uploaded again."]
-        async fn set_return_to_launch_after_mission(
+        #[doc = " Supported:"]
+        #[doc = " - Waypoints"]
+        #[doc = " - Survey"]
+        #[doc = " Not supported:"]
+        #[doc = " - Structure Scan"]
+        async fn import_qgroundcontrol_mission(
             &self,
-            request: tonic::Request<super::SetReturnToLaunchAfterMissionRequest>,
-        ) -> Result<tonic::Response<super::SetReturnToLaunchAfterMissionResponse>, tonic::Status>;
+            request: tonic::Request<super::ImportQgroundcontrolMissionRequest>,
+        ) -> Result<tonic::Response<super::ImportQgroundcontrolMissionResponse>, tonic::Status>;
     }
-    #[doc = " Enable waypoint missions."]
+    #[doc = " Enable raw missions as exposed by MAVLink."]
     #[derive(Debug)]
-    pub struct MissionServiceServer<T: MissionService> {
+    pub struct MissionRawServiceServer<T: MissionRawService> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: MissionService> MissionServiceServer<T> {
+    impl<T: MissionRawService> MissionRawServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -834,9 +644,9 @@ pub mod mission_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for MissionServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for MissionRawServiceServer<T>
     where
-        T: MissionService,
+        T: MissionRawService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -849,10 +659,11 @@ pub mod mission_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/mavsdk.rpc.mission.MissionService/UploadMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/UploadMission" => {
                     #[allow(non_camel_case_types)]
-                    struct UploadMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService> tonic::server::UnaryService<super::UploadMissionRequest>
+                    struct UploadMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::UnaryService<super::UploadMissionRequest>
                         for UploadMissionSvc<T>
                     {
                         type Response = super::UploadMissionResponse;
@@ -882,53 +693,10 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/SubscribeUploadMissionWithProgress" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/CancelMissionUpload" => {
                     #[allow(non_camel_case_types)]
-                    struct SubscribeUploadMissionWithProgressSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::ServerStreamingService<
-                            super::SubscribeUploadMissionWithProgressRequest,
-                        > for SubscribeUploadMissionWithProgressSvc<T>
-                    {
-                        type Response = super::UploadMissionWithProgressResponse;
-                        type ResponseStream = T::SubscribeUploadMissionWithProgressStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                super::SubscribeUploadMissionWithProgressRequest,
-                            >,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move {
-                                (*inner)
-                                    .subscribe_upload_mission_with_progress(request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = SubscribeUploadMissionWithProgressSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.server_streaming(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.mission.MissionService/CancelMissionUpload" => {
-                    #[allow(non_camel_case_types)]
-                    struct CancelMissionUploadSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
+                    struct CancelMissionUploadSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
                         tonic::server::UnaryService<super::CancelMissionUploadRequest>
                         for CancelMissionUploadSvc<T>
                     {
@@ -959,10 +727,10 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/DownloadMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/DownloadMission" => {
                     #[allow(non_camel_case_types)]
-                    struct DownloadMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
+                    struct DownloadMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
                         tonic::server::UnaryService<super::DownloadMissionRequest>
                         for DownloadMissionSvc<T>
                     {
@@ -993,53 +761,10 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/SubscribeDownloadMissionWithProgress" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/CancelMissionDownload" => {
                     #[allow(non_camel_case_types)]
-                    struct SubscribeDownloadMissionWithProgressSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::ServerStreamingService<
-                            super::SubscribeDownloadMissionWithProgressRequest,
-                        > for SubscribeDownloadMissionWithProgressSvc<T>
-                    {
-                        type Response = super::DownloadMissionWithProgressResponse;
-                        type ResponseStream = T::SubscribeDownloadMissionWithProgressStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                super::SubscribeDownloadMissionWithProgressRequest,
-                            >,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move {
-                                (*inner)
-                                    .subscribe_download_mission_with_progress(request)
-                                    .await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = SubscribeDownloadMissionWithProgressSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.server_streaming(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.mission.MissionService/CancelMissionDownload" => {
-                    #[allow(non_camel_case_types)]
-                    struct CancelMissionDownloadSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
+                    struct CancelMissionDownloadSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
                         tonic::server::UnaryService<super::CancelMissionDownloadRequest>
                         for CancelMissionDownloadSvc<T>
                     {
@@ -1071,10 +796,11 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/StartMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/StartMission" => {
                     #[allow(non_camel_case_types)]
-                    struct StartMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService> tonic::server::UnaryService<super::StartMissionRequest>
+                    struct StartMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::UnaryService<super::StartMissionRequest>
                         for StartMissionSvc<T>
                     {
                         type Response = super::StartMissionResponse;
@@ -1104,10 +830,11 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/PauseMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/PauseMission" => {
                     #[allow(non_camel_case_types)]
-                    struct PauseMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService> tonic::server::UnaryService<super::PauseMissionRequest>
+                    struct PauseMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::UnaryService<super::PauseMissionRequest>
                         for PauseMissionSvc<T>
                     {
                         type Response = super::PauseMissionResponse;
@@ -1137,10 +864,11 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/ClearMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/ClearMission" => {
                     #[allow(non_camel_case_types)]
-                    struct ClearMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService> tonic::server::UnaryService<super::ClearMissionRequest>
+                    struct ClearMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::UnaryService<super::ClearMissionRequest>
                         for ClearMissionSvc<T>
                     {
                         type Response = super::ClearMissionResponse;
@@ -1170,10 +898,10 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/SetCurrentMissionItem" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/SetCurrentMissionItem" => {
                     #[allow(non_camel_case_types)]
-                    struct SetCurrentMissionItemSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
+                    struct SetCurrentMissionItemSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
                         tonic::server::UnaryService<super::SetCurrentMissionItemRequest>
                         for SetCurrentMissionItemSvc<T>
                     {
@@ -1205,44 +933,10 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/IsMissionFinished" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/SubscribeMissionProgress" => {
                     #[allow(non_camel_case_types)]
-                    struct IsMissionFinishedSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::UnaryService<super::IsMissionFinishedRequest>
-                        for IsMissionFinishedSvc<T>
-                    {
-                        type Response = super::IsMissionFinishedResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::IsMissionFinishedRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move { (*inner).is_mission_finished(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = IsMissionFinishedSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.mission.MissionService/SubscribeMissionProgress" => {
-                    #[allow(non_camel_case_types)]
-                    struct SubscribeMissionProgressSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
+                    struct SubscribeMissionProgressSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
                         tonic::server::ServerStreamingService<
                             super::SubscribeMissionProgressRequest,
                         > for SubscribeMissionProgressSvc<T>
@@ -1277,23 +971,24 @@ pub mod mission_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/GetReturnToLaunchAfterMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/SubscribeMissionChanged" => {
                     #[allow(non_camel_case_types)]
-                    struct GetReturnToLaunchAfterMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::UnaryService<super::GetReturnToLaunchAfterMissionRequest>
-                        for GetReturnToLaunchAfterMissionSvc<T>
+                    struct SubscribeMissionChangedSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::ServerStreamingService<super::SubscribeMissionChangedRequest>
+                        for SubscribeMissionChangedSvc<T>
                     {
-                        type Response = super::GetReturnToLaunchAfterMissionResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Response = super::MissionChangedResponse;
+                        type ResponseStream = T::SubscribeMissionChangedStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetReturnToLaunchAfterMissionRequest>,
+                            request: tonic::Request<super::SubscribeMissionChangedRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move {
-                                (*inner).get_return_to_launch_after_mission(request).await
-                            };
+                            let fut =
+                                async move { (*inner).subscribe_mission_changed(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -1302,33 +997,33 @@ pub mod mission_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetReturnToLaunchAfterMissionSvc(inner);
+                        let method = SubscribeMissionChangedSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
                         );
-                        let res = grpc.unary(method, req).await;
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.mission.MissionService/SetReturnToLaunchAfterMission" => {
+                "/mavsdk.rpc.mission_raw.MissionRawService/ImportQgroundcontrolMission" => {
                     #[allow(non_camel_case_types)]
-                    struct SetReturnToLaunchAfterMissionSvc<T: MissionService>(pub Arc<T>);
-                    impl<T: MissionService>
-                        tonic::server::UnaryService<super::SetReturnToLaunchAfterMissionRequest>
-                        for SetReturnToLaunchAfterMissionSvc<T>
+                    struct ImportQgroundcontrolMissionSvc<T: MissionRawService>(pub Arc<T>);
+                    impl<T: MissionRawService>
+                        tonic::server::UnaryService<super::ImportQgroundcontrolMissionRequest>
+                        for ImportQgroundcontrolMissionSvc<T>
                     {
-                        type Response = super::SetReturnToLaunchAfterMissionResponse;
+                        type Response = super::ImportQgroundcontrolMissionResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SetReturnToLaunchAfterMissionRequest>,
+                            request: tonic::Request<super::ImportQgroundcontrolMissionRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
                             let fut = async move {
-                                (*inner).set_return_to_launch_after_mission(request).await
+                                (*inner).import_qgroundcontrol_mission(request).await
                             };
                             Box::pin(fut)
                         }
@@ -1338,7 +1033,7 @@ pub mod mission_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = SetReturnToLaunchAfterMissionSvc(inner);
+                        let method = ImportQgroundcontrolMissionSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -1360,7 +1055,7 @@ pub mod mission_service_server {
             }
         }
     }
-    impl<T: MissionService> Clone for MissionServiceServer<T> {
+    impl<T: MissionRawService> Clone for MissionRawServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -1370,7 +1065,7 @@ pub mod mission_service_server {
             }
         }
     }
-    impl<T: MissionService> Clone for _Inner<T> {
+    impl<T: MissionRawService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -1380,7 +1075,7 @@ pub mod mission_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: MissionService> tonic::transport::NamedService for MissionServiceServer<T> {
-        const NAME: &'static str = "mavsdk.rpc.mission.MissionService";
+    impl<T: MissionRawService> tonic::transport::NamedService for MissionRawServiceServer<T> {
+        const NAME: &'static str = "mavsdk.rpc.mission_raw.MissionRawService";
     }
 }

@@ -64,13 +64,13 @@ pub struct SetPositionNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionGlobalRequest {
     /// Position and yaw
     #[prost(message, optional, tag = "1")]
     pub position_global_yaw: ::core::option::Option<PositionGlobalYaw>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetPositionGlobalResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
@@ -111,13 +111,13 @@ pub struct SetPositionVelocityNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAccelerationNedRequest {
     /// Acceleration
     #[prost(message, optional, tag = "1")]
     pub acceleration_ned: ::core::option::Option<AccelerationNed>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetAccelerationNedResponse {
     #[prost(message, optional, tag = "1")]
     pub offboard_result: ::core::option::Option<OffboardResult>,
@@ -202,7 +202,7 @@ pub struct PositionNedYaw {
     pub yaw_deg: f32,
 }
 /// Type for position commands in Global (Latitude, Longitude, Altitude) coordinates and yaw.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PositionGlobalYaw {
     /// Latitude (in degrees)
     #[prost(double, tag = "1")]
@@ -223,7 +223,19 @@ pub struct PositionGlobalYaw {
 /// Nested message and enum types in `PositionGlobalYaw`.
 pub mod position_global_yaw {
     /// Possible altitude options
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum AltitudeType {
         /// Altitude relative to the Home position
@@ -267,7 +279,7 @@ pub struct VelocityNedYaw {
     pub yaw_deg: f32,
 }
 /// Type for acceleration commands in NED (North East Down) coordinates.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AccelerationNed {
     /// Acceleration North (in metres/second^2)
     #[prost(float, tag = "1")]

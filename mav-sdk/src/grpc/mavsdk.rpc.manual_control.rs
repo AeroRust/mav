@@ -1,18 +1,18 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartPositionControlRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartPositionControlResponse {
     #[prost(message, optional, tag = "1")]
     pub manual_control_result: ::core::option::Option<ManualControlResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartAltitudeControlRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartAltitudeControlResponse {
     #[prost(message, optional, tag = "1")]
     pub manual_control_result: ::core::option::Option<ManualControlResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetManualControlInputRequest {
     /// value between -1. to 1. negative -> backwards, positive -> forwards
     #[prost(float, tag = "1")]
@@ -27,13 +27,13 @@ pub struct SetManualControlInputRequest {
     #[prost(float, tag = "4")]
     pub r: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetManualControlInputResponse {
     #[prost(message, optional, tag = "1")]
     pub manual_control_result: ::core::option::Option<ManualControlResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ManualControlResult {
     /// Result enum value
     #[prost(enumeration = "manual_control_result::Result", tag = "1")]

@@ -81,7 +81,7 @@ pub struct GotoLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DoOrbitRequest {
     /// Radius of circle (in meters)
     #[prost(float, tag = "1")]
@@ -102,19 +102,19 @@ pub struct DoOrbitRequest {
     #[prost(double, tag = "7")]
     pub absolute_altitude_m: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DoOrbitResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HoldRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HoldResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorRequest {
     /// Index of actuator (starting with 1)
     #[prost(int32, tag = "1")]
@@ -123,7 +123,7 @@ pub struct SetActuatorRequest {
     #[prost(float, tag = "2")]
     pub value: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetActuatorResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -260,7 +260,19 @@ pub mod action_result {
     }
 }
 /// Yaw behaviour during orbit flight.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum OrbitYawBehavior {
     /// Vehicle front points to the center (default)

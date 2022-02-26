@@ -1,26 +1,54 @@
+#![allow(dead_code)]
+
 use once_cell::sync::Lazy;
 use std::{collections::HashSet, path::PathBuf};
 
 const PROTO_GIT_SUBMODULE: &str = "mavsdk-proto";
 const MAVSDK_OPTIONS: &str = "mavsdk_options";
 
-const PLUGINS: [&str; 14] = [
+const PLUGINS: Lazy<HashSet<&str>> = Lazy::new(|| vec![
     "action",
+    // TODO: Add derive structs for serde
+    "action_server",
     "calibration",
     "camera",
     "core",
+    // TODO: Add derive structs for serde
+    "failure",
+    // TODO: Add derive structs for serde
+    "follow_me",
+    // TODO: Add derive structs for serde
+    "ftp",
     "geofence",
     "gimbal",
     "info",
     // TODO: Add derive structs for serde
+    "log_files",
+    // TODO: Add derive structs for serde
     "manual_control",
     "mission",
+    // TODO: Add derive structs for serde
+    "mission_raw",
+    // TODO: Add derive structs for serde
+    "mission_raw_server",
     "mocap",
     "offboard",
     "param",
+    // TODO: Add derive structs for serde
+    "param_server",
+    // TODO: Add derive structs for serde
+    "server_utility",
     "shell",
     "telemetry",
-];
+    // TODO: Add derive structs for serde
+    "telemetry_server",
+    // TODO: Add derive structs for serde
+    "tracking_server",
+    // TODO: Add derive structs for serde
+    "transponder",
+    // TODO: Add derive structs for serde
+    "tune",
+].into_iter().collect());
 
 const COMMON_TYPE_NAMES: [&str; 1] = ["Result"];
 
@@ -63,6 +91,9 @@ const ACTION: [&str; 37] = [
     "TransitionToMulticopterRequest",
     "TransitionToMulticopterResponse",
 ];
+
+// TODO: Add derive structs for serde
+const ACTION_SERVER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
 
 const CALIBRATION: [&str; 14] = [
     "CalibrateAccelerometerResponse",
@@ -144,6 +175,15 @@ static CORE: [&str; 6] = [
     "SubscribeConnectionStateRequest",
 ];
 
+// TODO: Add derive structs for serde
+const FAILURE: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const FOLLOW_ME: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const FTP: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
 static GEOFENCE: [&str; 6] = [
     "GeofenceResult",
     "Point",
@@ -182,6 +222,12 @@ static INFO: [&str; 15] = [
     "Version",
 ];
 
+// TODO: Add derive structs for serde
+const LOG_FILES: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const MANUAL_CONTROL: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
 static MISSION: [&str; 31] = [
     "CancelMissionDownloadRequest",
     "CancelMissionDownloadResponse",
@@ -215,6 +261,12 @@ static MISSION: [&str; 31] = [
     "UploadMissionRequest",
     "UploadMissionResponse",
 ];
+
+// TODO: Add derive structs for serde
+const MISSION_RAW: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const MISSION_RAW_SERVER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
 
 const MOCAP: [&str; 17] = [
     "AngleBody",
@@ -283,6 +335,12 @@ static PARAM: [&str; 14] = [
     "SetParamIntRequest",
     "SetParamIntResponse",
 ];
+
+// TODO: Add derive structs for serde
+const PARAM_SERVER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const SERVER_UTILITY: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
 
 static SHELL: [&str; 5] = [
     "ReceiveResponse",
@@ -426,24 +484,52 @@ const TELEMETRY: [&str; 131] = [
     "StatusTextType",
 ];
 
+// TODO: Add derive structs for serde
+const TELEMETRY_SERVER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const TRACKING_SERVER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const TRANSPONDER: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
+// TODO: Add derive structs for serde
+const TUNE: Lazy<HashSet<&str>> = Lazy::new(|| vec![].into_iter().collect());
+
 static DERIVE_SERDE_FOR: Lazy<HashSet<&str>> = Lazy::new(|| {
-    COMMON_TYPE_NAMES
-        .to_vec()
-        .into_iter()
-        .chain(ACTION.to_vec())
-        .chain(CALIBRATION.to_vec())
-        .chain(CAMERA.to_vec())
-        .chain(CORE.to_vec())
-        .chain(GEOFENCE.to_vec())
-        .chain(GIMBAL.to_vec())
-        .chain(INFO.to_vec())
-        .chain(MISSION.to_vec())
-        .chain(MOCAP.to_vec())
-        .chain(OFFBOARD.to_vec())
-        .chain(PARAM.to_vec())
-        .chain(SHELL.to_vec())
-        .chain(TELEMETRY.to_vec())
-        .collect()
+    // will match all messages (structs and enums)
+    vec!["."].into_iter().collect()
+    // COMMON_TYPE_NAMES
+    //     .to_vec()
+    //     .into_iter()
+    //     .chain(ACTION.to_vec())
+    //     .chain(ACTION_SERVER.clone().into_iter())
+    //     .chain(CALIBRATION.to_vec())
+    //     .chain(CAMERA.to_vec())
+    //     .chain(CORE.to_vec())
+    //     .chain(FAILURE.clone().into_iter())
+    //     .chain(FOLLOW_ME.clone().into_iter())
+    //     .chain(FTP.clone().into_iter())
+    //     .chain(GEOFENCE.to_vec())
+    //     .chain(GIMBAL.to_vec())
+    //     .chain(INFO.to_vec())
+    //     .chain(LOG_FILES.clone().into_iter())
+    //     .chain(MANUAL_CONTROL.clone().into_iter())
+    //     .chain(MISSION.to_vec())
+    //     .chain(MISSION_RAW.clone().into_iter())
+    //     .chain(MISSION_RAW_SERVER.clone().into_iter())
+    //     .chain(MOCAP.to_vec())
+    //     .chain(OFFBOARD.to_vec())
+    //     .chain(PARAM.to_vec())
+    //     .chain(PARAM_SERVER.clone().into_iter())
+    //     .chain(SERVER_UTILITY.clone().into_iter())
+    //     .chain(SHELL.to_vec())
+    //     .chain(TELEMETRY.to_vec())
+    //     .chain(TELEMETRY_SERVER.clone().into_iter())
+    //     .chain(TRACKING_SERVER.clone().into_iter())
+    //     .chain(TRANSPONDER.clone().into_iter())
+    //     .chain(TUNE.clone().into_iter())
+    //     .collect()
 });
 
 fn main() -> Result<(), std::io::Error> {
@@ -476,7 +562,7 @@ fn proto_include(plugin_name: &str) -> PathBuf {
 
 /// build in grpc, adding all files to the build instead generating them one by one
 fn tonic_build_single(
-    plugins: &[&str],
+    plugins: &HashSet<&str>,
     mavsdk_options_include: PathBuf,
 ) -> Result<(), std::io::Error> {
     let mavsdk_options_path = PathBuf::from(format!(

@@ -10,13 +10,15 @@
 
 //! mav-sdk is a [gRPC] HTTP/2 client for communicating with a [MAVSDK] server.
 //!
+//! Compatible with **MAVSDK v1.0** server.
+//!
 //! [MAVSDK] uses the [MAVLink] protocol to communicate with drones and other vehicles that use it.
 //!
 //! Well-known autopilots that support the [MAVLink] protocol are [PX4] & [ArduPilot].
 //!
 //!
 //! ## Features:
-//! - `serde` - Enables `serde` for (de)serializations of `Response`s, `Request`s and types used inside.
+//! - `with_serde` - Enables `serde` for (de)serializations of `Response`s, `Request`s and types used inside.
 //!
 //! [PX4]: https://px4.io
 //! [ArduPilot]: https://ardupilot.org

@@ -2,11 +2,12 @@ version: '3.8'
 
 services:
   px4-gazebo-headless:
+    # image: jonasvautherin/px4-gazebo-headless:latest
     image: jonasvautherin/px4-gazebo-headless:1.11.0
-    container_name: gazebo-headless
+    container_name: px4-gazebo-headless
     ports:
-      # for MAVLINK API/Offboard
-      - "14540:14540"
+      # for MAVLINK API/Offboard and MAVSDK
+      - "127.0.0.1:14540:14540"
       # for MAVLINK QGroundControl
       - "14550:14550"
       # For Video Stream
@@ -33,14 +34,17 @@ services:
     networks:
       - internal
       - external
+    stdin_open: true
+    tty: true
 
 networks:
   internal:
     internal: true
   external:
+  # To set a custom subnet for the IP addresses of the setup
+  # otherwise just use `0.0.0.0`
   #   driver: bridge
   #   ipam:
   #     driver: default
   #     config:
   #     - subnet: 192.168.220.0/24
-

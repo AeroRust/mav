@@ -6,13 +6,13 @@ pub struct ConnectionStateResponse {
     #[prost(message, optional, tag = "1")]
     pub connection_state: ::core::option::Option<ConnectionState>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMavlinkTimeoutRequest {
     /// Timeout in seconds
     #[prost(double, tag = "1")]
     pub timeout_s: f64,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMavlinkTimeoutResponse {}
 /// Connection state type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
