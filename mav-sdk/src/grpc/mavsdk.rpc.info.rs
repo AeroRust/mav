@@ -1,6 +1,6 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetFlightInformationRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetFlightInformationResponse {
     #[prost(message, optional, tag = "1")]
     pub info_result: ::core::option::Option<InfoResult>,
@@ -8,9 +8,9 @@ pub struct GetFlightInformationResponse {
     #[prost(message, optional, tag = "2")]
     pub flight_info: ::core::option::Option<FlightInfo>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetIdentificationRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetIdentificationResponse {
     #[prost(message, optional, tag = "1")]
     pub info_result: ::core::option::Option<InfoResult>,
@@ -18,9 +18,9 @@ pub struct GetIdentificationResponse {
     #[prost(message, optional, tag = "2")]
     pub identification: ::core::option::Option<Identification>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetProductRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetProductResponse {
     #[prost(message, optional, tag = "1")]
     pub info_result: ::core::option::Option<InfoResult>,
@@ -28,9 +28,9 @@ pub struct GetProductResponse {
     #[prost(message, optional, tag = "2")]
     pub product: ::core::option::Option<Product>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetVersionRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetVersionResponse {
     #[prost(message, optional, tag = "1")]
     pub info_result: ::core::option::Option<InfoResult>,
@@ -38,9 +38,9 @@ pub struct GetVersionResponse {
     #[prost(message, optional, tag = "2")]
     pub version: ::core::option::Option<Version>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetSpeedFactorRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetSpeedFactorResponse {
     #[prost(message, optional, tag = "1")]
     pub info_result: ::core::option::Option<InfoResult>,
@@ -49,7 +49,7 @@ pub struct GetSpeedFactorResponse {
     pub speed_factor: f64,
 }
 /// System flight information.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FlightInfo {
     /// Time since system boot
     #[prost(uint32, tag = "1")]
@@ -59,14 +59,17 @@ pub struct FlightInfo {
     pub flight_uid: u64,
 }
 /// System identification.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Identification {
     /// UID of the hardware. This refers to uid2 of MAVLink. If the system does not support uid2 yet, this is all zeros.
     #[prost(string, tag = "1")]
     pub hardware_uid: ::prost::alloc::string::String,
+    /// Legacy UID of the hardware, referred to as uid in MAVLink (formerly exposed during system discovery as UUID).
+    #[prost(uint64, tag = "2")]
+    pub legacy_uid: u64,
 }
 /// System product information.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Product {
     /// ID of the board vendor
     #[prost(int32, tag = "1")]
@@ -82,7 +85,7 @@ pub struct Product {
     pub product_name: ::prost::alloc::string::String,
 }
 /// System version information.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Version {
     /// Flight software major version
     #[prost(int32, tag = "1")]
@@ -119,7 +122,7 @@ pub struct Version {
     pub os_sw_git_hash: ::prost::alloc::string::String,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct InfoResult {
     /// Result enum value
     #[prost(enumeration = "info_result::Result", tag = "1")]
@@ -131,7 +134,19 @@ pub struct InfoResult {
 /// Nested message and enum types in `InfoResult`.
 pub mod info_result {
     /// Possible results returned for info requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -140,6 +155,8 @@ pub mod info_result {
         Success = 1,
         /// Information has not been received yet
         InformationNotReceivedYet = 2,
+        /// No system is connected
+        NoSystem = 3,
     }
 }
 #[doc = r" Generated client implementations."]
@@ -165,7 +182,7 @@ pub mod info_service_client {
     impl<T> InfoServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -348,7 +365,7 @@ pub mod info_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for InfoServiceServer<T>
     where
         T: InfoService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

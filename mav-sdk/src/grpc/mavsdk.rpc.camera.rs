@@ -1,141 +1,162 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct PrepareRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct PrepareResponse {
+    #[prost(message, optional, tag = "1")]
+    pub camera_result: ::core::option::Option<CameraResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakePhotoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakePhotoResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartPhotoIntervalRequest {
     /// Interval between photos (in seconds)
     #[prost(float, tag = "1")]
     pub interval_s: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartPhotoIntervalResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopPhotoIntervalRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopPhotoIntervalResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoStreamingRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StartVideoStreamingResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoStreamingRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StopVideoStreamingResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetModeRequest {
     /// Camera mode to set
     #[prost(enumeration = "Mode", tag = "1")]
     pub mode: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetModeResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ListPhotosRequest {
+    /// Which photos should be listed (all or since connection)
+    #[prost(enumeration = "PhotosRange", tag = "1")]
+    pub photos_range: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ListPhotosResponse {
+    #[prost(message, optional, tag = "1")]
+    pub camera_result: ::core::option::Option<CameraResult>,
+    /// List of capture infos (representing the photos)
+    #[prost(message, repeated, tag = "2")]
+    pub capture_infos: ::prost::alloc::vec::Vec<CaptureInfo>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeInformationRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct InformationResponse {
     /// Camera information
     #[prost(message, optional, tag = "1")]
     pub information: ::core::option::Option<Information>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeModeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ModeResponse {
     /// Camera mode
     #[prost(enumeration = "Mode", tag = "1")]
     pub mode: i32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeVideoStreamInfoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamInfoResponse {
     /// Video stream info
     #[prost(message, optional, tag = "1")]
     pub video_stream_info: ::core::option::Option<VideoStreamInfo>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCaptureInfoRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CaptureInfoResponse {
     /// Capture info
     #[prost(message, optional, tag = "1")]
     pub capture_info: ::core::option::Option<CaptureInfo>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeStatusRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct StatusResponse {
     /// Camera status
     #[prost(message, optional, tag = "1")]
     pub camera_status: ::core::option::Option<Status>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCurrentSettingsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CurrentSettingsResponse {
     /// List of current settings
     #[prost(message, repeated, tag = "1")]
     pub current_settings: ::prost::alloc::vec::Vec<Setting>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribePossibleSettingOptionsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct PossibleSettingOptionsResponse {
     /// List of settings that can be changed
     #[prost(message, repeated, tag = "1")]
     pub setting_options: ::prost::alloc::vec::Vec<SettingOptions>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetSettingRequest {
     /// Desired setting
     #[prost(message, optional, tag = "1")]
     pub setting: ::core::option::Option<Setting>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetSettingResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetSettingRequest {
     /// Requested setting
     #[prost(message, optional, tag = "1")]
     pub setting: ::core::option::Option<Setting>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetSettingResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
@@ -143,15 +164,15 @@ pub struct GetSettingResponse {
     #[prost(message, optional, tag = "2")]
     pub setting: ::core::option::Option<Setting>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FormatStorageRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct FormatStorageResponse {
     #[prost(message, optional, tag = "1")]
     pub camera_result: ::core::option::Option<CameraResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CameraResult {
     /// Result enum value
     #[prost(enumeration = "camera_result::Result", tag = "1")]
@@ -163,7 +184,19 @@ pub struct CameraResult {
 /// Nested message and enum types in `CameraResult`.
 pub mod camera_result {
     /// Possible results returned for camera commands
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -176,12 +209,14 @@ pub mod camera_result {
         Busy = 3,
         /// Camera denied the command
         Denied = 4,
-        /// An error has occured while executing the command
+        /// An error has occurred while executing the command
         Error = 5,
         /// Command timed out
         Timeout = 6,
         /// Command has wrong argument(s)
         WrongArgument = 7,
+        /// No system connected
+        NoSystem = 8,
     }
 }
 /// Position type in global coordinates.
@@ -208,7 +243,7 @@ pub struct Position {
 /// A zero-rotation quaternion is represented by (1,0,0,0).
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
-/// For more info see: https://en.wikipedia.org/wiki/Quaternion
+/// For more info see: <https://en.wikipedia.org/wiki/Quaternion>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
@@ -230,7 +265,7 @@ pub struct Quaternion {
 /// All rotations and axis systems follow the right-hand rule.
 /// The Euler angles follow the convention of a 3-2-1 intrinsic Tait-Bryan rotation sequence.
 ///
-/// For more info see https://en.wikipedia.org/wiki/Euler_angles
+/// For more info see <https://en.wikipedia.org/wiki/Euler_angles>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct EulerAngle {
     /// Roll angle in degrees, positive is banking to the right
@@ -244,7 +279,7 @@ pub struct EulerAngle {
     pub yaw_deg: f32,
 }
 /// Information about a picture just captured.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CaptureInfo {
     /// Location where the picture was taken
     #[prost(message, optional, tag = "1")]
@@ -269,7 +304,7 @@ pub struct CaptureInfo {
     pub file_url: ::prost::alloc::string::String,
 }
 /// Type for video stream settings.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamSettings {
     /// Frames per second
     #[prost(float, tag = "1")]
@@ -289,31 +324,72 @@ pub struct VideoStreamSettings {
     /// Video stream URI
     #[prost(string, tag = "6")]
     pub uri: ::prost::alloc::string::String,
+    /// Horizontal fov in degrees
+    #[prost(float, tag = "7")]
+    pub horizontal_fov_deg: f32,
 }
 /// Information about the video stream.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct VideoStreamInfo {
     /// Video stream settings
     #[prost(message, optional, tag = "1")]
     pub settings: ::core::option::Option<VideoStreamSettings>,
     /// Current status of video streaming
-    #[prost(enumeration = "video_stream_info::Status", tag = "2")]
+    #[prost(enumeration = "video_stream_info::VideoStreamStatus", tag = "2")]
     pub status: i32,
+    /// Light-spectrum of the video stream
+    #[prost(enumeration = "video_stream_info::VideoStreamSpectrum", tag = "3")]
+    pub spectrum: i32,
 }
 /// Nested message and enum types in `VideoStreamInfo`.
 pub mod video_stream_info {
     /// Video stream status type.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
-    pub enum Status {
+    pub enum VideoStreamStatus {
         /// Video stream is not running
         NotRunning = 0,
         /// Video stream is running
         InProgress = 1,
     }
+    /// Video stream light spectrum type
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
+    #[repr(i32)]
+    pub enum VideoStreamSpectrum {
+        /// Unknown
+        Unknown = 0,
+        /// Visible light
+        VisibleLight = 1,
+        /// Infrared
+        Infrared = 2,
+    }
 }
 /// Information about the camera status.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Status {
     /// Whether video recording is currently in process
     #[prost(bool, tag = "1")]
@@ -339,11 +415,29 @@ pub struct Status {
     /// Storage status
     #[prost(enumeration = "status::StorageStatus", tag = "8")]
     pub storage_status: i32,
+    /// Storage ID starting at 1
+    #[prost(uint32, tag = "9")]
+    pub storage_id: u32,
+    /// Storage type
+    #[prost(enumeration = "status::StorageType", tag = "10")]
+    pub storage_type: i32,
 }
 /// Nested message and enum types in `Status`.
 pub mod status {
     /// Storage status type.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum StorageStatus {
         /// Status not available
@@ -352,10 +446,41 @@ pub mod status {
         Unformatted = 1,
         /// Storage is formatted (i.e. has recognized a file system)
         Formatted = 2,
+        /// Storage status is not supported
+        NotSupported = 3,
+    }
+    /// Storage type.
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
+    #[repr(i32)]
+    pub enum StorageType {
+        /// Storage type unknown
+        Unknown = 0,
+        /// Storage type USB stick
+        UsbStick = 1,
+        /// Storage type SD card
+        Sd = 2,
+        /// Storage type MicroSD card
+        Microsd = 3,
+        /// Storage type HD mass storage
+        Hd = 7,
+        /// Storage type other, not listed
+        Other = 254,
     }
 }
 /// Type to represent a setting option.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Option {
     /// Name of the option (machine readable)
     #[prost(string, tag = "1")]
@@ -365,7 +490,7 @@ pub struct Option {
     pub option_description: ::prost::alloc::string::String,
 }
 /// Type to represent a setting with a selected option.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Setting {
     /// Name of a setting (machine readable)
     #[prost(string, tag = "1")]
@@ -381,7 +506,7 @@ pub struct Setting {
     pub is_range: bool,
 }
 /// Type to represent a setting with a list of options to choose from.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SettingOptions {
     /// Name of the setting (machine readable)
     #[prost(string, tag = "1")]
@@ -397,7 +522,7 @@ pub struct SettingOptions {
     pub is_range: bool,
 }
 /// Type to represent a camera information.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Information {
     /// Name of the camera vendor
     #[prost(string, tag = "1")]
@@ -405,9 +530,36 @@ pub struct Information {
     /// Name of the camera model
     #[prost(string, tag = "2")]
     pub model_name: ::prost::alloc::string::String,
+    /// Focal length
+    #[prost(float, tag = "3")]
+    pub focal_length_mm: f32,
+    /// Horizontal sensor size
+    #[prost(float, tag = "4")]
+    pub horizontal_sensor_size_mm: f32,
+    /// Vertical sensor size
+    #[prost(float, tag = "5")]
+    pub vertical_sensor_size_mm: f32,
+    /// Horizontal image resolution in pixels
+    #[prost(uint32, tag = "6")]
+    pub horizontal_resolution_px: u32,
+    /// Vertical image resolution in pixels
+    #[prost(uint32, tag = "7")]
+    pub vertical_resolution_px: u32,
 }
 /// Camera mode type.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum Mode {
     /// Unknown
@@ -416,6 +568,27 @@ pub enum Mode {
     Photo = 1,
     /// Video mode
     Video = 2,
+}
+/// Photos range type.
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
+#[repr(i32)]
+pub enum PhotosRange {
+    /// All the photos present on the camera
+    All = 0,
+    /// Photos taken since MAVSDK got connected
+    SinceConnection = 1,
 }
 #[doc = r" Generated client implementations."]
 pub mod camera_service_client {
@@ -447,7 +620,7 @@ pub mod camera_service_client {
     impl<T> CameraServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -484,6 +657,23 @@ pub mod camera_service_client {
         pub fn accept_gzip(mut self) -> Self {
             self.inner = self.inner.accept_gzip();
             self
+        }
+        #[doc = ""]
+        #[doc = " Prepare the camera plugin (e.g. download the camera definition, etc)."]
+        pub async fn prepare(
+            &mut self,
+            request: impl tonic::IntoRequest<super::PrepareRequest>,
+        ) -> Result<tonic::Response<super::PrepareResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/Prepare");
+            self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
         #[doc = " Take one photo."]
@@ -623,6 +813,23 @@ pub mod camera_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path =
                 http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/SetMode");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " List photos available on the camera."]
+        pub async fn list_photos(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListPhotosRequest>,
+        ) -> Result<tonic::Response<super::ListPhotosResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.camera.CameraService/ListPhotos");
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
@@ -850,6 +1057,12 @@ pub mod camera_service_server {
     #[async_trait]
     pub trait CameraService: Send + Sync + 'static {
         #[doc = ""]
+        #[doc = " Prepare the camera plugin (e.g. download the camera definition, etc)."]
+        async fn prepare(
+            &self,
+            request: tonic::Request<super::PrepareRequest>,
+        ) -> Result<tonic::Response<super::PrepareResponse>, tonic::Status>;
+        #[doc = ""]
         #[doc = " Take one photo."]
         async fn take_photo(
             &self,
@@ -897,10 +1110,15 @@ pub mod camera_service_server {
             &self,
             request: tonic::Request<super::SetModeRequest>,
         ) -> Result<tonic::Response<super::SetModeResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " List photos available on the camera."]
+        async fn list_photos(
+            &self,
+            request: tonic::Request<super::ListPhotosRequest>,
+        ) -> Result<tonic::Response<super::ListPhotosResponse>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeMode method."]
         type SubscribeModeStream: futures_core::Stream<Item = Result<super::ModeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to camera mode updates."]
@@ -911,7 +1129,6 @@ pub mod camera_service_server {
         #[doc = "Server streaming response type for the SubscribeInformation method."]
         type SubscribeInformationStream: futures_core::Stream<Item = Result<super::InformationResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to camera information updates."]
@@ -922,7 +1139,6 @@ pub mod camera_service_server {
         #[doc = "Server streaming response type for the SubscribeVideoStreamInfo method."]
         type SubscribeVideoStreamInfoStream: futures_core::Stream<Item = Result<super::VideoStreamInfoResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to video stream info updates."]
@@ -933,7 +1149,6 @@ pub mod camera_service_server {
         #[doc = "Server streaming response type for the SubscribeCaptureInfo method."]
         type SubscribeCaptureInfoStream: futures_core::Stream<Item = Result<super::CaptureInfoResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to capture info updates."]
@@ -944,7 +1159,6 @@ pub mod camera_service_server {
         #[doc = "Server streaming response type for the SubscribeStatus method."]
         type SubscribeStatusStream: futures_core::Stream<Item = Result<super::StatusResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Subscribe to camera status updates."]
@@ -955,7 +1169,6 @@ pub mod camera_service_server {
         #[doc = "Server streaming response type for the SubscribeCurrentSettings method."]
         type SubscribeCurrentSettingsStream: futures_core::Stream<Item = Result<super::CurrentSettingsResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Get the list of current camera settings."]
@@ -967,7 +1180,6 @@ pub mod camera_service_server {
         type SubscribePossibleSettingOptionsStream: futures_core::Stream<
                 Item = Result<super::PossibleSettingOptionsResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = ""]
         #[doc = " Get the list of settings that can be changed."]
@@ -1035,7 +1247,7 @@ pub mod camera_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CameraServiceServer<T>
     where
         T: CameraService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -1047,6 +1259,37 @@ pub mod camera_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
+                "/mavsdk.rpc.camera.CameraService/Prepare" => {
+                    #[allow(non_camel_case_types)]
+                    struct PrepareSvc<T: CameraService>(pub Arc<T>);
+                    impl<T: CameraService> tonic::server::UnaryService<super::PrepareRequest> for PrepareSvc<T> {
+                        type Response = super::PrepareResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::PrepareRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).prepare(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = PrepareSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/mavsdk.rpc.camera.CameraService/TakePhoto" => {
                     #[allow(non_camel_case_types)]
                     struct TakePhotoSvc<T: CameraService>(pub Arc<T>);
@@ -1297,6 +1540,37 @@ pub mod camera_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetModeSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.camera.CameraService/ListPhotos" => {
+                    #[allow(non_camel_case_types)]
+                    struct ListPhotosSvc<T: CameraService>(pub Arc<T>);
+                    impl<T: CameraService> tonic::server::UnaryService<super::ListPhotosRequest> for ListPhotosSvc<T> {
+                        type Response = super::ListPhotosResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ListPhotosRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).list_photos(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ListPhotosSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

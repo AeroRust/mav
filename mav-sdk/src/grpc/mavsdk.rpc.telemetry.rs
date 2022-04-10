@@ -39,6 +39,14 @@ pub struct ArmedResponse {
     pub is_armed: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeVtolStateRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct VtolStateResponse {
+    /// The next 'vtol' state
+    #[prost(enumeration = "VtolState", tag = "1")]
+    pub vtol_state: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeAttitudeQuaternionRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct AttitudeQuaternionResponse {
@@ -93,6 +101,14 @@ pub struct GpsInfoResponse {
     /// The next 'GPS info' state
     #[prost(message, optional, tag = "1")]
     pub gps_info: ::core::option::Option<GpsInfo>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeRawGpsRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct RawGpsResponse {
+    /// The next 'Raw GPS' state. Warning: this is an advanced feature, use `Position` updates to get the location of the drone!
+    #[prost(message, optional, tag = "1")]
+    pub raw_gps: ::core::option::Option<RawGps>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeBatteryRequest {}
@@ -191,6 +207,22 @@ pub struct ImuResponse {
     pub imu: ::core::option::Option<Imu>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeScaledImuRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ScaledImuResponse {
+    /// The next scaled IMU status
+    #[prost(message, optional, tag = "1")]
+    pub imu: ::core::option::Option<Imu>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeRawImuRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct RawImuResponse {
+    /// The next raw IMU status
+    #[prost(message, optional, tag = "1")]
+    pub imu: ::core::option::Option<Imu>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeHealthAllOkRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct HealthAllOkResponse {
@@ -213,6 +245,22 @@ pub struct DistanceSensorResponse {
     /// The next Distance Sensor status
     #[prost(message, optional, tag = "1")]
     pub distance_sensor: ::core::option::Option<DistanceSensor>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeScaledPressureRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ScaledPressureResponse {
+    /// The next Scaled Pressure status
+    #[prost(message, optional, tag = "1")]
+    pub scaled_pressure: ::core::option::Option<ScaledPressure>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeHeadingRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct HeadingResponse {
+    /// The next heading (yaw) in degrees
+    #[prost(message, optional, tag = "1")]
+    pub heading_deg: ::core::option::Option<Heading>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRatePositionRequest {
@@ -255,6 +303,17 @@ pub struct SetRateLandedStateRequest {
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateLandedStateResponse {
+    #[prost(message, optional, tag = "1")]
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateVtolStateRequest {
+    /// The requested rate (in Hertz)
+    #[prost(double, tag = "1")]
+    pub rate_hz: f64,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateVtolStateResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
@@ -323,6 +382,12 @@ pub struct SetRateGpsInfoRequest {
 pub struct SetRateGpsInfoResponse {
     #[prost(message, optional, tag = "1")]
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateRawGpsRequest {
+    /// The requested rate (in Hertz)
+    #[prost(double, tag = "1")]
+    pub rate_hz: f64,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateBatteryRequest {
@@ -424,6 +489,28 @@ pub struct SetRateImuResponse {
     pub telemetry_result: ::core::option::Option<TelemetryResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateScaledImuRequest {
+    /// The requested rate (in Hertz)
+    #[prost(double, tag = "1")]
+    pub rate_hz: f64,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateScaledImuResponse {
+    #[prost(message, optional, tag = "1")]
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateRawImuRequest {
+    /// The requested rate (in Hertz)
+    #[prost(double, tag = "1")]
+    pub rate_hz: f64,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetRateRawImuResponse {
+    #[prost(message, optional, tag = "1")]
+    pub telemetry_result: ::core::option::Option<TelemetryResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetRateUnixEpochTimeRequest {
     /// The requested rate (in Hertz)
     #[prost(double, tag = "1")]
@@ -470,6 +557,13 @@ pub struct Position {
     #[prost(float, tag = "4")]
     pub relative_altitude_m: f32,
 }
+/// Heading type used for global position
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct Heading {
+    /// Heading in degrees (range: 0 to +360)
+    #[prost(double, tag = "1")]
+    pub heading_deg: f64,
+}
 ///
 /// Quaternion type.
 ///
@@ -478,7 +572,7 @@ pub struct Position {
 /// A zero-rotation quaternion is represented by (1,0,0,0).
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
-/// For more info see: https://en.wikipedia.org/wiki/Quaternion
+/// For more info see: <https://en.wikipedia.org/wiki/Quaternion>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
@@ -493,6 +587,9 @@ pub struct Quaternion {
     /// Quaternion entry 3, also denoted as d
     #[prost(float, tag = "4")]
     pub z: f32,
+    /// Timestamp in microseconds
+    #[prost(uint64, tag = "5")]
+    pub timestamp_us: u64,
 }
 ///
 /// Euler angle type.
@@ -500,7 +597,7 @@ pub struct Quaternion {
 /// All rotations and axis systems follow the right-hand rule.
 /// The Euler angles follow the convention of a 3-2-1 intrinsic Tait-Bryan rotation sequence.
 ///
-/// For more info see https://en.wikipedia.org/wiki/Euler_angles
+/// For more info see <https://en.wikipedia.org/wiki/Euler_angles>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct EulerAngle {
     /// Roll angle in degrees, positive is banking to the right
@@ -512,6 +609,9 @@ pub struct EulerAngle {
     /// Yaw angle in degrees, positive is clock-wise seen from above
     #[prost(float, tag = "3")]
     pub yaw_deg: f32,
+    /// Timestamp in microseconds
+    #[prost(uint64, tag = "4")]
+    pub timestamp_us: u64,
 }
 /// Angular velocity type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -536,9 +636,62 @@ pub struct GpsInfo {
     #[prost(enumeration = "FixType", tag = "2")]
     pub fix_type: i32,
 }
+///
+/// Raw GPS information type.
+///
+/// Warning: this is an advanced type! If you want the location of the drone, use
+/// the position instead. This message exposes the raw values of the GNSS sensor.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct RawGps {
+    /// Timestamp in microseconds (UNIX Epoch time or time since system boot, to be inferred)
+    #[prost(uint64, tag = "1")]
+    pub timestamp_us: u64,
+    /// Latitude in degrees (WGS84, EGM96 ellipsoid)
+    #[prost(double, tag = "2")]
+    pub latitude_deg: f64,
+    /// Longitude in degrees (WGS84, EGM96 ellipsoid)
+    #[prost(double, tag = "3")]
+    pub longitude_deg: f64,
+    /// Altitude AMSL (above mean sea level) in metres
+    #[prost(float, tag = "4")]
+    pub absolute_altitude_m: f32,
+    /// GPS HDOP horizontal dilution of position (unitless). If unknown, set to NaN
+    #[prost(float, tag = "5")]
+    pub hdop: f32,
+    /// GPS VDOP vertical dilution of position (unitless). If unknown, set to NaN
+    #[prost(float, tag = "6")]
+    pub vdop: f32,
+    /// Ground velocity in metres per second
+    #[prost(float, tag = "7")]
+    pub velocity_m_s: f32,
+    /// Course over ground (NOT heading, but direction of movement) in degrees. If unknown, set to NaN
+    #[prost(float, tag = "8")]
+    pub cog_deg: f32,
+    /// Altitude in metres (above WGS84, EGM96 ellipsoid)
+    #[prost(float, tag = "9")]
+    pub altitude_ellipsoid_m: f32,
+    /// Position uncertainty in metres
+    #[prost(float, tag = "10")]
+    pub horizontal_uncertainty_m: f32,
+    /// Altitude uncertainty in metres
+    #[prost(float, tag = "11")]
+    pub vertical_uncertainty_m: f32,
+    /// Velocity uncertainty in metres per second
+    #[prost(float, tag = "12")]
+    pub velocity_uncertainty_m_s: f32,
+    /// Heading uncertainty in degrees
+    #[prost(float, tag = "13")]
+    pub heading_uncertainty_deg: f32,
+    /// Yaw in earth frame from north.
+    #[prost(float, tag = "14")]
+    pub yaw_deg: f32,
+}
 /// Battery type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Battery {
+    /// Battery ID, for systems with multiple batteries
+    #[prost(uint32, tag = "3")]
+    pub id: u32,
     /// Voltage in volts
     #[prost(float, tag = "1")]
     pub voltage_v: f32,
@@ -558,9 +711,6 @@ pub struct Health {
     /// True if the magnetometer is calibrated
     #[prost(bool, tag = "3")]
     pub is_magnetometer_calibration_ok: bool,
-    /// True if the vehicle has a valid level calibration
-    #[prost(bool, tag = "4")]
-    pub is_level_calibration_ok: bool,
     /// True if the local position estimate is good enough to fly in 'position control' mode
     #[prost(bool, tag = "5")]
     pub is_local_position_ok: bool,
@@ -570,6 +720,9 @@ pub struct Health {
     /// True if the home position has been initialized properly
     #[prost(bool, tag = "7")]
     pub is_home_position_ok: bool,
+    /// True if system can be armed
+    #[prost(bool, tag = "8")]
+    pub is_armable: bool,
 }
 /// Remote control status type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -580,7 +733,7 @@ pub struct RcStatus {
     /// True if the RC signal is available now
     #[prost(bool, tag = "2")]
     pub is_available: bool,
-    /// Signal strength (range: 0 to 100)
+    /// Signal strength (range: 0 to 100, NaN if unknown)
     #[prost(float, tag = "3")]
     pub signal_strength_percent: f32,
 }
@@ -686,7 +839,19 @@ pub struct Odometry {
 /// Nested message and enum types in `Odometry`.
 pub mod odometry {
     /// Mavlink frame id
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum MavFrame {
         /// Frame is undefined.
@@ -711,6 +876,25 @@ pub struct DistanceSensor {
     /// Current distance reading, NaN if unknown.
     #[prost(float, tag = "3")]
     pub current_distance_m: f32,
+}
+/// Scaled Pressure message type.
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ScaledPressure {
+    /// Timestamp (time since system boot)
+    #[prost(uint64, tag = "1")]
+    pub timestamp_us: u64,
+    /// Absolute pressure in hPa
+    #[prost(float, tag = "2")]
+    pub absolute_pressure_hpa: f32,
+    /// Differential pressure 1 in hPa
+    #[prost(float, tag = "3")]
+    pub differential_pressure_hpa: f32,
+    /// Absolute pressure temperature (in celsius)
+    #[prost(float, tag = "4")]
+    pub temperature_deg: f32,
+    /// Differential pressure temperature (in celsius, 0 if not available)
+    #[prost(float, tag = "5")]
+    pub differential_pressure_temperature_deg: f32,
 }
 /// PositionNed message type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -828,6 +1012,9 @@ pub struct Imu {
     /// Temperature
     #[prost(float, tag = "4")]
     pub temperature_degc: f32,
+    /// Timestamp in microseconds
+    #[prost(uint64, tag = "5")]
+    pub timestamp_us: u64,
 }
 /// Gps global origin type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -855,7 +1042,19 @@ pub struct TelemetryResult {
 /// Nested message and enum types in `TelemetryResult`.
 pub mod telemetry_result {
     /// Possible results returned for telemetry requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -872,10 +1071,24 @@ pub mod telemetry_result {
         CommandDenied = 5,
         /// Request timed out
         Timeout = 6,
+        /// Request not supported
+        Unsupported = 7,
     }
 }
 /// GPS fix type.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum FixType {
     /// No GPS connected
@@ -897,8 +1110,20 @@ pub enum FixType {
 /// Flight modes.
 ///
 /// For more information about flight modes, check out
-/// https://docs.px4.io/master/en/config/flight_mode.html.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+/// <https://docs.px4.io/master/en/config/flight_mode.html.>
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum FlightMode {
     /// Mode not known
@@ -933,7 +1158,19 @@ pub enum FlightMode {
     Rattitude = 14,
 }
 /// Status types.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum StatusTextType {
     /// Debug
@@ -954,7 +1191,19 @@ pub enum StatusTextType {
     Emergency = 7,
 }
 /// Landed State enumeration.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
 #[repr(i32)]
 pub enum LandedState {
     /// Landed state is unknown
@@ -967,6 +1216,33 @@ pub enum LandedState {
     TakingOff = 3,
     /// The vehicle is landing
     Landing = 4,
+}
+/// VTOL State enumeration
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
+#[repr(i32)]
+pub enum VtolState {
+    /// MAV is not configured as VTOL
+    Undefined = 0,
+    /// VTOL is in transition from multicopter to fixed-wing
+    TransitionToFw = 1,
+    /// VTOL is in transition from fixed-wing to multicopter
+    TransitionToMc = 2,
+    /// VTOL is in multicopter state
+    Mc = 3,
+    /// VTOL is in fixed-wing state
+    Fw = 4,
 }
 #[doc = r" Generated client implementations."]
 pub mod telemetry_service_client {
@@ -993,7 +1269,7 @@ pub mod telemetry_service_client {
     impl<T> TelemetryServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -1128,6 +1404,26 @@ pub mod telemetry_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.telemetry.TelemetryService/SubscribeArmed",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = " subscribe to vtol state Updates"]
+        pub async fn subscribe_vtol_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeVtolStateRequest>,
+        ) -> Result<tonic::Response<tonic::codec::Streaming<super::VtolStateResponse>>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeVtolState",
             );
             self.inner
                 .server_streaming(request.into_request(), path, codec)
@@ -1280,6 +1576,26 @@ pub mod telemetry_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.telemetry.TelemetryService/SubscribeGpsInfo",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = " Subscribe to 'Raw GPS' updates."]
+        pub async fn subscribe_raw_gps(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeRawGpsRequest>,
+        ) -> Result<tonic::Response<tonic::codec::Streaming<super::RawGpsResponse>>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeRawGps",
             );
             self.inner
                 .server_streaming(request.into_request(), path, codec)
@@ -1519,7 +1835,7 @@ pub mod telemetry_service_client {
                 .server_streaming(request.into_request(), path, codec)
                 .await
         }
-        #[doc = " Subscribe to 'IMU' updates."]
+        #[doc = " Subscribe to 'IMU' updates (in SI units in NED body frame)."]
         pub async fn subscribe_imu(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeImuRequest>,
@@ -1534,6 +1850,46 @@ pub mod telemetry_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.telemetry.TelemetryService/SubscribeImu",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = " Subscribe to 'Scaled IMU' updates."]
+        pub async fn subscribe_scaled_imu(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeScaledImuRequest>,
+        ) -> Result<tonic::Response<tonic::codec::Streaming<super::ScaledImuResponse>>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeScaledImu",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = " Subscribe to 'Raw IMU' updates."]
+        pub async fn subscribe_raw_imu(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeRawImuRequest>,
+        ) -> Result<tonic::Response<tonic::codec::Streaming<super::RawImuResponse>>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeRawImu",
             );
             self.inner
                 .server_streaming(request.into_request(), path, codec)
@@ -1605,6 +1961,48 @@ pub mod telemetry_service_client {
                 .server_streaming(request.into_request(), path, codec)
                 .await
         }
+        #[doc = " Subscribe to 'Scaled Pressure' updates."]
+        pub async fn subscribe_scaled_pressure(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeScaledPressureRequest>,
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::ScaledPressureResponse>>,
+            tonic::Status,
+        > {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeScaledPressure",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
+        #[doc = " Subscribe to 'Heading' updates."]
+        pub async fn subscribe_heading(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SubscribeHeadingRequest>,
+        ) -> Result<tonic::Response<tonic::codec::Streaming<super::HeadingResponse>>, tonic::Status>
+        {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeHeading",
+            );
+            self.inner
+                .server_streaming(request.into_request(), path, codec)
+                .await
+        }
         #[doc = " Set rate to 'position' updates."]
         pub async fn set_rate_position(
             &mut self,
@@ -1670,6 +2068,23 @@ pub mod telemetry_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.telemetry.TelemetryService/SetRateLandedState",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = " Set rate to VTOL state updates"]
+        pub async fn set_rate_vtol_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetRateVtolStateRequest>,
+        ) -> Result<tonic::Response<super::SetRateVtolStateResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateVtolState",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -1898,6 +2313,40 @@ pub mod telemetry_service_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        #[doc = " Set rate to 'Scaled IMU' updates."]
+        pub async fn set_rate_scaled_imu(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetRateScaledImuRequest>,
+        ) -> Result<tonic::Response<super::SetRateScaledImuResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateScaledImu",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = " Set rate to 'Raw IMU' updates."]
+        pub async fn set_rate_raw_imu(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetRateRawImuRequest>,
+        ) -> Result<tonic::Response<super::SetRateRawImuResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateRawImu",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
         #[doc = " Set rate to 'unix epoch time' updates."]
         pub async fn set_rate_unix_epoch_time(
             &mut self,
@@ -1961,7 +2410,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribePosition method."]
         type SubscribePositionStream: futures_core::Stream<Item = Result<super::PositionResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'position' updates."]
         async fn subscribe_position(
@@ -1971,7 +2419,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeHome method."]
         type SubscribeHomeStream: futures_core::Stream<Item = Result<super::HomeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'home position' updates."]
         async fn subscribe_home(
@@ -1981,7 +2428,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeInAir method."]
         type SubscribeInAirStream: futures_core::Stream<Item = Result<super::InAirResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to in-air updates."]
         async fn subscribe_in_air(
@@ -1991,7 +2437,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeLandedState method."]
         type SubscribeLandedStateStream: futures_core::Stream<Item = Result<super::LandedStateResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to landed state updates"]
         async fn subscribe_landed_state(
@@ -2001,17 +2446,24 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeArmed method."]
         type SubscribeArmedStream: futures_core::Stream<Item = Result<super::ArmedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to armed updates."]
         async fn subscribe_armed(
             &self,
             request: tonic::Request<super::SubscribeArmedRequest>,
         ) -> Result<tonic::Response<Self::SubscribeArmedStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeVtolState method."]
+        type SubscribeVtolStateStream: futures_core::Stream<Item = Result<super::VtolStateResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " subscribe to vtol state Updates"]
+        async fn subscribe_vtol_state(
+            &self,
+            request: tonic::Request<super::SubscribeVtolStateRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeVtolStateStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeAttitudeQuaternion method."]
         type SubscribeAttitudeQuaternionStream: futures_core::Stream<Item = Result<super::AttitudeQuaternionResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (quaternion)."]
         async fn subscribe_attitude_quaternion(
@@ -2021,7 +2473,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeAttitudeEuler method."]
         type SubscribeAttitudeEulerStream: futures_core::Stream<Item = Result<super::AttitudeEulerResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (Euler)."]
         async fn subscribe_attitude_euler(
@@ -2032,7 +2483,6 @@ pub mod telemetry_service_server {
         type SubscribeAttitudeAngularVelocityBodyStream: futures_core::Stream<
                 Item = Result<super::AttitudeAngularVelocityBodyResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'attitude' updates (angular velocity)"]
         async fn subscribe_attitude_angular_velocity_body(
@@ -2043,7 +2493,6 @@ pub mod telemetry_service_server {
         type SubscribeCameraAttitudeQuaternionStream: futures_core::Stream<
                 Item = Result<super::CameraAttitudeQuaternionResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'camera attitude' updates (quaternion)."]
         async fn subscribe_camera_attitude_quaternion(
@@ -2053,7 +2502,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeCameraAttitudeEuler method."]
         type SubscribeCameraAttitudeEulerStream: futures_core::Stream<Item = Result<super::CameraAttitudeEulerResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'camera attitude' updates (Euler)."]
         async fn subscribe_camera_attitude_euler(
@@ -2063,7 +2511,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeVelocityNed method."]
         type SubscribeVelocityNedStream: futures_core::Stream<Item = Result<super::VelocityNedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'ground speed' updates (NED)."]
         async fn subscribe_velocity_ned(
@@ -2073,17 +2520,24 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeGpsInfo method."]
         type SubscribeGpsInfoStream: futures_core::Stream<Item = Result<super::GpsInfoResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'GPS info' updates."]
         async fn subscribe_gps_info(
             &self,
             request: tonic::Request<super::SubscribeGpsInfoRequest>,
         ) -> Result<tonic::Response<Self::SubscribeGpsInfoStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeRawGps method."]
+        type SubscribeRawGpsStream: futures_core::Stream<Item = Result<super::RawGpsResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Subscribe to 'Raw GPS' updates."]
+        async fn subscribe_raw_gps(
+            &self,
+            request: tonic::Request<super::SubscribeRawGpsRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeRawGpsStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeBattery method."]
         type SubscribeBatteryStream: futures_core::Stream<Item = Result<super::BatteryResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'battery' updates."]
         async fn subscribe_battery(
@@ -2093,7 +2547,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeFlightMode method."]
         type SubscribeFlightModeStream: futures_core::Stream<Item = Result<super::FlightModeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'flight mode' updates."]
         async fn subscribe_flight_mode(
@@ -2103,7 +2556,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeHealth method."]
         type SubscribeHealthStream: futures_core::Stream<Item = Result<super::HealthResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'health' updates."]
         async fn subscribe_health(
@@ -2113,7 +2565,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeRcStatus method."]
         type SubscribeRcStatusStream: futures_core::Stream<Item = Result<super::RcStatusResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'RC status' updates."]
         async fn subscribe_rc_status(
@@ -2123,7 +2574,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeStatusText method."]
         type SubscribeStatusTextStream: futures_core::Stream<Item = Result<super::StatusTextResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'status text' updates."]
         async fn subscribe_status_text(
@@ -2133,7 +2583,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeActuatorControlTarget method."]
         type SubscribeActuatorControlTargetStream: futures_core::Stream<Item = Result<super::ActuatorControlTargetResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'actuator control target' updates."]
         async fn subscribe_actuator_control_target(
@@ -2143,7 +2592,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeActuatorOutputStatus method."]
         type SubscribeActuatorOutputStatusStream: futures_core::Stream<Item = Result<super::ActuatorOutputStatusResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'actuator output status' updates."]
         async fn subscribe_actuator_output_status(
@@ -2153,7 +2601,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeOdometry method."]
         type SubscribeOdometryStream: futures_core::Stream<Item = Result<super::OdometryResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'odometry' updates."]
         async fn subscribe_odometry(
@@ -2163,7 +2610,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribePositionVelocityNed method."]
         type SubscribePositionVelocityNedStream: futures_core::Stream<Item = Result<super::PositionVelocityNedResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'position velocity' updates."]
         async fn subscribe_position_velocity_ned(
@@ -2173,7 +2619,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeGroundTruth method."]
         type SubscribeGroundTruthStream: futures_core::Stream<Item = Result<super::GroundTruthResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'ground truth' updates."]
         async fn subscribe_ground_truth(
@@ -2183,7 +2628,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeFixedwingMetrics method."]
         type SubscribeFixedwingMetricsStream: futures_core::Stream<Item = Result<super::FixedwingMetricsResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'fixedwing metrics' updates."]
         async fn subscribe_fixedwing_metrics(
@@ -2193,17 +2637,33 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeImu method."]
         type SubscribeImuStream: futures_core::Stream<Item = Result<super::ImuResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
-        #[doc = " Subscribe to 'IMU' updates."]
+        #[doc = " Subscribe to 'IMU' updates (in SI units in NED body frame)."]
         async fn subscribe_imu(
             &self,
             request: tonic::Request<super::SubscribeImuRequest>,
         ) -> Result<tonic::Response<Self::SubscribeImuStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeScaledImu method."]
+        type SubscribeScaledImuStream: futures_core::Stream<Item = Result<super::ScaledImuResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Subscribe to 'Scaled IMU' updates."]
+        async fn subscribe_scaled_imu(
+            &self,
+            request: tonic::Request<super::SubscribeScaledImuRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeScaledImuStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeRawImu method."]
+        type SubscribeRawImuStream: futures_core::Stream<Item = Result<super::RawImuResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Subscribe to 'Raw IMU' updates."]
+        async fn subscribe_raw_imu(
+            &self,
+            request: tonic::Request<super::SubscribeRawImuRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeRawImuStream>, tonic::Status>;
         #[doc = "Server streaming response type for the SubscribeHealthAllOk method."]
         type SubscribeHealthAllOkStream: futures_core::Stream<Item = Result<super::HealthAllOkResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'HealthAllOk' updates."]
         async fn subscribe_health_all_ok(
@@ -2213,7 +2673,6 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeUnixEpochTime method."]
         type SubscribeUnixEpochTimeStream: futures_core::Stream<Item = Result<super::UnixEpochTimeResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'unix epoch time' updates."]
         async fn subscribe_unix_epoch_time(
@@ -2223,13 +2682,30 @@ pub mod telemetry_service_server {
         #[doc = "Server streaming response type for the SubscribeDistanceSensor method."]
         type SubscribeDistanceSensorStream: futures_core::Stream<Item = Result<super::DistanceSensorResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Subscribe to 'Distance Sensor' updates."]
         async fn subscribe_distance_sensor(
             &self,
             request: tonic::Request<super::SubscribeDistanceSensorRequest>,
         ) -> Result<tonic::Response<Self::SubscribeDistanceSensorStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeScaledPressure method."]
+        type SubscribeScaledPressureStream: futures_core::Stream<Item = Result<super::ScaledPressureResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Subscribe to 'Scaled Pressure' updates."]
+        async fn subscribe_scaled_pressure(
+            &self,
+            request: tonic::Request<super::SubscribeScaledPressureRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeScaledPressureStream>, tonic::Status>;
+        #[doc = "Server streaming response type for the SubscribeHeading method."]
+        type SubscribeHeadingStream: futures_core::Stream<Item = Result<super::HeadingResponse, tonic::Status>>
+            + Send
+            + 'static;
+        #[doc = " Subscribe to 'Heading' updates."]
+        async fn subscribe_heading(
+            &self,
+            request: tonic::Request<super::SubscribeHeadingRequest>,
+        ) -> Result<tonic::Response<Self::SubscribeHeadingStream>, tonic::Status>;
         #[doc = " Set rate to 'position' updates."]
         async fn set_rate_position(
             &self,
@@ -2250,6 +2726,11 @@ pub mod telemetry_service_server {
             &self,
             request: tonic::Request<super::SetRateLandedStateRequest>,
         ) -> Result<tonic::Response<super::SetRateLandedStateResponse>, tonic::Status>;
+        #[doc = " Set rate to VTOL state updates"]
+        async fn set_rate_vtol_state(
+            &self,
+            request: tonic::Request<super::SetRateVtolStateRequest>,
+        ) -> Result<tonic::Response<super::SetRateVtolStateResponse>, tonic::Status>;
         #[doc = " Set rate to 'attitude' updates."]
         async fn set_rate_attitude(
             &self,
@@ -2315,6 +2796,16 @@ pub mod telemetry_service_server {
             &self,
             request: tonic::Request<super::SetRateImuRequest>,
         ) -> Result<tonic::Response<super::SetRateImuResponse>, tonic::Status>;
+        #[doc = " Set rate to 'Scaled IMU' updates."]
+        async fn set_rate_scaled_imu(
+            &self,
+            request: tonic::Request<super::SetRateScaledImuRequest>,
+        ) -> Result<tonic::Response<super::SetRateScaledImuResponse>, tonic::Status>;
+        #[doc = " Set rate to 'Raw IMU' updates."]
+        async fn set_rate_raw_imu(
+            &self,
+            request: tonic::Request<super::SetRateRawImuRequest>,
+        ) -> Result<tonic::Response<super::SetRateRawImuResponse>, tonic::Status>;
         #[doc = " Set rate to 'unix epoch time' updates."]
         async fn set_rate_unix_epoch_time(
             &self,
@@ -2361,7 +2852,7 @@ pub mod telemetry_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for TelemetryServiceServer<T>
     where
         T: TelemetryService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -2543,6 +3034,42 @@ pub mod telemetry_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SubscribeArmedSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeVtolState" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeVtolStateSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeVtolStateRequest>
+                        for SubscribeVtolStateSvc<T>
+                    {
+                        type Response = super::VtolStateResponse;
+                        type ResponseStream = T::SubscribeVtolStateStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeVtolStateRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).subscribe_vtol_state(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeVtolStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -2814,6 +3341,42 @@ pub mod telemetry_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SubscribeGpsInfoSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeRawGps" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeRawGpsSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeRawGpsRequest>
+                        for SubscribeRawGpsSvc<T>
+                    {
+                        type Response = super::RawGpsResponse;
+                        type ResponseStream = T::SubscribeRawGpsStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeRawGpsRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).subscribe_raw_gps(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeRawGpsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -3267,6 +3830,78 @@ pub mod telemetry_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeScaledImu" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeScaledImuSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeScaledImuRequest>
+                        for SubscribeScaledImuSvc<T>
+                    {
+                        type Response = super::ScaledImuResponse;
+                        type ResponseStream = T::SubscribeScaledImuStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeScaledImuRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).subscribe_scaled_imu(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeScaledImuSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeRawImu" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeRawImuSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeRawImuRequest>
+                        for SubscribeRawImuSvc<T>
+                    {
+                        type Response = super::RawImuResponse;
+                        type ResponseStream = T::SubscribeRawImuStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeRawImuRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).subscribe_raw_imu(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeRawImuSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/mavsdk.rpc.telemetry.TelemetryService/SubscribeHealthAllOk" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeHealthAllOkSvc<T: TelemetryService>(pub Arc<T>);
@@ -3368,6 +4003,79 @@ pub mod telemetry_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SubscribeDistanceSensorSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeScaledPressure" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeScaledPressureSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeScaledPressureRequest>
+                        for SubscribeScaledPressureSvc<T>
+                    {
+                        type Response = super::ScaledPressureResponse;
+                        type ResponseStream = T::SubscribeScaledPressureStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeScaledPressureRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut =
+                                async move { (*inner).subscribe_scaled_pressure(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeScaledPressureSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SubscribeHeading" => {
+                    #[allow(non_camel_case_types)]
+                    struct SubscribeHeadingSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::ServerStreamingService<super::SubscribeHeadingRequest>
+                        for SubscribeHeadingSvc<T>
+                    {
+                        type Response = super::HeadingResponse;
+                        type ResponseStream = T::SubscribeHeadingStream;
+                        type Future =
+                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SubscribeHeadingRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).subscribe_heading(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SubscribeHeadingSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -3503,6 +4211,40 @@ pub mod telemetry_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetRateLandedStateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateVtolState" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetRateVtolStateSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::UnaryService<super::SetRateVtolStateRequest>
+                        for SetRateVtolStateSvc<T>
+                    {
+                        type Response = super::SetRateVtolStateResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetRateVtolStateRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_rate_vtol_state(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetRateVtolStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -3952,6 +4694,74 @@ pub mod telemetry_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SetRateImuSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateScaledImu" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetRateScaledImuSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::UnaryService<super::SetRateScaledImuRequest>
+                        for SetRateScaledImuSvc<T>
+                    {
+                        type Response = super::SetRateScaledImuResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetRateScaledImuRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_rate_scaled_imu(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetRateScaledImuSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.telemetry.TelemetryService/SetRateRawImu" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetRateRawImuSvc<T: TelemetryService>(pub Arc<T>);
+                    impl<T: TelemetryService>
+                        tonic::server::UnaryService<super::SetRateRawImuRequest>
+                        for SetRateRawImuSvc<T>
+                    {
+                        type Response = super::SetRateRawImuResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetRateRawImuRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_rate_raw_imu(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetRateRawImuSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

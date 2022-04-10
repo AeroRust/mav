@@ -1,35 +1,36 @@
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SendRequest {
-    /// The command line to send
-    #[prost(string, tag = "1")]
-    pub command: ::prost::alloc::string::String,
-}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SendResponse {
+pub struct PlayTuneRequest {
+    /// The tune to be played
     #[prost(message, optional, tag = "1")]
-    pub shell_result: ::core::option::Option<ShellResult>,
+    pub tune_description: ::core::option::Option<TuneDescription>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeReceiveRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ReceiveResponse {
-    /// Received data.
-    #[prost(string, tag = "1")]
-    pub data: ::prost::alloc::string::String,
+pub struct PlayTuneResponse {
+    #[prost(message, optional, tag = "1")]
+    pub tune_result: ::core::option::Option<TuneResult>,
 }
-/// Result type.
+/// Tune description, containing song elements and tempo.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ShellResult {
+pub struct TuneDescription {
+    /// The list of song elements (notes, pauses, ...) to be played
+    #[prost(enumeration = "SongElement", repeated, tag = "1")]
+    pub song_elements: ::prost::alloc::vec::Vec<i32>,
+    /// The tempo of the song (range: 32 - 255)
+    #[prost(int32, tag = "2")]
+    pub tempo: i32,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct TuneResult {
     /// Result enum value
-    #[prost(enumeration = "shell_result::Result", tag = "1")]
+    #[prost(enumeration = "tune_result::Result", tag = "1")]
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
     pub result_str: ::prost::alloc::string::String,
 }
-/// Nested message and enum types in `ShellResult`.
-pub mod shell_result {
-    /// Possible results returned for shell requests
+/// Nested message and enum types in `TuneResult`.
+pub mod tune_result {
+    /// Possible results returned for tune requests.
     #[derive(
         serde::Serialize,
         serde::Deserialize,
@@ -49,27 +50,85 @@ pub mod shell_result {
         Unknown = 0,
         /// Request succeeded
         Success = 1,
-        /// No system is connected
-        NoSystem = 2,
-        /// Connection error
-        ConnectionError = 3,
-        /// Response was not received
-        NoResponse = 4,
-        /// Shell busy (transfer in progress)
-        Busy = 5,
+        /// Invalid tempo (range: 32 - 255)
+        InvalidTempo = 2,
+        /// Invalid tune: encoded string must be at most 247 chars
+        TuneTooLong = 3,
+        /// Failed to send the request
+        Error = 4,
+        /// No system connected
+        NoSystem = 5,
     }
 }
+/// An element of the tune
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
+#[repr(i32)]
+pub enum SongElement {
+    /// After this element, start playing legato
+    StyleLegato = 0,
+    /// After this element, start playing normal
+    StyleNormal = 1,
+    /// After this element, start playing staccato
+    StyleStaccato = 2,
+    /// After this element, set the note duration to 1
+    Duration1 = 3,
+    /// After this element, set the note duration to 2
+    Duration2 = 4,
+    /// After this element, set the note duration to 4
+    Duration4 = 5,
+    /// After this element, set the note duration to 8
+    Duration8 = 6,
+    /// After this element, set the note duration to 16
+    Duration16 = 7,
+    /// After this element, set the note duration to 32
+    Duration32 = 8,
+    /// Play note A
+    NoteA = 9,
+    /// Play note B
+    NoteB = 10,
+    /// Play note C
+    NoteC = 11,
+    /// Play note D
+    NoteD = 12,
+    /// Play note E
+    NoteE = 13,
+    /// Play note F
+    NoteF = 14,
+    /// Play note G
+    NoteG = 15,
+    /// Play a rest
+    NotePause = 16,
+    /// After this element, sharp the note (half a step up)
+    Sharp = 17,
+    /// After this element, flat the note (half a step down)
+    Flat = 18,
+    /// After this element, shift the note 1 octave up
+    OctaveUp = 19,
+    /// After this element, shift the note 1 octave down
+    OctaveDown = 20,
+}
 #[doc = r" Generated client implementations."]
-pub mod shell_service_client {
+pub mod tune_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "*"]
-    #[doc = " Allow to communicate with the vehicle's system shell."]
+    #[doc = " Enable creating and sending a tune to be played on the system."]
     #[derive(Debug, Clone)]
-    pub struct ShellServiceClient<T> {
+    pub struct TuneServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl ShellServiceClient<tonic::transport::Channel> {
+    impl TuneServiceClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -80,7 +139,7 @@ pub mod shell_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> ShellServiceClient<T>
+    impl<T> TuneServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -94,7 +153,7 @@ pub mod shell_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> ShellServiceClient<InterceptedService<T, F>>
+        ) -> TuneServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -106,7 +165,7 @@ pub mod shell_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            ShellServiceClient::new(InterceptedService::new(inner, interceptor))
+            TuneServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -121,12 +180,11 @@ pub mod shell_service_client {
             self.inner = self.inner.accept_gzip();
             self
         }
-        #[doc = ""]
-        #[doc = " Send a command line."]
-        pub async fn send(
+        #[doc = " Send a tune to be played by the system."]
+        pub async fn play_tune(
             &mut self,
-            request: impl tonic::IntoRequest<super::SendRequest>,
-        ) -> Result<tonic::Response<super::SendResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::PlayTuneRequest>,
+        ) -> Result<tonic::Response<super::PlayTuneResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -134,70 +192,34 @@ pub mod shell_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/mavsdk.rpc.shell.ShellService/Send");
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.tune.TuneService/PlayTune");
             self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Receive feedback from a sent command line."]
-        #[doc = ""]
-        #[doc = " This subscription needs to be made before a command line is sent, otherwise, no response will be sent."]
-        pub async fn subscribe_receive(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SubscribeReceiveRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::ReceiveResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.shell.ShellService/SubscribeReceive",
-            );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
         }
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod shell_service_server {
+pub mod tune_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ShellServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with TuneServiceServer."]
     #[async_trait]
-    pub trait ShellService: Send + Sync + 'static {
-        #[doc = ""]
-        #[doc = " Send a command line."]
-        async fn send(
+    pub trait TuneService: Send + Sync + 'static {
+        #[doc = " Send a tune to be played by the system."]
+        async fn play_tune(
             &self,
-            request: tonic::Request<super::SendRequest>,
-        ) -> Result<tonic::Response<super::SendResponse>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeReceive method."]
-        type SubscribeReceiveStream: futures_core::Stream<Item = Result<super::ReceiveResponse, tonic::Status>>
-            + Send
-            + 'static;
-        #[doc = ""]
-        #[doc = " Receive feedback from a sent command line."]
-        #[doc = ""]
-        #[doc = " This subscription needs to be made before a command line is sent, otherwise, no response will be sent."]
-        async fn subscribe_receive(
-            &self,
-            request: tonic::Request<super::SubscribeReceiveRequest>,
-        ) -> Result<tonic::Response<Self::SubscribeReceiveStream>, tonic::Status>;
+            request: tonic::Request<super::PlayTuneRequest>,
+        ) -> Result<tonic::Response<super::PlayTuneResponse>, tonic::Status>;
     }
-    #[doc = "*"]
-    #[doc = " Allow to communicate with the vehicle's system shell."]
+    #[doc = " Enable creating and sending a tune to be played on the system."]
     #[derive(Debug)]
-    pub struct ShellServiceServer<T: ShellService> {
+    pub struct TuneServiceServer<T: TuneService> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: ShellService> ShellServiceServer<T> {
+    impl<T: TuneService> TuneServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -214,9 +236,9 @@ pub mod shell_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ShellServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for TuneServiceServer<T>
     where
-        T: ShellService,
+        T: TuneService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -229,18 +251,18 @@ pub mod shell_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/mavsdk.rpc.shell.ShellService/Send" => {
+                "/mavsdk.rpc.tune.TuneService/PlayTune" => {
                     #[allow(non_camel_case_types)]
-                    struct SendSvc<T: ShellService>(pub Arc<T>);
-                    impl<T: ShellService> tonic::server::UnaryService<super::SendRequest> for SendSvc<T> {
-                        type Response = super::SendResponse;
+                    struct PlayTuneSvc<T: TuneService>(pub Arc<T>);
+                    impl<T: TuneService> tonic::server::UnaryService<super::PlayTuneRequest> for PlayTuneSvc<T> {
+                        type Response = super::PlayTuneResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SendRequest>,
+                            request: tonic::Request<super::PlayTuneRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).send(request).await };
+                            let fut = async move { (*inner).play_tune(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -249,49 +271,13 @@ pub mod shell_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = SendSvc(inner);
+                        let method = PlayTuneSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
                         );
                         let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.shell.ShellService/SubscribeReceive" => {
-                    #[allow(non_camel_case_types)]
-                    struct SubscribeReceiveSvc<T: ShellService>(pub Arc<T>);
-                    impl<T: ShellService>
-                        tonic::server::ServerStreamingService<super::SubscribeReceiveRequest>
-                        for SubscribeReceiveSvc<T>
-                    {
-                        type Response = super::ReceiveResponse;
-                        type ResponseStream = T::SubscribeReceiveStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::SubscribeReceiveRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_receive(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = SubscribeReceiveSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -307,7 +293,7 @@ pub mod shell_service_server {
             }
         }
     }
-    impl<T: ShellService> Clone for ShellServiceServer<T> {
+    impl<T: TuneService> Clone for TuneServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -317,7 +303,7 @@ pub mod shell_service_server {
             }
         }
     }
-    impl<T: ShellService> Clone for _Inner<T> {
+    impl<T: TuneService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -327,7 +313,7 @@ pub mod shell_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: ShellService> tonic::transport::NamedService for ShellServiceServer<T> {
-        const NAME: &'static str = "mavsdk.rpc.shell.ShellService";
+    impl<T: TuneService> tonic::transport::NamedService for TuneServiceServer<T> {
+        const NAME: &'static str = "mavsdk.rpc.tune.TuneService";
     }
 }

@@ -1,67 +1,67 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ArmRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ArmResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DisarmRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct DisarmResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeoffRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TakeoffResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct LandRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct LandResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RebootRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct RebootResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ShutdownRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ShutdownResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TerminateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TerminateResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct KillRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct KillResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReturnToLaunchRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ReturnToLaunchResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GotoLocationRequest {
     /// Latitude (in degrees)
     #[prost(double, tag = "1")]
@@ -76,28 +76,75 @@ pub struct GotoLocationRequest {
     #[prost(float, tag = "4")]
     pub yaw_deg: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GotoLocationResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct DoOrbitRequest {
+    /// Radius of circle (in meters)
+    #[prost(float, tag = "1")]
+    pub radius_m: f32,
+    /// Tangential velocity (in m/s)
+    #[prost(float, tag = "2")]
+    pub velocity_ms: f32,
+    /// Yaw behavior of vehicle (ORBIT_YAW_BEHAVIOUR)
+    #[prost(enumeration = "OrbitYawBehavior", tag = "3")]
+    pub yaw_behavior: i32,
+    /// Center point latitude in degrees. NAN: use current latitude for center
+    #[prost(double, tag = "5")]
+    pub latitude_deg: f64,
+    /// Center point longitude in degrees. NAN: use current longitude for center
+    #[prost(double, tag = "6")]
+    pub longitude_deg: f64,
+    /// Center point altitude in meters. NAN: use current altitude for center
+    #[prost(double, tag = "7")]
+    pub absolute_altitude_m: f64,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct DoOrbitResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct HoldRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct HoldResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetActuatorRequest {
+    /// Index of actuator (starting with 1)
+    #[prost(int32, tag = "1")]
+    pub index: i32,
+    /// Value to set the actuator to (normalized from \[-1..1\])
+    #[prost(float, tag = "2")]
+    pub value: f32,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetActuatorResponse {
+    #[prost(message, optional, tag = "1")]
+    pub action_result: ::core::option::Option<ActionResult>,
+}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToFixedwingRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToFixedwingResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToMulticopterRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct TransitionToMulticopterResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetTakeoffAltitudeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetTakeoffAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -105,20 +152,20 @@ pub struct GetTakeoffAltitudeResponse {
     #[prost(float, tag = "2")]
     pub altitude: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetTakeoffAltitudeRequest {
     /// Takeoff altitude relative to ground/takeoff location (in meters)
     #[prost(float, tag = "1")]
     pub altitude: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetTakeoffAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetMaximumSpeedRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetMaximumSpeedResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -126,20 +173,20 @@ pub struct GetMaximumSpeedResponse {
     #[prost(float, tag = "2")]
     pub speed: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMaximumSpeedRequest {
     /// Maximum speed (in metres/second)
     #[prost(float, tag = "1")]
     pub speed: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetMaximumSpeedResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAltitudeRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GetReturnToLaunchAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
@@ -147,19 +194,19 @@ pub struct GetReturnToLaunchAltitudeResponse {
     #[prost(float, tag = "2")]
     pub relative_altitude_m: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAltitudeRequest {
     /// Return altitude relative to takeoff location (in meters)
     #[prost(float, tag = "1")]
     pub relative_altitude_m: f32,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SetReturnToLaunchAltitudeResponse {
     #[prost(message, optional, tag = "1")]
     pub action_result: ::core::option::Option<ActionResult>,
 }
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ActionResult {
     /// Result enum value
     #[prost(enumeration = "action_result::Result", tag = "1")]
@@ -171,7 +218,19 @@ pub struct ActionResult {
 /// Nested message and enum types in `ActionResult`.
 pub mod action_result {
     /// Possible results returned for action requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -200,6 +259,33 @@ pub mod action_result {
         ParameterError = 11,
     }
 }
+/// Yaw behaviour during orbit flight.
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
+#[repr(i32)]
+pub enum OrbitYawBehavior {
+    /// Vehicle front points to the center (default)
+    HoldFrontToCircleCenter = 0,
+    /// Vehicle front holds heading when message received
+    HoldInitialHeading = 1,
+    /// Yaw uncontrolled
+    Uncontrolled = 2,
+    /// Vehicle front follows flight path (tangential to circle)
+    HoldFrontTangentToCircle = 3,
+    /// Yaw controlled by RC input
+    RcControlled = 4,
+}
 #[doc = r" Generated client implementations."]
 pub mod action_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
@@ -223,7 +309,7 @@ pub mod action_service_client {
     impl<T> ActionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -462,6 +548,66 @@ pub mod action_service_client {
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action.ActionService/GotoLocation",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Send command do orbit to the drone."]
+        #[doc = ""]
+        #[doc = " This will run the orbit routine with the given parameters."]
+        pub async fn do_orbit(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DoOrbitRequest>,
+        ) -> Result<tonic::Response<super::DoOrbitResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.action.ActionService/DoOrbit");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Send command to hold position (a.k.a. \"Loiter\")."]
+        #[doc = ""]
+        #[doc = " Sends a command to drone to change to Hold flight mode, causing the"]
+        #[doc = " vehicle to stop and maintain its current GPS position and altitude."]
+        #[doc = ""]
+        #[doc = " Note: this command is specific to the PX4 Autopilot flight stack as"]
+        #[doc = " it implies a change to a PX4-specific mode."]
+        pub async fn hold(
+            &mut self,
+            request: impl tonic::IntoRequest<super::HoldRequest>,
+        ) -> Result<tonic::Response<super::HoldResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path =
+                http::uri::PathAndQuery::from_static("/mavsdk.rpc.action.ActionService/Hold");
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Send command to set the value of an actuator."]
+        pub async fn set_actuator(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetActuatorRequest>,
+        ) -> Result<tonic::Response<super::SetActuatorResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.action.ActionService/SetActuator",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -723,6 +869,32 @@ pub mod action_service_server {
             request: tonic::Request<super::GotoLocationRequest>,
         ) -> Result<tonic::Response<super::GotoLocationResponse>, tonic::Status>;
         #[doc = ""]
+        #[doc = " Send command do orbit to the drone."]
+        #[doc = ""]
+        #[doc = " This will run the orbit routine with the given parameters."]
+        async fn do_orbit(
+            &self,
+            request: tonic::Request<super::DoOrbitRequest>,
+        ) -> Result<tonic::Response<super::DoOrbitResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Send command to hold position (a.k.a. \"Loiter\")."]
+        #[doc = ""]
+        #[doc = " Sends a command to drone to change to Hold flight mode, causing the"]
+        #[doc = " vehicle to stop and maintain its current GPS position and altitude."]
+        #[doc = ""]
+        #[doc = " Note: this command is specific to the PX4 Autopilot flight stack as"]
+        #[doc = " it implies a change to a PX4-specific mode."]
+        async fn hold(
+            &self,
+            request: tonic::Request<super::HoldRequest>,
+        ) -> Result<tonic::Response<super::HoldResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Send command to set the value of an actuator."]
+        async fn set_actuator(
+            &self,
+            request: tonic::Request<super::SetActuatorRequest>,
+        ) -> Result<tonic::Response<super::SetActuatorResponse>, tonic::Status>;
+        #[doc = ""]
         #[doc = " Send command to transition the drone to fixedwing."]
         #[doc = ""]
         #[doc = " The associated action will only be executed for VTOL vehicles (on other vehicle types the"]
@@ -807,7 +979,7 @@ pub mod action_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ActionServiceServer<T>
     where
         T: ActionService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -1123,6 +1295,101 @@ pub mod action_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GotoLocationSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/DoOrbit" => {
+                    #[allow(non_camel_case_types)]
+                    struct DoOrbitSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::DoOrbitRequest> for DoOrbitSvc<T> {
+                        type Response = super::DoOrbitResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::DoOrbitRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).do_orbit(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = DoOrbitSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/Hold" => {
+                    #[allow(non_camel_case_types)]
+                    struct HoldSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::HoldRequest> for HoldSvc<T> {
+                        type Response = super::HoldResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::HoldRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).hold(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = HoldSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.action.ActionService/SetActuator" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetActuatorSvc<T: ActionService>(pub Arc<T>);
+                    impl<T: ActionService> tonic::server::UnaryService<super::SetActuatorRequest>
+                        for SetActuatorSvc<T>
+                    {
+                        type Response = super::SetActuatorResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetActuatorRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_actuator(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetActuatorSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

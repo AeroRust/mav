@@ -1,20 +1,20 @@
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetParamIntRequest {
+pub struct RetrieveParamIntRequest {
     /// Name of the parameter
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetParamIntResponse {
+pub struct RetrieveParamIntResponse {
     #[prost(message, optional, tag = "1")]
-    pub param_result: ::core::option::Option<ParamResult>,
+    pub param_server_result: ::core::option::Option<ParamServerResult>,
     /// Value of the requested parameter
     #[prost(int32, tag = "2")]
     pub value: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetParamIntRequest {
-    /// Name of the parameter to set
+pub struct ProvideParamIntRequest {
+    /// Name of the parameter to provide
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Value the parameter should be set to
@@ -22,27 +22,27 @@ pub struct SetParamIntRequest {
     pub value: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetParamIntResponse {
+pub struct ProvideParamIntResponse {
     #[prost(message, optional, tag = "1")]
-    pub param_result: ::core::option::Option<ParamResult>,
+    pub param_server_result: ::core::option::Option<ParamServerResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetParamFloatRequest {
+pub struct RetrieveParamFloatRequest {
     /// Name of the parameter
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetParamFloatResponse {
+pub struct RetrieveParamFloatResponse {
     #[prost(message, optional, tag = "1")]
-    pub param_result: ::core::option::Option<ParamResult>,
+    pub param_server_result: ::core::option::Option<ParamServerResult>,
     /// Value of the requested parameter
     #[prost(float, tag = "2")]
     pub value: f32,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetParamFloatRequest {
-    /// Name of the parameter to set
+pub struct ProvideParamFloatRequest {
+    /// Name of the parameter to provide
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Value the parameter should be set to
@@ -50,14 +50,14 @@ pub struct SetParamFloatRequest {
     pub value: f32,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SetParamFloatResponse {
+pub struct ProvideParamFloatResponse {
     #[prost(message, optional, tag = "1")]
-    pub param_result: ::core::option::Option<ParamResult>,
+    pub param_server_result: ::core::option::Option<ParamServerResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetAllParamsRequest {}
+pub struct RetrieveAllParamsRequest {}
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetAllParamsResponse {
+pub struct RetrieveAllParamsResponse {
     /// Collection of all parameters
     #[prost(message, optional, tag = "1")]
     pub params: ::core::option::Option<AllParams>,
@@ -97,16 +97,16 @@ pub struct AllParams {
 }
 /// Result type.
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ParamResult {
+pub struct ParamServerResult {
     /// Result enum value
-    #[prost(enumeration = "param_result::Result", tag = "1")]
+    #[prost(enumeration = "param_server_result::Result", tag = "1")]
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
     pub result_str: ::prost::alloc::string::String,
 }
-/// Nested message and enum types in `ParamResult`.
-pub mod param_result {
+/// Nested message and enum types in `ParamServerResult`.
+pub mod param_server_result {
     /// Possible results returned for param requests.
     #[derive(
         serde::Serialize,
@@ -127,28 +127,26 @@ pub mod param_result {
         Unknown = 0,
         /// Request succeeded
         Success = 1,
-        /// Request timed out
-        Timeout = 2,
-        /// Connection error
-        ConnectionError = 3,
+        /// Not Found
+        NotFound = 2,
         /// Wrong type
-        WrongType = 4,
+        WrongType = 3,
         /// Parameter name too long (> 16)
-        ParamNameTooLong = 5,
-        /// No system connected
-        NoSystem = 6,
+        ParamNameTooLong = 4,
+        /// No system available
+        NoSystem = 5,
     }
 }
 #[doc = r" Generated client implementations."]
-pub mod param_service_client {
+pub mod param_server_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Provide raw access to get and set parameters."]
+    #[doc = " Provide raw access to retrieve and provide server parameters."]
     #[derive(Debug, Clone)]
-    pub struct ParamServiceClient<T> {
+    pub struct ParamServerServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl ParamServiceClient<tonic::transport::Channel> {
+    impl ParamServerServiceClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -159,7 +157,7 @@ pub mod param_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> ParamServiceClient<T>
+    impl<T> ParamServerServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -173,7 +171,7 @@ pub mod param_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> ParamServiceClient<InterceptedService<T, F>>
+        ) -> ParamServerServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -185,7 +183,7 @@ pub mod param_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            ParamServiceClient::new(InterceptedService::new(inner, interceptor))
+            ParamServerServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -201,51 +199,13 @@ pub mod param_service_client {
             self
         }
         #[doc = ""]
-        #[doc = " Get an int parameter."]
+        #[doc = " Retrieve an int parameter."]
         #[doc = ""]
         #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        pub async fn get_param_int(
+        pub async fn retrieve_param_int(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetParamIntRequest>,
-        ) -> Result<tonic::Response<super::GetParamIntResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/mavsdk.rpc.param.ParamService/GetParamInt");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Set an int parameter."]
-        #[doc = ""]
-        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        pub async fn set_param_int(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SetParamIntRequest>,
-        ) -> Result<tonic::Response<super::SetParamIntResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/mavsdk.rpc.param.ParamService/SetParamInt");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Get a float parameter."]
-        #[doc = ""]
-        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        pub async fn get_param_float(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetParamFloatRequest>,
-        ) -> Result<tonic::Response<super::GetParamFloatResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::RetrieveParamIntRequest>,
+        ) -> Result<tonic::Response<super::RetrieveParamIntResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -254,18 +214,18 @@ pub mod param_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.param.ParamService/GetParamFloat",
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveParamInt",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
-        #[doc = " Set a float parameter."]
+        #[doc = " Provide an int parameter."]
         #[doc = ""]
         #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        pub async fn set_param_float(
+        pub async fn provide_param_int(
             &mut self,
-            request: impl tonic::IntoRequest<super::SetParamFloatRequest>,
-        ) -> Result<tonic::Response<super::SetParamFloatResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::ProvideParamIntRequest>,
+        ) -> Result<tonic::Response<super::ProvideParamIntResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -274,16 +234,18 @@ pub mod param_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.param.ParamService/SetParamFloat",
+                "/mavsdk.rpc.param_server.ParamServerService/ProvideParamInt",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
         #[doc = ""]
-        #[doc = " Get all parameters."]
-        pub async fn get_all_params(
+        #[doc = " Retrieve a float parameter."]
+        #[doc = ""]
+        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
+        pub async fn retrieve_param_float(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetAllParamsRequest>,
-        ) -> Result<tonic::Response<super::GetAllParamsResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::RetrieveParamFloatRequest>,
+        ) -> Result<tonic::Response<super::RetrieveParamFloatResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -291,67 +253,106 @@ pub mod param_service_client {
                 )
             })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/mavsdk.rpc.param.ParamService/GetAllParams");
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveParamFloat",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Provide a float parameter."]
+        #[doc = ""]
+        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
+        pub async fn provide_param_float(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ProvideParamFloatRequest>,
+        ) -> Result<tonic::Response<super::ProvideParamFloatResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.param_server.ParamServerService/ProvideParamFloat",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        #[doc = ""]
+        #[doc = " Retrieve all parameters."]
+        pub async fn retrieve_all_params(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RetrieveAllParamsRequest>,
+        ) -> Result<tonic::Response<super::RetrieveAllParamsResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveAllParams",
+            );
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod param_service_server {
+pub mod param_server_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ParamServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ParamServerServiceServer."]
     #[async_trait]
-    pub trait ParamService: Send + Sync + 'static {
+    pub trait ParamServerService: Send + Sync + 'static {
         #[doc = ""]
-        #[doc = " Get an int parameter."]
-        #[doc = ""]
-        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        async fn get_param_int(
-            &self,
-            request: tonic::Request<super::GetParamIntRequest>,
-        ) -> Result<tonic::Response<super::GetParamIntResponse>, tonic::Status>;
-        #[doc = ""]
-        #[doc = " Set an int parameter."]
+        #[doc = " Retrieve an int parameter."]
         #[doc = ""]
         #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        async fn set_param_int(
+        async fn retrieve_param_int(
             &self,
-            request: tonic::Request<super::SetParamIntRequest>,
-        ) -> Result<tonic::Response<super::SetParamIntResponse>, tonic::Status>;
+            request: tonic::Request<super::RetrieveParamIntRequest>,
+        ) -> Result<tonic::Response<super::RetrieveParamIntResponse>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Get a float parameter."]
+        #[doc = " Provide an int parameter."]
         #[doc = ""]
         #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        async fn get_param_float(
+        async fn provide_param_int(
             &self,
-            request: tonic::Request<super::GetParamFloatRequest>,
-        ) -> Result<tonic::Response<super::GetParamFloatResponse>, tonic::Status>;
+            request: tonic::Request<super::ProvideParamIntRequest>,
+        ) -> Result<tonic::Response<super::ProvideParamIntResponse>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Set a float parameter."]
+        #[doc = " Retrieve a float parameter."]
         #[doc = ""]
         #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
-        async fn set_param_float(
+        async fn retrieve_param_float(
             &self,
-            request: tonic::Request<super::SetParamFloatRequest>,
-        ) -> Result<tonic::Response<super::SetParamFloatResponse>, tonic::Status>;
+            request: tonic::Request<super::RetrieveParamFloatRequest>,
+        ) -> Result<tonic::Response<super::RetrieveParamFloatResponse>, tonic::Status>;
         #[doc = ""]
-        #[doc = " Get all parameters."]
-        async fn get_all_params(
+        #[doc = " Provide a float parameter."]
+        #[doc = ""]
+        #[doc = " If the type is wrong, the result will be `WRONG_TYPE`."]
+        async fn provide_param_float(
             &self,
-            request: tonic::Request<super::GetAllParamsRequest>,
-        ) -> Result<tonic::Response<super::GetAllParamsResponse>, tonic::Status>;
+            request: tonic::Request<super::ProvideParamFloatRequest>,
+        ) -> Result<tonic::Response<super::ProvideParamFloatResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Retrieve all parameters."]
+        async fn retrieve_all_params(
+            &self,
+            request: tonic::Request<super::RetrieveAllParamsRequest>,
+        ) -> Result<tonic::Response<super::RetrieveAllParamsResponse>, tonic::Status>;
     }
-    #[doc = " Provide raw access to get and set parameters."]
+    #[doc = " Provide raw access to retrieve and provide server parameters."]
     #[derive(Debug)]
-    pub struct ParamServiceServer<T: ParamService> {
+    pub struct ParamServerServiceServer<T: ParamServerService> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: ParamService> ParamServiceServer<T> {
+    impl<T: ParamServerService> ParamServerServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -368,9 +369,9 @@ pub mod param_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ParamServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for ParamServerServiceServer<T>
     where
-        T: ParamService,
+        T: ParamServerService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -383,82 +384,21 @@ pub mod param_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/mavsdk.rpc.param.ParamService/GetParamInt" => {
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveParamInt" => {
                     #[allow(non_camel_case_types)]
-                    struct GetParamIntSvc<T: ParamService>(pub Arc<T>);
-                    impl<T: ParamService> tonic::server::UnaryService<super::GetParamIntRequest> for GetParamIntSvc<T> {
-                        type Response = super::GetParamIntResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetParamIntRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move { (*inner).get_param_int(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetParamIntSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.param.ParamService/SetParamInt" => {
-                    #[allow(non_camel_case_types)]
-                    struct SetParamIntSvc<T: ParamService>(pub Arc<T>);
-                    impl<T: ParamService> tonic::server::UnaryService<super::SetParamIntRequest> for SetParamIntSvc<T> {
-                        type Response = super::SetParamIntResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::SetParamIntRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move { (*inner).set_param_int(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = SetParamIntSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.param.ParamService/GetParamFloat" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetParamFloatSvc<T: ParamService>(pub Arc<T>);
-                    impl<T: ParamService> tonic::server::UnaryService<super::GetParamFloatRequest>
-                        for GetParamFloatSvc<T>
+                    struct RetrieveParamIntSvc<T: ParamServerService>(pub Arc<T>);
+                    impl<T: ParamServerService>
+                        tonic::server::UnaryService<super::RetrieveParamIntRequest>
+                        for RetrieveParamIntSvc<T>
                     {
-                        type Response = super::GetParamFloatResponse;
+                        type Response = super::RetrieveParamIntResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetParamFloatRequest>,
+                            request: tonic::Request<super::RetrieveParamIntRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).get_param_float(request).await };
+                            let fut = async move { (*inner).retrieve_param_int(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -467,7 +407,7 @@ pub mod param_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetParamFloatSvc(inner);
+                        let method = RetrieveParamIntSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -478,20 +418,21 @@ pub mod param_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.param.ParamService/SetParamFloat" => {
+                "/mavsdk.rpc.param_server.ParamServerService/ProvideParamInt" => {
                     #[allow(non_camel_case_types)]
-                    struct SetParamFloatSvc<T: ParamService>(pub Arc<T>);
-                    impl<T: ParamService> tonic::server::UnaryService<super::SetParamFloatRequest>
-                        for SetParamFloatSvc<T>
+                    struct ProvideParamIntSvc<T: ParamServerService>(pub Arc<T>);
+                    impl<T: ParamServerService>
+                        tonic::server::UnaryService<super::ProvideParamIntRequest>
+                        for ProvideParamIntSvc<T>
                     {
-                        type Response = super::SetParamFloatResponse;
+                        type Response = super::ProvideParamIntResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SetParamFloatRequest>,
+                            request: tonic::Request<super::ProvideParamIntRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).set_param_float(request).await };
+                            let fut = async move { (*inner).provide_param_int(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -500,7 +441,7 @@ pub mod param_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = SetParamFloatSvc(inner);
+                        let method = ProvideParamIntSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -511,20 +452,21 @@ pub mod param_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.param.ParamService/GetAllParams" => {
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveParamFloat" => {
                     #[allow(non_camel_case_types)]
-                    struct GetAllParamsSvc<T: ParamService>(pub Arc<T>);
-                    impl<T: ParamService> tonic::server::UnaryService<super::GetAllParamsRequest>
-                        for GetAllParamsSvc<T>
+                    struct RetrieveParamFloatSvc<T: ParamServerService>(pub Arc<T>);
+                    impl<T: ParamServerService>
+                        tonic::server::UnaryService<super::RetrieveParamFloatRequest>
+                        for RetrieveParamFloatSvc<T>
                     {
-                        type Response = super::GetAllParamsResponse;
+                        type Response = super::RetrieveParamFloatResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetAllParamsRequest>,
+                            request: tonic::Request<super::RetrieveParamFloatRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).get_all_params(request).await };
+                            let fut = async move { (*inner).retrieve_param_float(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -533,7 +475,75 @@ pub mod param_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetAllParamsSvc(inner);
+                        let method = RetrieveParamFloatSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.param_server.ParamServerService/ProvideParamFloat" => {
+                    #[allow(non_camel_case_types)]
+                    struct ProvideParamFloatSvc<T: ParamServerService>(pub Arc<T>);
+                    impl<T: ParamServerService>
+                        tonic::server::UnaryService<super::ProvideParamFloatRequest>
+                        for ProvideParamFloatSvc<T>
+                    {
+                        type Response = super::ProvideParamFloatResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ProvideParamFloatRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).provide_param_float(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ProvideParamFloatSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.param_server.ParamServerService/RetrieveAllParams" => {
+                    #[allow(non_camel_case_types)]
+                    struct RetrieveAllParamsSvc<T: ParamServerService>(pub Arc<T>);
+                    impl<T: ParamServerService>
+                        tonic::server::UnaryService<super::RetrieveAllParamsRequest>
+                        for RetrieveAllParamsSvc<T>
+                    {
+                        type Response = super::RetrieveAllParamsResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::RetrieveAllParamsRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).retrieve_all_params(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RetrieveAllParamsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
@@ -555,7 +565,7 @@ pub mod param_service_server {
             }
         }
     }
-    impl<T: ParamService> Clone for ParamServiceServer<T> {
+    impl<T: ParamServerService> Clone for ParamServerServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -565,7 +575,7 @@ pub mod param_service_server {
             }
         }
     }
-    impl<T: ParamService> Clone for _Inner<T> {
+    impl<T: ParamServerService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -575,7 +585,7 @@ pub mod param_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: ParamService> tonic::transport::NamedService for ParamServiceServer<T> {
-        const NAME: &'static str = "mavsdk.rpc.param.ParamService";
+    impl<T: ParamServerService> tonic::transport::NamedService for ParamServerServiceServer<T> {
+        const NAME: &'static str = "mavsdk.rpc.param_server.ParamServerService";
     }
 }

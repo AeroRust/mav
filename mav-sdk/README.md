@@ -10,14 +10,22 @@
 
 - Source: _https://mavsdk.mavlink.io_
 
+## Compatibility
+
+Compatible with [MAVSDK v1.0](./mavsdk-proto/)
+
 ## Usage
 
 Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-mav-sdk = "0.1.0"
+mav-sdk = "0.2.0"
 ```
+
+### Features:
+
+- `with_serde` - Enables `serde` for (de)serializations of `Response`s, `Request`s and types used inside.
 
 ## Documentation:
 

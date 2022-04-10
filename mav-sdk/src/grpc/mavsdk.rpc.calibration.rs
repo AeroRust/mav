@@ -1,6 +1,6 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCalibrateGyroRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrateGyroResponse {
     #[prost(message, optional, tag = "1")]
     pub calibration_result: ::core::option::Option<CalibrationResult>,
@@ -8,9 +8,9 @@ pub struct CalibrateGyroResponse {
     #[prost(message, optional, tag = "2")]
     pub progress_data: ::core::option::Option<ProgressData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCalibrateAccelerometerRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrateAccelerometerResponse {
     #[prost(message, optional, tag = "1")]
     pub calibration_result: ::core::option::Option<CalibrationResult>,
@@ -18,9 +18,9 @@ pub struct CalibrateAccelerometerResponse {
     #[prost(message, optional, tag = "2")]
     pub progress_data: ::core::option::Option<ProgressData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCalibrateMagnetometerRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrateMagnetometerResponse {
     #[prost(message, optional, tag = "1")]
     pub calibration_result: ::core::option::Option<CalibrationResult>,
@@ -28,9 +28,9 @@ pub struct CalibrateMagnetometerResponse {
     #[prost(message, optional, tag = "2")]
     pub progress_data: ::core::option::Option<ProgressData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCalibrateLevelHorizonRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrateLevelHorizonResponse {
     #[prost(message, optional, tag = "1")]
     pub calibration_result: ::core::option::Option<CalibrationResult>,
@@ -38,9 +38,9 @@ pub struct CalibrateLevelHorizonResponse {
     #[prost(message, optional, tag = "2")]
     pub progress_data: ::core::option::Option<ProgressData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeCalibrateGimbalAccelerometerRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrateGimbalAccelerometerResponse {
     #[prost(message, optional, tag = "1")]
     pub calibration_result: ::core::option::Option<CalibrationResult>,
@@ -48,12 +48,15 @@ pub struct CalibrateGimbalAccelerometerResponse {
     #[prost(message, optional, tag = "2")]
     pub progress_data: ::core::option::Option<ProgressData>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CancelRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CancelResponse {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct CancelResponse {
+    #[prost(message, optional, tag = "1")]
+    pub calibration_result: ::core::option::Option<CalibrationResult>,
+}
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct CalibrationResult {
     /// Result enum value
     #[prost(enumeration = "calibration_result::Result", tag = "1")]
@@ -65,7 +68,19 @@ pub struct CalibrationResult {
 /// Nested message and enum types in `CalibrationResult`.
 pub mod calibration_result {
     /// Possible results returned for calibration commands
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -96,7 +111,7 @@ pub mod calibration_result {
 /// Progress data coming from calibration.
 ///
 /// Can be a progress percentage, or an instruction text.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ProgressData {
     /// Whether this ProgressData contains a 'progress' status or not
     #[prost(bool, tag = "1")]
@@ -134,7 +149,7 @@ pub mod calibration_service_client {
     impl<T> CalibrationServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -311,7 +326,6 @@ pub mod calibration_service_server {
         #[doc = "Server streaming response type for the SubscribeCalibrateGyro method."]
         type SubscribeCalibrateGyroStream: futures_core::Stream<Item = Result<super::CalibrateGyroResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Perform gyro calibration."]
         async fn subscribe_calibrate_gyro(
@@ -322,7 +336,6 @@ pub mod calibration_service_server {
         type SubscribeCalibrateAccelerometerStream: futures_core::Stream<
                 Item = Result<super::CalibrateAccelerometerResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Perform accelerometer calibration."]
         async fn subscribe_calibrate_accelerometer(
@@ -332,7 +345,6 @@ pub mod calibration_service_server {
         #[doc = "Server streaming response type for the SubscribeCalibrateMagnetometer method."]
         type SubscribeCalibrateMagnetometerStream: futures_core::Stream<Item = Result<super::CalibrateMagnetometerResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Perform magnetometer calibration."]
         async fn subscribe_calibrate_magnetometer(
@@ -342,7 +354,6 @@ pub mod calibration_service_server {
         #[doc = "Server streaming response type for the SubscribeCalibrateLevelHorizon method."]
         type SubscribeCalibrateLevelHorizonStream: futures_core::Stream<Item = Result<super::CalibrateLevelHorizonResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
         #[doc = " Perform board level horizon calibration."]
         async fn subscribe_calibrate_level_horizon(
@@ -353,7 +364,6 @@ pub mod calibration_service_server {
         type SubscribeCalibrateGimbalAccelerometerStream: futures_core::Stream<
                 Item = Result<super::CalibrateGimbalAccelerometerResponse, tonic::Status>,
             > + Send
-            + Sync
             + 'static;
         #[doc = " Perform gimbal accelerometer calibration."]
         async fn subscribe_calibrate_gimbal_accelerometer(
@@ -394,7 +404,7 @@ pub mod calibration_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CalibrationServiceServer<T>
     where
         T: CalibrationService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

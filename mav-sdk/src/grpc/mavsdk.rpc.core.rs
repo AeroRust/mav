@@ -1,47 +1,31 @@
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct SubscribeConnectionStateRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ConnectionStateResponse {
     /// Connection state
     #[prost(message, optional, tag = "1")]
     pub connection_state: ::core::option::Option<ConnectionState>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListRunningPluginsRequest {}
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ListRunningPluginsResponse {
-    /// Plugin info
-    #[prost(message, repeated, tag = "1")]
-    pub plugin_info: ::prost::alloc::vec::Vec<PluginInfo>,
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetMavlinkTimeoutRequest {
+    /// Timeout in seconds
+    #[prost(double, tag = "1")]
+    pub timeout_s: f64,
 }
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct SetMavlinkTimeoutResponse {}
 /// Connection state type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ConnectionState {
-    /// UUID of the vehicle
-    #[prost(uint64, tag = "1")]
-    pub uuid: u64,
     /// Whether the vehicle got connected or disconnected
     #[prost(bool, tag = "2")]
     pub is_connected: bool,
-}
-/// Plugin info type.
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct PluginInfo {
-    /// Name of the plugin
-    #[prost(string, tag = "1")]
-    pub name: ::prost::alloc::string::String,
-    /// Address where the plugin is running
-    #[prost(string, tag = "2")]
-    pub address: ::prost::alloc::string::String,
-    /// Port where the plugin is running
-    #[prost(int32, tag = "3")]
-    pub port: i32,
 }
 #[doc = r" Generated client implementations."]
 pub mod core_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Access to the connection state and running plugins."]
+    #[doc = " Access to the connection state and core configurations"]
     #[derive(Debug, Clone)]
     pub struct CoreServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -60,7 +44,7 @@ pub mod core_service_client {
     impl<T> CoreServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -98,6 +82,7 @@ pub mod core_service_client {
             self.inner = self.inner.accept_gzip();
             self
         }
+        #[doc = ""]
         #[doc = " Subscribe to 'connection state' updates."]
         pub async fn subscribe_connection_state(
             &mut self,
@@ -120,11 +105,17 @@ pub mod core_service_client {
                 .server_streaming(request.into_request(), path, codec)
                 .await
         }
-        #[doc = " Get a list of currently running plugins."]
-        pub async fn list_running_plugins(
+        #[doc = ""]
+        #[doc = " Set timeout of MAVLink transfers."]
+        #[doc = ""]
+        #[doc = " The default timeout used is generally (0.5 seconds) seconds."]
+        #[doc = " If MAVSDK is used on the same host this timeout can be reduced, while"]
+        #[doc = " if MAVSDK has to communicate over links with high latency it might"]
+        #[doc = " need to be increased to prevent timeouts."]
+        pub async fn set_mavlink_timeout(
             &mut self,
-            request: impl tonic::IntoRequest<super::ListRunningPluginsRequest>,
-        ) -> Result<tonic::Response<super::ListRunningPluginsResponse>, tonic::Status> {
+            request: impl tonic::IntoRequest<super::SetMavlinkTimeoutRequest>,
+        ) -> Result<tonic::Response<super::SetMavlinkTimeoutResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -133,7 +124,7 @@ pub mod core_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.core.CoreService/ListRunningPlugins",
+                "/mavsdk.rpc.core.CoreService/SetMavlinkTimeout",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -149,20 +140,26 @@ pub mod core_service_server {
         #[doc = "Server streaming response type for the SubscribeConnectionState method."]
         type SubscribeConnectionStateStream: futures_core::Stream<Item = Result<super::ConnectionStateResponse, tonic::Status>>
             + Send
-            + Sync
             + 'static;
+        #[doc = ""]
         #[doc = " Subscribe to 'connection state' updates."]
         async fn subscribe_connection_state(
             &self,
             request: tonic::Request<super::SubscribeConnectionStateRequest>,
         ) -> Result<tonic::Response<Self::SubscribeConnectionStateStream>, tonic::Status>;
-        #[doc = " Get a list of currently running plugins."]
-        async fn list_running_plugins(
+        #[doc = ""]
+        #[doc = " Set timeout of MAVLink transfers."]
+        #[doc = ""]
+        #[doc = " The default timeout used is generally (0.5 seconds) seconds."]
+        #[doc = " If MAVSDK is used on the same host this timeout can be reduced, while"]
+        #[doc = " if MAVSDK has to communicate over links with high latency it might"]
+        #[doc = " need to be increased to prevent timeouts."]
+        async fn set_mavlink_timeout(
             &self,
-            request: tonic::Request<super::ListRunningPluginsRequest>,
-        ) -> Result<tonic::Response<super::ListRunningPluginsResponse>, tonic::Status>;
+            request: tonic::Request<super::SetMavlinkTimeoutRequest>,
+        ) -> Result<tonic::Response<super::SetMavlinkTimeoutResponse>, tonic::Status>;
     }
-    #[doc = " Access to the connection state and running plugins."]
+    #[doc = " Access to the connection state and core configurations"]
     #[derive(Debug)]
     pub struct CoreServiceServer<T: CoreService> {
         inner: _Inner<T>,
@@ -190,7 +187,7 @@ pub mod core_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for CoreServiceServer<T>
     where
         T: CoreService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -240,21 +237,21 @@ pub mod core_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/mavsdk.rpc.core.CoreService/ListRunningPlugins" => {
+                "/mavsdk.rpc.core.CoreService/SetMavlinkTimeout" => {
                     #[allow(non_camel_case_types)]
-                    struct ListRunningPluginsSvc<T: CoreService>(pub Arc<T>);
+                    struct SetMavlinkTimeoutSvc<T: CoreService>(pub Arc<T>);
                     impl<T: CoreService>
-                        tonic::server::UnaryService<super::ListRunningPluginsRequest>
-                        for ListRunningPluginsSvc<T>
+                        tonic::server::UnaryService<super::SetMavlinkTimeoutRequest>
+                        for SetMavlinkTimeoutSvc<T>
                     {
-                        type Response = super::ListRunningPluginsResponse;
+                        type Response = super::SetMavlinkTimeoutResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::ListRunningPluginsRequest>,
+                            request: tonic::Request<super::SetMavlinkTimeoutRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).list_running_plugins(request).await };
+                            let fut = async move { (*inner).set_mavlink_timeout(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -263,7 +260,7 @@ pub mod core_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = ListRunningPluginsSvc(inner);
+                        let method = SetMavlinkTimeoutSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

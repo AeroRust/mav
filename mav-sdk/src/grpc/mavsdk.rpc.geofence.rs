@@ -1,5 +1,5 @@
 /// Point type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Point {
     /// Latitude in degrees (range: -90 to +90)
     #[prost(double, tag = "1")]
@@ -9,7 +9,7 @@ pub struct Point {
     pub longitude_deg: f64,
 }
 /// Polygon type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Polygon {
     /// Points defining the polygon
     #[prost(message, repeated, tag = "1")]
@@ -21,7 +21,19 @@ pub struct Polygon {
 /// Nested message and enum types in `Polygon`.
 pub mod polygon {
     /// Geofence polygon types.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum FenceType {
         /// Type representing an inclusion fence
@@ -30,19 +42,26 @@ pub mod polygon {
         Exclusion = 1,
     }
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadGeofenceRequest {
     /// Polygon(s) representing the geofence(s)
     #[prost(message, repeated, tag = "1")]
     pub polygons: ::prost::alloc::vec::Vec<Polygon>,
 }
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct UploadGeofenceResponse {
     #[prost(message, optional, tag = "1")]
     pub geofence_result: ::core::option::Option<GeofenceResult>,
 }
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ClearGeofenceRequest {}
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+pub struct ClearGeofenceResponse {
+    #[prost(message, optional, tag = "1")]
+    pub geofence_result: ::core::option::Option<GeofenceResult>,
+}
 /// Result type.
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct GeofenceResult {
     /// Result enum value
     #[prost(enumeration = "geofence_result::Result", tag = "1")]
@@ -54,7 +73,19 @@ pub struct GeofenceResult {
 /// Nested message and enum types in `GeofenceResult`.
 pub mod geofence_result {
     /// Possible results returned for geofence requests.
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -71,6 +102,8 @@ pub mod geofence_result {
         Timeout = 5,
         /// Invalid argument
         InvalidArgument = 6,
+        /// No system connected
+        NoSystem = 7,
     }
 }
 #[doc = r" Generated client implementations."]
@@ -96,7 +129,7 @@ pub mod geofence_service_client {
     impl<T> GeofenceServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -155,6 +188,24 @@ pub mod geofence_service_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        #[doc = ""]
+        #[doc = " Clear all geofences saved on the vehicle."]
+        pub async fn clear_geofence(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ClearGeofenceRequest>,
+        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status> {
+            self.inner.ready().await.map_err(|e| {
+                tonic::Status::new(
+                    tonic::Code::Unknown,
+                    format!("Service was not ready: {}", e.into()),
+                )
+            })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 #[doc = r" Generated server implementations."]
@@ -173,6 +224,12 @@ pub mod geofence_service_server {
             &self,
             request: tonic::Request<super::UploadGeofenceRequest>,
         ) -> Result<tonic::Response<super::UploadGeofenceResponse>, tonic::Status>;
+        #[doc = ""]
+        #[doc = " Clear all geofences saved on the vehicle."]
+        async fn clear_geofence(
+            &self,
+            request: tonic::Request<super::ClearGeofenceRequest>,
+        ) -> Result<tonic::Response<super::ClearGeofenceResponse>, tonic::Status>;
     }
     #[doc = " Enable setting a geofence."]
     #[derive(Debug)]
@@ -202,7 +259,7 @@ pub mod geofence_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for GeofenceServiceServer<T>
     where
         T: GeofenceService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
@@ -238,6 +295,40 @@ pub mod geofence_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = UploadGeofenceSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
+                            accept_compression_encodings,
+                            send_compression_encodings,
+                        );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/mavsdk.rpc.geofence.GeofenceService/ClearGeofence" => {
+                    #[allow(non_camel_case_types)]
+                    struct ClearGeofenceSvc<T: GeofenceService>(pub Arc<T>);
+                    impl<T: GeofenceService>
+                        tonic::server::UnaryService<super::ClearGeofenceRequest>
+                        for ClearGeofenceSvc<T>
+                    {
+                        type Response = super::ClearGeofenceResponse;
+                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ClearGeofenceRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).clear_geofence(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ClearGeofenceSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,

@@ -101,7 +101,7 @@ pub struct Covariance {
 /// A zero-rotation quaternion is represented by (1,0,0,0).
 /// The quaternion could also be written as w + xi + yj + zk.
 ///
-/// For more info see: https://en.wikipedia.org/wiki/Quaternion
+/// For more info see: <https://en.wikipedia.org/wiki/Quaternion>
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct Quaternion {
     /// Quaternion entry 0, also denoted as a
@@ -180,7 +180,19 @@ pub struct Odometry {
 /// Nested message and enum types in `Odometry`.
 pub mod odometry {
     /// Mavlink frame id
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum MavFrame {
         /// MAVLink number: 14. Odometry local coordinate frame of data given by a motion capture system, Z-down (x: north, y: east, z: down).
@@ -202,7 +214,19 @@ pub struct MocapResult {
 /// Nested message and enum types in `MocapResult`.
 pub mod mocap_result {
     /// Possible results returned for mocap requests
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+    #[derive(
+        serde::Serialize,
+        serde::Deserialize,
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration,
+    )]
     #[repr(i32)]
     pub enum Result {
         /// Unknown error
@@ -243,7 +267,7 @@ pub mod mocap_service_client {
     impl<T> MocapServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + Sync + 'static,
+        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
@@ -389,7 +413,7 @@ pub mod mocap_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for MocapServiceServer<T>
     where
         T: MocapService,
-        B: Body + Send + Sync + 'static,
+        B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;

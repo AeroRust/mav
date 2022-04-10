@@ -1,35 +1,29 @@
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SendRequest {
-    /// The command line to send
-    #[prost(string, tag = "1")]
-    pub command: ::prost::alloc::string::String,
+pub struct SendStatusTextRequest {
+    /// The text to send
+    #[prost(enumeration = "StatusTextType", tag = "1")]
+    pub r#type: i32,
+    /// Text message
+    #[prost(string, tag = "2")]
+    pub text: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SendResponse {
+pub struct SendStatusTextResponse {
     #[prost(message, optional, tag = "1")]
-    pub shell_result: ::core::option::Option<ShellResult>,
+    pub server_utility_result: ::core::option::Option<ServerUtilityResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeReceiveRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ReceiveResponse {
-    /// Received data.
-    #[prost(string, tag = "1")]
-    pub data: ::prost::alloc::string::String,
-}
-/// Result type.
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct ShellResult {
+pub struct ServerUtilityResult {
     /// Result enum value
-    #[prost(enumeration = "shell_result::Result", tag = "1")]
+    #[prost(enumeration = "server_utility_result::Result", tag = "1")]
     pub result: i32,
     /// Human-readable English string describing the result
     #[prost(string, tag = "2")]
     pub result_str: ::prost::alloc::string::String,
 }
-/// Nested message and enum types in `ShellResult`.
-pub mod shell_result {
-    /// Possible results returned for shell requests
+/// Nested message and enum types in `ServerUtilityResult`.
+pub mod server_utility_result {
+    /// Possible results returned for server utility requests.
     #[derive(
         serde::Serialize,
         serde::Deserialize,
@@ -53,23 +47,54 @@ pub mod shell_result {
         NoSystem = 2,
         /// Connection error
         ConnectionError = 3,
-        /// Response was not received
-        NoResponse = 4,
-        /// Shell busy (transfer in progress)
-        Busy = 5,
+        /// Invalid argument
+        InvalidArgument = 4,
     }
 }
+/// Status types.
+#[derive(
+    serde::Serialize,
+    serde::Deserialize,
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    ::prost::Enumeration,
+)]
+#[repr(i32)]
+pub enum StatusTextType {
+    /// Debug
+    Debug = 0,
+    /// Information
+    Info = 1,
+    /// Notice
+    Notice = 2,
+    /// Warning
+    Warning = 3,
+    /// Error
+    Error = 4,
+    /// Critical
+    Critical = 5,
+    /// Alert
+    Alert = 6,
+    /// Emergency
+    Emergency = 7,
+}
 #[doc = r" Generated client implementations."]
-pub mod shell_service_client {
+pub mod server_utility_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "*"]
-    #[doc = " Allow to communicate with the vehicle's system shell."]
+    #[doc = ""]
+    #[doc = " Utility for onboard MAVSDK instances for common \"server\" tasks."]
     #[derive(Debug, Clone)]
-    pub struct ShellServiceClient<T> {
+    pub struct ServerUtilityServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl ShellServiceClient<tonic::transport::Channel> {
+    impl ServerUtilityServiceClient<tonic::transport::Channel> {
         #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -80,7 +105,7 @@ pub mod shell_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> ShellServiceClient<T>
+    impl<T> ServerUtilityServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::ResponseBody: Body + Send + 'static,
@@ -94,7 +119,7 @@ pub mod shell_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> ShellServiceClient<InterceptedService<T, F>>
+        ) -> ServerUtilityServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T: tonic::codegen::Service<
@@ -106,7 +131,7 @@ pub mod shell_service_client {
             <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
                 Into<StdError> + Send + Sync,
         {
-            ShellServiceClient::new(InterceptedService::new(inner, interceptor))
+            ServerUtilityServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         #[doc = r" Compress requests with `gzip`."]
         #[doc = r""]
@@ -121,31 +146,11 @@ pub mod shell_service_client {
             self.inner = self.inner.accept_gzip();
             self
         }
-        #[doc = ""]
-        #[doc = " Send a command line."]
-        pub async fn send(
+        #[doc = " Sends a statustext."]
+        pub async fn send_status_text(
             &mut self,
-            request: impl tonic::IntoRequest<super::SendRequest>,
-        ) -> Result<tonic::Response<super::SendResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/mavsdk.rpc.shell.ShellService/Send");
-            self.inner.unary(request.into_request(), path, codec).await
-        }
-        #[doc = ""]
-        #[doc = " Receive feedback from a sent command line."]
-        #[doc = ""]
-        #[doc = " This subscription needs to be made before a command line is sent, otherwise, no response will be sent."]
-        pub async fn subscribe_receive(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SubscribeReceiveRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::ReceiveResponse>>, tonic::Status>
-        {
+            request: impl tonic::IntoRequest<super::SendStatusTextRequest>,
+        ) -> Result<tonic::Response<super::SendStatusTextResponse>, tonic::Status> {
             self.inner.ready().await.map_err(|e| {
                 tonic::Status::new(
                     tonic::Code::Unknown,
@@ -154,50 +159,35 @@ pub mod shell_service_client {
             })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/mavsdk.rpc.shell.ShellService/SubscribeReceive",
+                "/mavsdk.rpc.server_utility.ServerUtilityService/SendStatusText",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.unary(request.into_request(), path, codec).await
         }
     }
 }
 #[doc = r" Generated server implementations."]
-pub mod shell_service_server {
+pub mod server_utility_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ShellServiceServer."]
+    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ServerUtilityServiceServer."]
     #[async_trait]
-    pub trait ShellService: Send + Sync + 'static {
-        #[doc = ""]
-        #[doc = " Send a command line."]
-        async fn send(
+    pub trait ServerUtilityService: Send + Sync + 'static {
+        #[doc = " Sends a statustext."]
+        async fn send_status_text(
             &self,
-            request: tonic::Request<super::SendRequest>,
-        ) -> Result<tonic::Response<super::SendResponse>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeReceive method."]
-        type SubscribeReceiveStream: futures_core::Stream<Item = Result<super::ReceiveResponse, tonic::Status>>
-            + Send
-            + 'static;
-        #[doc = ""]
-        #[doc = " Receive feedback from a sent command line."]
-        #[doc = ""]
-        #[doc = " This subscription needs to be made before a command line is sent, otherwise, no response will be sent."]
-        async fn subscribe_receive(
-            &self,
-            request: tonic::Request<super::SubscribeReceiveRequest>,
-        ) -> Result<tonic::Response<Self::SubscribeReceiveStream>, tonic::Status>;
+            request: tonic::Request<super::SendStatusTextRequest>,
+        ) -> Result<tonic::Response<super::SendStatusTextResponse>, tonic::Status>;
     }
-    #[doc = "*"]
-    #[doc = " Allow to communicate with the vehicle's system shell."]
+    #[doc = ""]
+    #[doc = " Utility for onboard MAVSDK instances for common \"server\" tasks."]
     #[derive(Debug)]
-    pub struct ShellServiceServer<T: ShellService> {
+    pub struct ServerUtilityServiceServer<T: ServerUtilityService> {
         inner: _Inner<T>,
         accept_compression_encodings: (),
         send_compression_encodings: (),
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: ShellService> ShellServiceServer<T> {
+    impl<T: ServerUtilityService> ServerUtilityServiceServer<T> {
         pub fn new(inner: T) -> Self {
             let inner = Arc::new(inner);
             let inner = _Inner(inner);
@@ -214,9 +204,9 @@ pub mod shell_service_server {
             InterceptedService::new(Self::new(inner), interceptor)
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for ShellServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for ServerUtilityServiceServer<T>
     where
-        T: ShellService,
+        T: ServerUtilityService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -229,18 +219,21 @@ pub mod shell_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/mavsdk.rpc.shell.ShellService/Send" => {
+                "/mavsdk.rpc.server_utility.ServerUtilityService/SendStatusText" => {
                     #[allow(non_camel_case_types)]
-                    struct SendSvc<T: ShellService>(pub Arc<T>);
-                    impl<T: ShellService> tonic::server::UnaryService<super::SendRequest> for SendSvc<T> {
-                        type Response = super::SendResponse;
+                    struct SendStatusTextSvc<T: ServerUtilityService>(pub Arc<T>);
+                    impl<T: ServerUtilityService>
+                        tonic::server::UnaryService<super::SendStatusTextRequest>
+                        for SendStatusTextSvc<T>
+                    {
+                        type Response = super::SendStatusTextResponse;
                         type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SendRequest>,
+                            request: tonic::Request<super::SendStatusTextRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).send(request).await };
+                            let fut = async move { (*inner).send_status_text(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -249,49 +242,13 @@ pub mod shell_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = SendSvc(inner);
+                        let method = SendStatusTextSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
                         );
                         let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/mavsdk.rpc.shell.ShellService/SubscribeReceive" => {
-                    #[allow(non_camel_case_types)]
-                    struct SubscribeReceiveSvc<T: ShellService>(pub Arc<T>);
-                    impl<T: ShellService>
-                        tonic::server::ServerStreamingService<super::SubscribeReceiveRequest>
-                        for SubscribeReceiveSvc<T>
-                    {
-                        type Response = super::ReceiveResponse;
-                        type ResponseStream = T::SubscribeReceiveStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::SubscribeReceiveRequest>,
-                        ) -> Self::Future {
-                            let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_receive(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = SubscribeReceiveSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
-                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -307,7 +264,7 @@ pub mod shell_service_server {
             }
         }
     }
-    impl<T: ShellService> Clone for ShellServiceServer<T> {
+    impl<T: ServerUtilityService> Clone for ServerUtilityServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -317,7 +274,7 @@ pub mod shell_service_server {
             }
         }
     }
-    impl<T: ShellService> Clone for _Inner<T> {
+    impl<T: ServerUtilityService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(self.0.clone())
         }
@@ -327,7 +284,7 @@ pub mod shell_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: ShellService> tonic::transport::NamedService for ShellServiceServer<T> {
-        const NAME: &'static str = "mavsdk.rpc.shell.ShellService";
+    impl<T: ServerUtilityService> tonic::transport::NamedService for ServerUtilityServiceServer<T> {
+        const NAME: &'static str = "mavsdk.rpc.server_utility.ServerUtilityService";
     }
 }
