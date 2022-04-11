@@ -1,5 +1,11 @@
 # MAV
 
+## The Rust book for Drones
+
+You can run the Rust book for drones by using `mdbook`:
+
+`mdbook serve`
+
 ## MAV-SDK
 
 A [`MAVSDK`](https://github.com/mavlink/MAVSDK) gRPC client ( HTTP/2 ) for communicating with a drone, built from `proto` files using `tonic`.
