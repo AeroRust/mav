@@ -2,5 +2,8 @@
 authors = ["The AeroRust community <aerospace.rust@gmail.com>"]
 language = "en"
 multilingual = false
-src = "drone-book/src"
-title = "The Rust book for Drone"
+src = "drone-book"
+title = "The Rust book for Drones"
+
+[build]
+build-dir = "drone-book/book"
