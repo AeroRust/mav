@@ -10,7 +10,7 @@ You can run the Rust book for drones by using `mdbook`:
 
 A [`MAVSDK`](https://github.com/mavlink/MAVSDK) gRPC client ( HTTP/2 ) for communicating with a drone, built from `proto` files using `tonic`.
 
-You need to be running `MAVSDK` Server (see https://github.com/mavlink/MAVSDK/releases).
+You need to be running the `MAVSDK` Server (see https://github.com/mavlink/MAVSDK/releases) in order to use this crate.
 
 ### Run PX4, Gazebo and MAVSDK Server with docker-compose
 
@@ -23,6 +23,30 @@ docker-compose up --detach
 ```
 cargo run -p mav_sdk --example takeoff
 ```
+
+### Development
+Prerequisite:
+
+1. Make sure you have SSH set for your Github account.
+
+  See Github articles:
+ - [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+ - [Adding a new SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+
+Building the project:
+
+1. Clone the repository and change dir:
+
+  `git clone git@github.com:AeroRust/mav.git && cd mav`
+
+2. Initialize the `mavsdk-proto` submodule:
+
+  `git submodule init && git submodule update`
+
+3. Build the project
+
+  `cargo build`
 
 
 ## Simulation
@@ -74,6 +98,7 @@ https://answers.gazebosim.org/question/7117/running-gzserver-on-ec2-and-gzclient
 GAZEBO_IP=172.23.3.104 GAZEBO_MASTER_URI=172.23.1.170:12345 gzclient
 ```
 #### MAVLink
+
 - MAVLink basics: https://ardupilot.org/dev/docs/mavlink-basics.html#mavlink-basics
 - MAVLink Routing in ArduPilot: https://ardupilot.org/dev/docs/mavlink-routing-in-ardupilot.html
 
