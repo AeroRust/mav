@@ -21,13 +21,13 @@ docker-compose up --detach
 ### Take it to the skies
 
 ```
-cargo run -p mav_sdk --example takeoff
+cargo run -p mav-sdk --example takeoff
 ```
 
 ### Development
 Prerequisite:
 
-1. Make sure you have SSH set for your Github account.
+1. Make sure you have SSH key set for your Github account.
 
   See Github articles:
  - [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)

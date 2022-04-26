@@ -33,7 +33,7 @@ For the time being, however, all you need to know is that this is how we simulat
 3. Take it to the skies
 
 ```
-cargo run -p mav_sdk --example takeoff
+cargo run -p mav-sdk --example takeoff
 ```
 
 
