@@ -12,7 +12,7 @@ Operating system: Linux / MacOS(?)
 - Docker and Docker-compose for simulation (Install [Docker][install-docker] & [docker-compose][install-docker-compose])
 - Rust for `cargo run` (Install the [Rust][install-rust] programming language)
 - Git
-- `ssh` key set on your GitHub profile, see [Connecting to GitHub with SSH][github-ssh])
+- `ssh` key set on your GitHub profile, see [Connecting to GitHub with SSH][github-ssh]
 - QGroundControl (optional)
 
 1. `git clone git@github.com:AeroRust/mav.git && cd mav`
@@ -29,7 +29,7 @@ docker-compose up --detach
 
 **Tools:** `PX4` (autopilot), `Gazebo` (a tool for simulations) and `MAVSDK` server are all open-source tools and later we will get to know what each tool does.
 
-For the time being, however, all you need to know is that this is how we simulate a drone using Docker containers and 
+For the time being, however, all you need to know is that this is how we simulate a drone using Docker containers.
 
 3. Take it to the skies
 
