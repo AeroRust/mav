@@ -10,7 +10,7 @@
 
 //! mav-sdk is a [gRPC] HTTP/2 client for communicating with a [MAVSDK] server.
 //!
-//! Compatible with **MAVSDK v1.0** server.
+//! Compatible with [**MAVSDK v1.0**][MAVSDK v1.0] server.
 //!
 //! [MAVSDK] uses the [MAVLink] protocol to communicate with drones and other vehicles that use it.
 //!
@@ -25,6 +25,7 @@
 //! [gRPC]: https://grpc.io
 //! [MAVLink]: https://mavlink.io
 //! [MAVSDK]: https://mavsdk.mavlink.io
+//! [MAVSDK v1.0]: https://mavsdk.mavlink.io/v1.0/en
 
 /// Generated MAVSDK services for client/server implementations.
 pub mod grpc;

@@ -12,11 +12,12 @@ Operating system: Linux / MacOS(?)
 - Docker and Docker-compose for simulation (Install [Docker][install-docker] & [docker-compose][install-docker-compose])
 - Rust for `cargo run` (Install the [Rust][install-rust] programming language)
 - Git
+- `ssh` key set on your GitHub profile, see [Connecting to GitHub with SSH][github-ssh])
 - QGroundControl (optional)
 
-1. `git clone https://github.com/AeroRust/mav && cd mav`
+1. `git clone git@github.com:AeroRust/mav.git && cd mav`
 
-    0.1. `git submodule init && git submodule update`
+    1.1. `git submodule init && git submodule update`
 
 
 2. Run PX4, Gazebo and MAVSDK Server with `docker-compose`
@@ -40,3 +41,4 @@ cargo run -p mav-sdk --example takeoff
 [install-rust]: https://rustup.rs/
 [install-docker]: https://docs.docker.com/engine/install/
 [install-docker-compose]: https://docs.docker.com/compose/install/
+[github-ssh]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
