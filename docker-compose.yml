@@ -4,7 +4,7 @@ services:
   px4-gazebo-headless:
     platform: linux/amd64
     # image: jonasvautherin/px4-gazebo-headless:latest
-    image: jonasvautherin/px4-gazebo-headless:1.11.0
+    image: jonasvautherin/px4-gazebo-headless:1.12.3
     container_name: px4-gazebo-headless
     ports:
       # for MAVLINK API/Offboard and MAVSDK
@@ -16,6 +16,8 @@ services:
       - "127.0.0.1:8554:8554/tcp"
       # try default UDP Gazebo port https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
       - "5600:5600/udp"
+      # default gazebo port for conecting with client
+      - "11345:11345"
     networks:
       - internal
       - external
