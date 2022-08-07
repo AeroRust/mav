@@ -6,7 +6,7 @@ RUN  apt update \
 
 WORKDIR /server
 
-ARG MAVSDK_VERSION=1.0.8
+ARG MAVSDK_VERSION=1.4.3
 
 RUN wget -O mavsdk_server https://github.com/mavlink/MAVSDK/releases/download/v${MAVSDK_VERSION}/mavsdk_server_manylinux2010-x64
 
