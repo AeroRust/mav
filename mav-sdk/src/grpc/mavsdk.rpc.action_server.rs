@@ -1,172 +1,196 @@
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAllowTakeoffRequest {
     /// Is takeoff allowed?
-    #[prost(bool, tag = "1")]
+    #[prost(bool, tag="1")]
     pub allow_takeoff: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetArmableRequest {
     /// Is Armable now?
-    #[prost(bool, tag = "1")]
+    #[prost(bool, tag="1")]
     pub armable: bool,
     /// Is armable with force?
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub force_armable: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetDisarmableRequest {
     /// Is disarmable now?
-    #[prost(bool, tag = "1")]
+    #[prost(bool, tag="1")]
     pub disarmable: bool,
     /// Is disarmable with force? (Kill)
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub force_disarmable: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAllowableFlightModesRequest {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub flight_modes: ::core::option::Option<AllowableFlightModes>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct GetAllowableFlightModesRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeArmDisarmRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeFlightModeChangeRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeTakeoffRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeLandRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeRebootRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeShutdownRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
-pub struct SubscribeTerminateRequest {}
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAllowableFlightModesRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeArmDisarmRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeFlightModeChangeRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeTakeoffRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeLandRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeRebootRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeShutdownRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SubscribeTerminateRequest {
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArmDisarmResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag="2")]
     pub arm: ::core::option::Option<ArmDisarm>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FlightModeChangeResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(enumeration = "FlightMode", tag = "2")]
+    #[prost(enumeration="FlightMode", tag="2")]
     pub flight_mode: i32,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TakeoffResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub takeoff: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LandResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub land: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RebootResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub reboot: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ShutdownResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub shutdown: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TerminateResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub terminate: bool,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetArmableResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetDisarmableResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAllowableFlightModesResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetAllowTakeoffResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub action_server_result: ::core::option::Option<ActionServerResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAllowableFlightModesResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub flight_modes: ::core::option::Option<AllowableFlightModes>,
 }
 /// State to check if the vehicle can transition to
 /// respective flightmodes
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AllowableFlightModes {
-    /// Auto/mission mode
-    #[prost(bool, tag = "1")]
+    /// Auto/mission mode 
+    #[prost(bool, tag="1")]
     pub can_auto_mode: bool,
     /// Guided mode
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub can_guided_mode: bool,
     /// Stabilize mode
-    #[prost(bool, tag = "3")]
+    #[prost(bool, tag="3")]
     pub can_stabilize_mode: bool,
 }
 /// Arming message type
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArmDisarm {
     /// Should vehicle arm
-    #[prost(bool, tag = "1")]
+    #[prost(bool, tag="1")]
     pub arm: bool,
     /// Should arm override pre-flight checks
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag="2")]
     pub force: bool,
 }
 /// Result type.
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ActionServerResult {
     /// Result enum value
-    #[prost(enumeration = "action_server_result::Result", tag = "1")]
+    #[prost(enumeration="action_server_result::Result", tag="1")]
     pub result: i32,
     /// Human-readable English string describing the result
-    #[prost(string, tag = "2")]
+    #[prost(string, tag="2")]
     pub result_str: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `ActionServerResult`.
 pub mod action_server_result {
     /// Possible results returned for action requests.
-    #[derive(
-        serde::Serialize,
-        serde::Deserialize,
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration,
-    )]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -196,25 +220,37 @@ pub mod action_server_result {
         /// Intermediate message showing progress or instructions on the next steps
         Next = 12,
     }
+    impl Result {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Result::Unknown => "RESULT_UNKNOWN",
+                Result::Success => "RESULT_SUCCESS",
+                Result::NoSystem => "RESULT_NO_SYSTEM",
+                Result::ConnectionError => "RESULT_CONNECTION_ERROR",
+                Result::Busy => "RESULT_BUSY",
+                Result::CommandDenied => "RESULT_COMMAND_DENIED",
+                Result::CommandDeniedLandedStateUnknown => "RESULT_COMMAND_DENIED_LANDED_STATE_UNKNOWN",
+                Result::CommandDeniedNotLanded => "RESULT_COMMAND_DENIED_NOT_LANDED",
+                Result::Timeout => "RESULT_TIMEOUT",
+                Result::VtolTransitionSupportUnknown => "RESULT_VTOL_TRANSITION_SUPPORT_UNKNOWN",
+                Result::NoVtolTransitionSupport => "RESULT_NO_VTOL_TRANSITION_SUPPORT",
+                Result::ParameterError => "RESULT_PARAMETER_ERROR",
+                Result::Next => "RESULT_NEXT",
+            }
+        }
+    }
 }
 ///
 /// Flight modes.
 ///
 /// For more information about flight modes, check out
 /// <https://docs.px4.io/master/en/config/flight_mode.html.>
-#[derive(
-    serde::Serialize,
-    serde::Deserialize,
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    PartialOrd,
-    Ord,
-    ::prost::Enumeration,
-)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FlightMode {
     /// Mode not known
@@ -246,17 +282,42 @@ pub enum FlightMode {
     /// In 'Stabilize' mode
     Stabilized = 13,
 }
-#[doc = r" Generated client implementations."]
+impl FlightMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FlightMode::Unknown => "FLIGHT_MODE_UNKNOWN",
+            FlightMode::Ready => "FLIGHT_MODE_READY",
+            FlightMode::Takeoff => "FLIGHT_MODE_TAKEOFF",
+            FlightMode::Hold => "FLIGHT_MODE_HOLD",
+            FlightMode::Mission => "FLIGHT_MODE_MISSION",
+            FlightMode::ReturnToLaunch => "FLIGHT_MODE_RETURN_TO_LAUNCH",
+            FlightMode::Land => "FLIGHT_MODE_LAND",
+            FlightMode::Offboard => "FLIGHT_MODE_OFFBOARD",
+            FlightMode::FollowMe => "FLIGHT_MODE_FOLLOW_ME",
+            FlightMode::Manual => "FLIGHT_MODE_MANUAL",
+            FlightMode::Altctl => "FLIGHT_MODE_ALTCTL",
+            FlightMode::Posctl => "FLIGHT_MODE_POSCTL",
+            FlightMode::Acro => "FLIGHT_MODE_ACRO",
+            FlightMode::Stabilized => "FLIGHT_MODE_STABILIZED",
+        }
+    }
+}
+/// Generated client implementations.
 pub mod action_server_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Provide vehicle actions (as a server) such as arming, taking off, and landing."]
+    use tonic::codegen::http::Uri;
+    /// Provide vehicle actions (as a server) such as arming, taking off, and landing.
     #[derive(Debug, Clone)]
     pub struct ActionServerServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
     impl ActionServerServiceClient<tonic::transport::Channel> {
-        #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
+        /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
             D: std::convert::TryInto<tonic::transport::Endpoint>,
@@ -269,12 +330,16 @@ pub mod action_server_service_client {
     impl<T> ActionServerServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -283,51 +348,58 @@ pub mod action_server_service_client {
         ) -> ActionServerServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
             T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
             ActionServerServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        #[doc = r" Compress requests with `gzip`."]
-        #[doc = r""]
-        #[doc = r" This requires the server to support it otherwise it might respond with an"]
-        #[doc = r" error."]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        #[doc = r" Enable decompressing responses with `gzip`."]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
-        #[doc = " Subscribe to ARM/DISARM commands"]
+        /// Subscribe to ARM/DISARM commands
         pub async fn subscribe_arm_disarm(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeArmDisarmRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::ArmDisarmResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::ArmDisarmResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeArmDisarm",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to DO_SET_MODE"]
+        /// Subscribe to DO_SET_MODE
         pub async fn subscribe_flight_mode_change(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeFlightModeChangeRequest>,
@@ -335,201 +407,236 @@ pub mod action_server_service_client {
             tonic::Response<tonic::codec::Streaming<super::FlightModeChangeResponse>>,
             tonic::Status,
         > {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeFlightModeChange",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to takeoff command"]
+        /// Subscribe to takeoff command
         pub async fn subscribe_takeoff(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeTakeoffRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::TakeoffResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::TakeoffResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeTakeoff",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to land command"]
+        /// Subscribe to land command
         pub async fn subscribe_land(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeLandRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::LandResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::LandResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeLand",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to reboot command"]
+        /// Subscribe to reboot command
         pub async fn subscribe_reboot(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeRebootRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::RebootResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::RebootResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeReboot",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to shutdown command"]
+        /// Subscribe to shutdown command
         pub async fn subscribe_shutdown(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeShutdownRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::ShutdownResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::ShutdownResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeShutdown",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Subscribe to terminate command"]
+        /// Subscribe to terminate command
         pub async fn subscribe_terminate(
             &mut self,
             request: impl tonic::IntoRequest<super::SubscribeTerminateRequest>,
-        ) -> Result<tonic::Response<tonic::codec::Streaming<super::TerminateResponse>>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<tonic::codec::Streaming<super::TerminateResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeTerminate",
             );
-            self.inner
-                .server_streaming(request.into_request(), path, codec)
-                .await
+            self.inner.server_streaming(request.into_request(), path, codec).await
         }
-        #[doc = " Can the vehicle takeoff"]
+        /// Can the vehicle takeoff
         pub async fn set_allow_takeoff(
             &mut self,
             request: impl tonic::IntoRequest<super::SetAllowTakeoffRequest>,
         ) -> Result<tonic::Response<super::SetAllowTakeoffResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SetAllowTakeoff",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = " Can the vehicle arm when requested"]
+        /// Can the vehicle arm when requested
         pub async fn set_armable(
             &mut self,
             request: impl tonic::IntoRequest<super::SetArmableRequest>,
         ) -> Result<tonic::Response<super::SetArmableResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SetArmable",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = " Can the vehicle disarm when requested"]
+        /// Can the vehicle disarm when requested
         pub async fn set_disarmable(
             &mut self,
             request: impl tonic::IntoRequest<super::SetDisarmableRequest>,
         ) -> Result<tonic::Response<super::SetDisarmableResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SetDisarmable",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = " Set which modes the vehicle can transition to (Manual always allowed)"]
+        /// Set which modes the vehicle can transition to (Manual always allowed)
         pub async fn set_allowable_flight_modes(
             &mut self,
             request: impl tonic::IntoRequest<super::SetAllowableFlightModesRequest>,
-        ) -> Result<tonic::Response<super::SetAllowableFlightModesResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<super::SetAllowableFlightModesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/SetAllowableFlightModes",
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        #[doc = " Get which modes the vehicle can transition to (Manual always allowed)"]
+        /// Get which modes the vehicle can transition to (Manual always allowed)
         pub async fn get_allowable_flight_modes(
             &mut self,
             request: impl tonic::IntoRequest<super::GetAllowableFlightModesRequest>,
-        ) -> Result<tonic::Response<super::GetAllowableFlightModesResponse>, tonic::Status>
-        {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> Result<
+            tonic::Response<super::GetAllowableFlightModesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
                 "/mavsdk.rpc.action_server.ActionServerService/GetAllowableFlightModes",
@@ -538,113 +645,138 @@ pub mod action_server_service_client {
         }
     }
 }
-#[doc = r" Generated server implementations."]
+/// Generated server implementations.
 pub mod action_server_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with ActionServerServiceServer."]
+    ///Generated trait containing gRPC methods that should be implemented for use with ActionServerServiceServer.
     #[async_trait]
     pub trait ActionServerService: Send + Sync + 'static {
-        #[doc = "Server streaming response type for the SubscribeArmDisarm method."]
-        type SubscribeArmDisarmStream: futures_core::Stream<Item = Result<super::ArmDisarmResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeArmDisarm method.
+        type SubscribeArmDisarmStream: futures_core::Stream<
+                Item = Result<super::ArmDisarmResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to ARM/DISARM commands"]
+        /// Subscribe to ARM/DISARM commands
         async fn subscribe_arm_disarm(
             &self,
             request: tonic::Request<super::SubscribeArmDisarmRequest>,
         ) -> Result<tonic::Response<Self::SubscribeArmDisarmStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeFlightModeChange method."]
-        type SubscribeFlightModeChangeStream: futures_core::Stream<Item = Result<super::FlightModeChangeResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeFlightModeChange method.
+        type SubscribeFlightModeChangeStream: futures_core::Stream<
+                Item = Result<super::FlightModeChangeResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to DO_SET_MODE"]
+        /// Subscribe to DO_SET_MODE
         async fn subscribe_flight_mode_change(
             &self,
             request: tonic::Request<super::SubscribeFlightModeChangeRequest>,
-        ) -> Result<tonic::Response<Self::SubscribeFlightModeChangeStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeTakeoff method."]
-        type SubscribeTakeoffStream: futures_core::Stream<Item = Result<super::TakeoffResponse, tonic::Status>>
+        ) -> Result<
+            tonic::Response<Self::SubscribeFlightModeChangeStream>,
+            tonic::Status,
+        >;
+        ///Server streaming response type for the SubscribeTakeoff method.
+        type SubscribeTakeoffStream: futures_core::Stream<
+                Item = Result<super::TakeoffResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to takeoff command"]
+        /// Subscribe to takeoff command
         async fn subscribe_takeoff(
             &self,
             request: tonic::Request<super::SubscribeTakeoffRequest>,
         ) -> Result<tonic::Response<Self::SubscribeTakeoffStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeLand method."]
-        type SubscribeLandStream: futures_core::Stream<Item = Result<super::LandResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeLand method.
+        type SubscribeLandStream: futures_core::Stream<
+                Item = Result<super::LandResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to land command"]
+        /// Subscribe to land command
         async fn subscribe_land(
             &self,
             request: tonic::Request<super::SubscribeLandRequest>,
         ) -> Result<tonic::Response<Self::SubscribeLandStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeReboot method."]
-        type SubscribeRebootStream: futures_core::Stream<Item = Result<super::RebootResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeReboot method.
+        type SubscribeRebootStream: futures_core::Stream<
+                Item = Result<super::RebootResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to reboot command"]
+        /// Subscribe to reboot command
         async fn subscribe_reboot(
             &self,
             request: tonic::Request<super::SubscribeRebootRequest>,
         ) -> Result<tonic::Response<Self::SubscribeRebootStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeShutdown method."]
-        type SubscribeShutdownStream: futures_core::Stream<Item = Result<super::ShutdownResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeShutdown method.
+        type SubscribeShutdownStream: futures_core::Stream<
+                Item = Result<super::ShutdownResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to shutdown command"]
+        /// Subscribe to shutdown command
         async fn subscribe_shutdown(
             &self,
             request: tonic::Request<super::SubscribeShutdownRequest>,
         ) -> Result<tonic::Response<Self::SubscribeShutdownStream>, tonic::Status>;
-        #[doc = "Server streaming response type for the SubscribeTerminate method."]
-        type SubscribeTerminateStream: futures_core::Stream<Item = Result<super::TerminateResponse, tonic::Status>>
+        ///Server streaming response type for the SubscribeTerminate method.
+        type SubscribeTerminateStream: futures_core::Stream<
+                Item = Result<super::TerminateResponse, tonic::Status>,
+            >
             + Send
             + 'static;
-        #[doc = " Subscribe to terminate command"]
+        /// Subscribe to terminate command
         async fn subscribe_terminate(
             &self,
             request: tonic::Request<super::SubscribeTerminateRequest>,
         ) -> Result<tonic::Response<Self::SubscribeTerminateStream>, tonic::Status>;
-        #[doc = " Can the vehicle takeoff"]
+        /// Can the vehicle takeoff
         async fn set_allow_takeoff(
             &self,
             request: tonic::Request<super::SetAllowTakeoffRequest>,
         ) -> Result<tonic::Response<super::SetAllowTakeoffResponse>, tonic::Status>;
-        #[doc = " Can the vehicle arm when requested"]
+        /// Can the vehicle arm when requested
         async fn set_armable(
             &self,
             request: tonic::Request<super::SetArmableRequest>,
         ) -> Result<tonic::Response<super::SetArmableResponse>, tonic::Status>;
-        #[doc = " Can the vehicle disarm when requested"]
+        /// Can the vehicle disarm when requested
         async fn set_disarmable(
             &self,
             request: tonic::Request<super::SetDisarmableRequest>,
         ) -> Result<tonic::Response<super::SetDisarmableResponse>, tonic::Status>;
-        #[doc = " Set which modes the vehicle can transition to (Manual always allowed)"]
+        /// Set which modes the vehicle can transition to (Manual always allowed)
         async fn set_allowable_flight_modes(
             &self,
             request: tonic::Request<super::SetAllowableFlightModesRequest>,
-        ) -> Result<tonic::Response<super::SetAllowableFlightModesResponse>, tonic::Status>;
-        #[doc = " Get which modes the vehicle can transition to (Manual always allowed)"]
+        ) -> Result<
+            tonic::Response<super::SetAllowableFlightModesResponse>,
+            tonic::Status,
+        >;
+        /// Get which modes the vehicle can transition to (Manual always allowed)
         async fn get_allowable_flight_modes(
             &self,
             request: tonic::Request<super::GetAllowableFlightModesRequest>,
-        ) -> Result<tonic::Response<super::GetAllowableFlightModesResponse>, tonic::Status>;
+        ) -> Result<
+            tonic::Response<super::GetAllowableFlightModesResponse>,
+            tonic::Status,
+        >;
     }
-    #[doc = " Provide vehicle actions (as a server) such as arming, taking off, and landing."]
+    /// Provide vehicle actions (as a server) such as arming, taking off, and landing.
     #[derive(Debug)]
     pub struct ActionServerServiceServer<T: ActionServerService> {
         inner: _Inner<T>,
-        accept_compression_encodings: (),
-        send_compression_encodings: (),
+        accept_compression_encodings: EnabledCompressionEncodings,
+        send_compression_encodings: EnabledCompressionEncodings,
     }
     struct _Inner<T>(Arc<T>);
     impl<T: ActionServerService> ActionServerServiceServer<T> {
         pub fn new(inner: T) -> Self {
-            let inner = Arc::new(inner);
+            Self::from_arc(Arc::new(inner))
+        }
+        pub fn from_arc(inner: Arc<T>) -> Self {
             let inner = _Inner(inner);
             Self {
                 inner,
@@ -652,11 +784,26 @@ pub mod action_server_service_server {
                 send_compression_encodings: Default::default(),
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
             InterceptedService::new(Self::new(inner), interceptor)
+        }
+        /// Enable decompressing requests with the given encoding.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.accept_compression_encodings.enable(encoding);
+            self
+        }
+        /// Compress responses with the given encoding, if the client supports it.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.send_compression_encodings.enable(encoding);
+            self
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>> for ActionServerServiceServer<T>
@@ -666,9 +813,12 @@ pub mod action_server_service_server {
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
-        type Error = Never;
+        type Error = std::convert::Infallible;
         type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
@@ -677,20 +827,25 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeArmDisarm" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeArmDisarmSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeArmDisarmRequest>
-                        for SubscribeArmDisarmSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeArmDisarmRequest,
+                    > for SubscribeArmDisarmSvc<T> {
                         type Response = super::ArmDisarmResponse;
                         type ResponseStream = T::SubscribeArmDisarmStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeArmDisarmRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_arm_disarm(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_arm_disarm(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -701,10 +856,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeArmDisarmSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -712,23 +868,30 @@ pub mod action_server_service_server {
                 }
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeFlightModeChange" => {
                     #[allow(non_camel_case_types)]
-                    struct SubscribeFlightModeChangeSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<
-                            super::SubscribeFlightModeChangeRequest,
-                        > for SubscribeFlightModeChangeSvc<T>
-                    {
+                    struct SubscribeFlightModeChangeSvc<T: ActionServerService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeFlightModeChangeRequest,
+                    > for SubscribeFlightModeChangeSvc<T> {
                         type Response = super::FlightModeChangeResponse;
                         type ResponseStream = T::SubscribeFlightModeChangeStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SubscribeFlightModeChangeRequest>,
+                            request: tonic::Request<
+                                super::SubscribeFlightModeChangeRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut =
-                                async move { (*inner).subscribe_flight_mode_change(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_flight_mode_change(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -739,10 +902,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeFlightModeChangeSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -751,20 +915,25 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeTakeoff" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeTakeoffSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeTakeoffRequest>
-                        for SubscribeTakeoffSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeTakeoffRequest,
+                    > for SubscribeTakeoffSvc<T> {
                         type Response = super::TakeoffResponse;
                         type ResponseStream = T::SubscribeTakeoffStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeTakeoffRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_takeoff(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_takeoff(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -775,10 +944,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeTakeoffSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -787,20 +957,24 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeLand" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeLandSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeLandRequest>
-                        for SubscribeLandSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<super::SubscribeLandRequest>
+                    for SubscribeLandSvc<T> {
                         type Response = super::LandResponse;
                         type ResponseStream = T::SubscribeLandStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeLandRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_land(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_land(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -811,10 +985,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeLandSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -823,20 +998,25 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeReboot" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeRebootSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeRebootRequest>
-                        for SubscribeRebootSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeRebootRequest,
+                    > for SubscribeRebootSvc<T> {
                         type Response = super::RebootResponse;
                         type ResponseStream = T::SubscribeRebootStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeRebootRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_reboot(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_reboot(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -847,10 +1027,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeRebootSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -859,20 +1040,25 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeShutdown" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeShutdownSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeShutdownRequest>
-                        for SubscribeShutdownSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeShutdownRequest,
+                    > for SubscribeShutdownSvc<T> {
                         type Response = super::ShutdownResponse;
                         type ResponseStream = T::SubscribeShutdownStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeShutdownRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_shutdown(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_shutdown(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -883,10 +1069,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeShutdownSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -895,20 +1082,25 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SubscribeTerminate" => {
                     #[allow(non_camel_case_types)]
                     struct SubscribeTerminateSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::ServerStreamingService<super::SubscribeTerminateRequest>
-                        for SubscribeTerminateSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::ServerStreamingService<
+                        super::SubscribeTerminateRequest,
+                    > for SubscribeTerminateSvc<T> {
                         type Response = super::TerminateResponse;
                         type ResponseStream = T::SubscribeTerminateStream;
-                        type Future =
-                            BoxFuture<tonic::Response<Self::ResponseStream>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SubscribeTerminateRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).subscribe_terminate(request).await };
+                            let fut = async move {
+                                (*inner).subscribe_terminate(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -919,10 +1111,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SubscribeTerminateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
@@ -931,18 +1124,23 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SetAllowTakeoff" => {
                     #[allow(non_camel_case_types)]
                     struct SetAllowTakeoffSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::UnaryService<super::SetAllowTakeoffRequest>
-                        for SetAllowTakeoffSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::UnaryService<super::SetAllowTakeoffRequest>
+                    for SetAllowTakeoffSvc<T> {
                         type Response = super::SetAllowTakeoffResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SetAllowTakeoffRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).set_allow_takeoff(request).await };
+                            let fut = async move {
+                                (*inner).set_allow_takeoff(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -953,10 +1151,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SetAllowTakeoffSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -965,11 +1164,15 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SetArmable" => {
                     #[allow(non_camel_case_types)]
                     struct SetArmableSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::UnaryService<super::SetArmableRequest> for SetArmableSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::UnaryService<super::SetArmableRequest>
+                    for SetArmableSvc<T> {
                         type Response = super::SetArmableResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SetArmableRequest>,
@@ -986,10 +1189,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SetArmableSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -998,18 +1202,23 @@ pub mod action_server_service_server {
                 "/mavsdk.rpc.action_server.ActionServerService/SetDisarmable" => {
                     #[allow(non_camel_case_types)]
                     struct SetDisarmableSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::UnaryService<super::SetDisarmableRequest>
-                        for SetDisarmableSvc<T>
-                    {
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::UnaryService<super::SetDisarmableRequest>
+                    for SetDisarmableSvc<T> {
                         type Response = super::SetDisarmableResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::SetDisarmableRequest>,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut = async move { (*inner).set_disarmable(request).await };
+                            let fut = async move {
+                                (*inner).set_disarmable(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -1020,10 +1229,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SetDisarmableSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1031,20 +1241,28 @@ pub mod action_server_service_server {
                 }
                 "/mavsdk.rpc.action_server.ActionServerService/SetAllowableFlightModes" => {
                     #[allow(non_camel_case_types)]
-                    struct SetAllowableFlightModesSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::UnaryService<super::SetAllowableFlightModesRequest>
-                        for SetAllowableFlightModesSvc<T>
-                    {
+                    struct SetAllowableFlightModesSvc<T: ActionServerService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::UnaryService<super::SetAllowableFlightModesRequest>
+                    for SetAllowableFlightModesSvc<T> {
                         type Response = super::SetAllowableFlightModesResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::SetAllowableFlightModesRequest>,
+                            request: tonic::Request<
+                                super::SetAllowableFlightModesRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut =
-                                async move { (*inner).set_allowable_flight_modes(request).await };
+                            let fut = async move {
+                                (*inner).set_allowable_flight_modes(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -1055,10 +1273,11 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = SetAllowableFlightModesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
@@ -1066,20 +1285,28 @@ pub mod action_server_service_server {
                 }
                 "/mavsdk.rpc.action_server.ActionServerService/GetAllowableFlightModes" => {
                     #[allow(non_camel_case_types)]
-                    struct GetAllowableFlightModesSvc<T: ActionServerService>(pub Arc<T>);
-                    impl<T: ActionServerService>
-                        tonic::server::UnaryService<super::GetAllowableFlightModesRequest>
-                        for GetAllowableFlightModesSvc<T>
-                    {
+                    struct GetAllowableFlightModesSvc<T: ActionServerService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: ActionServerService,
+                    > tonic::server::UnaryService<super::GetAllowableFlightModesRequest>
+                    for GetAllowableFlightModesSvc<T> {
                         type Response = super::GetAllowableFlightModesResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetAllowableFlightModesRequest>,
+                            request: tonic::Request<
+                                super::GetAllowableFlightModesRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = self.0.clone();
-                            let fut =
-                                async move { (*inner).get_allowable_flight_modes(request).await };
+                            let fut = async move {
+                                (*inner).get_allowable_flight_modes(request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -1090,23 +1317,28 @@ pub mod action_server_service_server {
                         let inner = inner.0;
                         let method = GetAllowableFlightModesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
                 }
-                _ => Box::pin(async move {
-                    Ok(http::Response::builder()
-                        .status(200)
-                        .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
-                        .body(empty_body())
-                        .unwrap())
-                }),
+                _ => {
+                    Box::pin(async move {
+                        Ok(
+                            http::Response::builder()
+                                .status(200)
+                                .header("grpc-status", "12")
+                                .header("content-type", "application/grpc")
+                                .body(empty_body())
+                                .unwrap(),
+                        )
+                    })
+                }
             }
         }
     }
@@ -1130,7 +1362,8 @@ pub mod action_server_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: ActionServerService> tonic::transport::NamedService for ActionServerServiceServer<T> {
+    impl<T: ActionServerService> tonic::server::NamedService
+    for ActionServerServiceServer<T> {
         const NAME: &'static str = "mavsdk.rpc.action_server.ActionServerService";
     }
 }

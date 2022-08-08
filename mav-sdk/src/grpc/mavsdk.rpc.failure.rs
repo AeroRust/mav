@@ -1,45 +1,37 @@
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InjectRequest {
     /// The failure unit to send
-    #[prost(enumeration = "FailureUnit", tag = "1")]
+    #[prost(enumeration="FailureUnit", tag="1")]
     pub failure_unit: i32,
     /// The failure type to send
-    #[prost(enumeration = "FailureType", tag = "2")]
+    #[prost(enumeration="FailureType", tag="2")]
     pub failure_type: i32,
     /// Instance to affect (0 for all)
-    #[prost(int32, tag = "3")]
+    #[prost(int32, tag="3")]
     pub instance: i32,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct InjectResponse {
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag="1")]
     pub failure_result: ::core::option::Option<FailureResult>,
 }
-#[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FailureResult {
     /// Result enum value
-    #[prost(enumeration = "failure_result::Result", tag = "1")]
+    #[prost(enumeration="failure_result::Result", tag="1")]
     pub result: i32,
     /// Human-readable English string describing the result
-    #[prost(string, tag = "2")]
+    #[prost(string, tag="2")]
     pub result_str: ::prost::alloc::string::String,
 }
 /// Nested message and enum types in `FailureResult`.
 pub mod failure_result {
     /// Possible results returned for failure requests.
-    #[derive(
-        serde::Serialize,
-        serde::Deserialize,
-        Clone,
-        Copy,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash,
-        PartialOrd,
-        Ord,
-        ::prost::Enumeration,
-    )]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
     #[repr(i32)]
     pub enum Result {
         /// Unknown result
@@ -59,21 +51,28 @@ pub mod failure_result {
         /// Request timed out
         Timeout = 7,
     }
+    impl Result {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Result::Unknown => "RESULT_UNKNOWN",
+                Result::Success => "RESULT_SUCCESS",
+                Result::NoSystem => "RESULT_NO_SYSTEM",
+                Result::ConnectionError => "RESULT_CONNECTION_ERROR",
+                Result::Unsupported => "RESULT_UNSUPPORTED",
+                Result::Denied => "RESULT_DENIED",
+                Result::Disabled => "RESULT_DISABLED",
+                Result::Timeout => "RESULT_TIMEOUT",
+            }
+        }
+    }
 }
 /// A failure unit.
-#[derive(
-    serde::Serialize,
-    serde::Deserialize,
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    PartialOrd,
-    Ord,
-    ::prost::Enumeration,
-)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FailureUnit {
     /// Gyro
@@ -107,20 +106,34 @@ pub enum FailureUnit {
     /// MAVLink signal
     SystemMavlinkSignal = 105,
 }
+impl FailureUnit {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FailureUnit::SensorGyro => "FAILURE_UNIT_SENSOR_GYRO",
+            FailureUnit::SensorAccel => "FAILURE_UNIT_SENSOR_ACCEL",
+            FailureUnit::SensorMag => "FAILURE_UNIT_SENSOR_MAG",
+            FailureUnit::SensorBaro => "FAILURE_UNIT_SENSOR_BARO",
+            FailureUnit::SensorGps => "FAILURE_UNIT_SENSOR_GPS",
+            FailureUnit::SensorOpticalFlow => "FAILURE_UNIT_SENSOR_OPTICAL_FLOW",
+            FailureUnit::SensorVio => "FAILURE_UNIT_SENSOR_VIO",
+            FailureUnit::SensorDistanceSensor => "FAILURE_UNIT_SENSOR_DISTANCE_SENSOR",
+            FailureUnit::SensorAirspeed => "FAILURE_UNIT_SENSOR_AIRSPEED",
+            FailureUnit::SystemBattery => "FAILURE_UNIT_SYSTEM_BATTERY",
+            FailureUnit::SystemMotor => "FAILURE_UNIT_SYSTEM_MOTOR",
+            FailureUnit::SystemServo => "FAILURE_UNIT_SYSTEM_SERVO",
+            FailureUnit::SystemAvoidance => "FAILURE_UNIT_SYSTEM_AVOIDANCE",
+            FailureUnit::SystemRcSignal => "FAILURE_UNIT_SYSTEM_RC_SIGNAL",
+            FailureUnit::SystemMavlinkSignal => "FAILURE_UNIT_SYSTEM_MAVLINK_SIGNAL",
+        }
+    }
+}
 /// A failure type
-#[derive(
-    serde::Serialize,
-    serde::Deserialize,
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    Hash,
-    PartialOrd,
-    Ord,
-    ::prost::Enumeration,
-)]
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum FailureType {
     /// No failure injected, used to reset a previous failure
@@ -140,17 +153,36 @@ pub enum FailureType {
     /// Unit is sometimes working, sometimes not
     Intermittent = 7,
 }
-#[doc = r" Generated client implementations."]
+impl FailureType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FailureType::Ok => "FAILURE_TYPE_OK",
+            FailureType::Off => "FAILURE_TYPE_OFF",
+            FailureType::Stuck => "FAILURE_TYPE_STUCK",
+            FailureType::Garbage => "FAILURE_TYPE_GARBAGE",
+            FailureType::Wrong => "FAILURE_TYPE_WRONG",
+            FailureType::Slow => "FAILURE_TYPE_SLOW",
+            FailureType::Delayed => "FAILURE_TYPE_DELAYED",
+            FailureType::Intermittent => "FAILURE_TYPE_INTERMITTENT",
+        }
+    }
+}
+/// Generated client implementations.
 pub mod failure_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = " Inject failures into system to test failsafes."]
+    use tonic::codegen::http::Uri;
+    /// Inject failures into system to test failsafes.
     #[derive(Debug, Clone)]
     pub struct FailureServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
     impl FailureServiceClient<tonic::transport::Channel> {
-        #[doc = r" Attempt to create a new client by connecting to a given endpoint."]
+        /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
             D: std::convert::TryInto<tonic::transport::Endpoint>,
@@ -163,12 +195,16 @@ pub mod failure_service_client {
     impl<T> FailureServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
-        T::ResponseBody: Body + Send + 'static,
         T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
         <T::ResponseBody as Body>::Error: Into<StdError> + Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
             Self { inner }
         }
         pub fn with_interceptor<F>(
@@ -177,72 +213,82 @@ pub mod failure_service_client {
         ) -> FailureServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
             T: tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
                 Response = http::Response<
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
             FailureServiceClient::new(InterceptedService::new(inner, interceptor))
         }
-        #[doc = r" Compress requests with `gzip`."]
-        #[doc = r""]
-        #[doc = r" This requires the server to support it otherwise it might respond with an"]
-        #[doc = r" error."]
-        pub fn send_gzip(mut self) -> Self {
-            self.inner = self.inner.send_gzip();
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
             self
         }
-        #[doc = r" Enable decompressing responses with `gzip`."]
-        pub fn accept_gzip(mut self) -> Self {
-            self.inner = self.inner.accept_gzip();
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
             self
         }
-        #[doc = " Injects a failure."]
+        /// Injects a failure.
         pub async fn inject(
             &mut self,
             request: impl tonic::IntoRequest<super::InjectRequest>,
         ) -> Result<tonic::Response<super::InjectResponse>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path =
-                http::uri::PathAndQuery::from_static("/mavsdk.rpc.failure.FailureService/Inject");
+            let path = http::uri::PathAndQuery::from_static(
+                "/mavsdk.rpc.failure.FailureService/Inject",
+            );
             self.inner.unary(request.into_request(), path, codec).await
         }
     }
 }
-#[doc = r" Generated server implementations."]
+/// Generated server implementations.
 pub mod failure_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    #[doc = "Generated trait containing gRPC methods that should be implemented for use with FailureServiceServer."]
+    ///Generated trait containing gRPC methods that should be implemented for use with FailureServiceServer.
     #[async_trait]
     pub trait FailureService: Send + Sync + 'static {
-        #[doc = " Injects a failure."]
+        /// Injects a failure.
         async fn inject(
             &self,
             request: tonic::Request<super::InjectRequest>,
         ) -> Result<tonic::Response<super::InjectResponse>, tonic::Status>;
     }
-    #[doc = " Inject failures into system to test failsafes."]
+    /// Inject failures into system to test failsafes.
     #[derive(Debug)]
     pub struct FailureServiceServer<T: FailureService> {
         inner: _Inner<T>,
-        accept_compression_encodings: (),
-        send_compression_encodings: (),
+        accept_compression_encodings: EnabledCompressionEncodings,
+        send_compression_encodings: EnabledCompressionEncodings,
     }
     struct _Inner<T>(Arc<T>);
     impl<T: FailureService> FailureServiceServer<T> {
         pub fn new(inner: T) -> Self {
-            let inner = Arc::new(inner);
+            Self::from_arc(Arc::new(inner))
+        }
+        pub fn from_arc(inner: Arc<T>) -> Self {
             let inner = _Inner(inner);
             Self {
                 inner,
@@ -250,11 +296,26 @@ pub mod failure_service_server {
                 send_compression_encodings: Default::default(),
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
             InterceptedService::new(Self::new(inner), interceptor)
+        }
+        /// Enable decompressing requests with the given encoding.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.accept_compression_encodings.enable(encoding);
+            self
+        }
+        /// Compress responses with the given encoding, if the client supports it.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.send_compression_encodings.enable(encoding);
+            self
         }
     }
     impl<T, B> tonic::codegen::Service<http::Request<B>> for FailureServiceServer<T>
@@ -264,9 +325,12 @@ pub mod failure_service_server {
         B::Error: Into<StdError> + Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
-        type Error = Never;
+        type Error = std::convert::Infallible;
         type Future = BoxFuture<Self::Response, Self::Error>;
-        fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<Result<(), Self::Error>> {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
@@ -275,9 +339,15 @@ pub mod failure_service_server {
                 "/mavsdk.rpc.failure.FailureService/Inject" => {
                     #[allow(non_camel_case_types)]
                     struct InjectSvc<T: FailureService>(pub Arc<T>);
-                    impl<T: FailureService> tonic::server::UnaryService<super::InjectRequest> for InjectSvc<T> {
+                    impl<
+                        T: FailureService,
+                    > tonic::server::UnaryService<super::InjectRequest>
+                    for InjectSvc<T> {
                         type Response = super::InjectResponse;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::InjectRequest>,
@@ -294,23 +364,28 @@ pub mod failure_service_server {
                         let inner = inner.0;
                         let method = InjectSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
-                            accept_compression_encodings,
-                            send_compression_encodings,
-                        );
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
                         let res = grpc.unary(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
                 }
-                _ => Box::pin(async move {
-                    Ok(http::Response::builder()
-                        .status(200)
-                        .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
-                        .body(empty_body())
-                        .unwrap())
-                }),
+                _ => {
+                    Box::pin(async move {
+                        Ok(
+                            http::Response::builder()
+                                .status(200)
+                                .header("grpc-status", "12")
+                                .header("content-type", "application/grpc")
+                                .body(empty_body())
+                                .unwrap(),
+                        )
+                    })
+                }
             }
         }
     }
@@ -334,7 +409,7 @@ pub mod failure_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: FailureService> tonic::transport::NamedService for FailureServiceServer<T> {
+    impl<T: FailureService> tonic::server::NamedService for FailureServiceServer<T> {
         const NAME: &'static str = "mavsdk.rpc.failure.FailureService";
     }
 }
