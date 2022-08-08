@@ -533,6 +533,8 @@ static DERIVE_SERDE_FOR: Lazy<HashSet<&str>> = Lazy::new(|| {
 });
 
 fn main() -> Result<(), std::io::Error> {
+    // TODO: use correct path for rerun-if-changed
+    // println!("cargo:rerun-if-changed=mavsdk-proto");
     let mavsdk_options_include = format!("{submodule}/protos", submodule = PROTO_GIT_SUBMODULE);
 
     // tonic_build(&plugins, mavsdk_options_include.into())
@@ -588,7 +590,6 @@ fn tonic_build_single(
 
     builder
         // .build_server(false)
-        .format(true)
         .out_dir("src/grpc")
         .compile(&proto_paths, &proto_includes)
 }
@@ -613,7 +614,6 @@ fn _tonic_build(plugins: &[&str], mavsdk_options_include: PathBuf) -> Result<(),
             // (proto_path(plugin), proto_include(plugin))
             tonic_build::configure()
                 // .build_server(false)
-                .format(true)
                 .out_dir(format!("src/grpc/{}", plugin))
                 .compile(
                     &[proto_path(plugin)],
@@ -630,7 +630,6 @@ fn _tonic_build(plugins: &[&str], mavsdk_options_include: PathBuf) -> Result<(),
 
             tonic_build::configure()
                 .build_server(false)
-                .format(true)
                 .out_dir("src/grpc")
                 .compile(&[path], &[mavsdk_options_include.clone()])
         }))
