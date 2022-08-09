@@ -3,12 +3,11 @@ version: '3.8'
 services:
   px4-gazebo-headless:
     platform: linux/amd64
-    # image: jonasvautherin/px4-gazebo-headless:latest
-    image: jonasvautherin/px4-gazebo-headless:1.10.1
+    image: jonasvautherin/px4-gazebo-headless:1.13.0
     container_name: px4-gazebo-headless
     ports:
       # for MAVLINK API/Offboard and MAVSDK
-      - "127.0.0.1:14540:14540"
+      - "14540:14540"
       # for MAVLINK QGroundControl
       - "14550:14550"
       # For Video Stream
@@ -19,17 +18,21 @@ services:
       # default gazebo port for conecting with client
       - "11345:11345"
     networks:
-      - internal
-      - external
+      internal-ip:
+          ipv4_address: 172.20.0.5
+      internal:
+      external:
     stdin_open: true
     tty: true
     # Video stream is only supported on `Typhoon H480` see https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
     # Proxy service from docker container using `H264`
     # Some of the options: typhoon_h480, iris, iris_opt_flow, solo
-    # TODO: Enable typhoon once we update the image to latest
-    # command: -v typhoon_h480 -w baylands
+    # -w baylands
+    command: -v typhoon_h480 172.20.0.6
   mavsdk-grpc-server:
     platform: linux/amd64
+    depends_on:
+      - px4-gazebo-headless
     build:
       dockerfile: Dockerfile-server
       context: mav-sdk
@@ -38,8 +41,10 @@ services:
     ports:
       - "4000:4000"
     networks:
-      - internal
-      - external
+      internal-ip:
+          ipv4_address: 172.20.0.6
+      internal:
+      external:
     stdin_open: true
     tty: true
 
@@ -47,10 +52,9 @@ networks:
   internal:
     internal: true
   external:
-  # To set a custom subnet for the IP addresses of the setup
-  # otherwise just use `0.0.0.0`
-  #   driver: bridge
-  #   ipam:
-  #     driver: default
-  #     config:
-  #     - subnet: 192.168.220.0/24
+  internal-ip:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.20.0.0/24
