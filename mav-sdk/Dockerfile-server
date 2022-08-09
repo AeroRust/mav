@@ -1,12 +1,16 @@
 FROM ubuntu:20.04
 
+LABEL maintainer="aerospace.rust@gmail.com"
+
 RUN  apt update \
   && apt install -y wget \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /server
 
-ARG MAVSDK_VERSION=1.4.3
+# This is latest version from the time of writing this comment
+# update accordingly, but also you're able to override this when building the image
+ARG MAVSDK_VERSION=1.4.4
 
 RUN wget -O mavsdk_server https://github.com/mavlink/MAVSDK/releases/download/v${MAVSDK_VERSION}/mavsdk_server_manylinux2010-x64
 
