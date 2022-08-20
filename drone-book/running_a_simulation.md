@@ -17,7 +17,9 @@ Operating system: Linux / MacOS(?)
 
 1. `git clone git@github.com:AeroRust/mav.git && cd mav`
 
-    1.1. `git submodule init && git submodule update`
+    1.1. Install `protoc` - For [Windows](https://www.geeksforgeeks.org/how-to-install-protocol-buffers-on-windows/), [Linux & mac](https://grpc.io/docs/protoc-installation/)
+
+    1.2. `git submodule init && git submodule update`
 
 
 2. Run PX4, Gazebo and MAVSDK Server with `docker-compose`
