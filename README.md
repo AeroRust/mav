@@ -40,11 +40,16 @@ Building the project:
 
   `git clone git@github.com:AeroRust/mav.git && cd mav`
 
-2. Initialize the `mavsdk-proto` submodule:
+2. Install `protoc`:
+
+  * For [Linux & mac](https://grpc.io/docs/protoc-installation/)
+  * For [Windows](https://www.geeksforgeeks.org/how-to-install-protocol-buffers-on-windows/)
+
+3. Initialize the `mavsdk-proto` submodule:
 
   `git submodule init && git submodule update`
 
-3. Build the project
+4. Build the project
 
   `cargo build`
 
