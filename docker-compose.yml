@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   px4-gazebo-headless:
-    platform: linux/amd64
     image: jonasvautherin/px4-gazebo-headless:1.13.0
     container_name: px4-gazebo-headless
     ports:
@@ -30,7 +29,6 @@ services:
     # -w baylands
     command: -v typhoon_h480 172.20.0.6
   mavsdk-grpc-server:
-    platform: linux/amd64
     depends_on:
       - px4-gazebo-headless
     build:
