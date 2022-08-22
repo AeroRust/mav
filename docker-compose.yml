@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   px4-gazebo-headless:
-    build: https://github.com/JonasVautherin/px4-gazebo-headless.git#master
+    build: https://github.com/o0Ignition0o/px4-gazebo-headless.git#igni/g11
     container_name: px4-gazebo-headless
     ports:
       # for MAVLINK API/Offboard and MAVSDK
@@ -11,7 +11,7 @@ services:
       - "14550:14550"
       # For Video Stream
       # try the RTSP port https://github.com/JonasVautherin/px4-gazebo-headless/blob/master/sitl_rtsp_proxy/main.cpp#L12
-      - "127.0.0.1:8554:8554/tcp"
+      - "8554:8554"
       # try default UDP Gazebo port https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
       - "5600:5600/udp"
       # default gazebo port for conecting with client
