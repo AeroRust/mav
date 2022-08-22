@@ -80,4 +80,21 @@ async fn flight(mut drone: Drone) {
     if let Some(next_message) = telemetry_streaming.message().await.unwrap() {
         println!("{:?}", next_message);
     }
+
+    sleep(Duration::from_secs(5));
+
+    let land_request = mav_sdk::grpc::action::LandRequest {};
+    let land_response = drone.action.land(land_request).await.unwrap();
+
+    println!(
+        "Landing: {}",
+        &land_response
+            .get_ref()
+            .action_result
+            .as_ref()
+            .unwrap()
+            .result_str
+    );
+
+    println!("the eagle has (hopefully) landed!");
 }
