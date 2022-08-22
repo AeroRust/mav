@@ -9,9 +9,11 @@ services:
       VERBOSE_SIM: "1"
     ports:
       # for MAVLINK API/Offboard and MAVSDK
-      - "14540:14540"
+      - "14540-14549:14540-14549"
       # for MAVLINK QGroundControl
       - "14550:14550"
+      # simulator
+      - "4560:4560"
       # For Video Stream
       # try the RTSP port https://github.com/JonasVautherin/px4-gazebo-headless/blob/master/sitl_rtsp_proxy/main.cpp#L12
       - "8554:8554"
