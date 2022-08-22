@@ -4,6 +4,9 @@ services:
   px4-gazebo-headless:
     build: https://github.com/o0Ignition0o/px4-gazebo-headless.git#igni/g11
     container_name: px4-gazebo-headless
+    environment:
+      VERBOSE: "1"
+      VERBOSE_SIM: "1"
     ports:
       # for MAVLINK API/Offboard and MAVSDK
       - "14540:14540"
@@ -26,8 +29,7 @@ services:
     # Video stream is only supported on `Typhoon H480` see https://dev.px4.io/master/en/simulation/gazebo.html#video-streaming
     # Proxy service from docker container using `H264`
     # Some of the options: typhoon_h480, iris, iris_opt_flow, solo
-    # -w baylands
-    command: -v typhoon_h480 172.20.0.6
+    command:  -w baylands -v typhoon_h480 172.20.0.6
   mavsdk-grpc-server:
     depends_on:
       - px4-gazebo-headless
