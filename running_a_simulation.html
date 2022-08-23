@@ -145,7 +145,8 @@ apart from you laptop.</p>
 <li>Rust for <code>cargo run</code> (Install the <a href="https://rustup.rs/">Rust</a> programming language)</li>
 <li>Git</li>
 <li><code>ssh</code> key set on your GitHub profile, see <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a></li>
-<li>QGroundControl (optional)</li>
+<li><a href="#qgroundcontrol-docker">QGroundControl (optional)</a></li>
+<li><code>protoc</code> for running the <code>mav-sdk</code> build script when using the examples, see <a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation">Protocol Compiler Installation</a>. Since <code>prost</code> version <code>0.11</code>, <code>protoc</code> is no longer automatically installed on the host machine.</li>
 </ul>
 <ol>
 <li>
@@ -165,6 +166,27 @@ apart from you laptop.</p>
 <li>Take it to the skies</li>
 </ol>
 <pre><code>cargo run -p mav-sdk --example takeoff
+</code></pre>
+<h3 id="qgroundcontrol-docker"><a class="header" href="#qgroundcontrol-docker">QGroundControl Docker</a></h3>
+<blockquote>
+<p>QGroundControl provides full flight control and mission planning for any MAVLink enabled drone. Its primary goal is ease of use for professional users and developers. All the code is open-source source, so you can contribute and evolve it as you want.</p>
+</blockquote>
+<ul>
+<li><em><a href="http://qgroundcontrol.com">qgroundcontrol.com</a></em></li>
+</ul>
+<p>In order to connect to the PX4 running inside Docker, use this setup:</p>
+<p><img src="images/QGroundControl_Docker.png" alt="The setup required to connect QGroundControl to the MAVLink running in Docker" /></p>
+<h3 id="connecting-gazebo-gui-client-to-gazebo-server-in-docker"><a class="header" href="#connecting-gazebo-gui-client-to-gazebo-server-in-docker">Connecting Gazebo GUI (client) to Gazebo server (in Docker)</a></h3>
+<p>The <code>Gazebo</code> simulation tool usually runs a server and a GUI on the host machine,
+however, our setup is running in <code>Docker</code> with mode <code>headless</code> for <code>Gazebo</code>,
+so we only have the server running in <code>Docker</code>.</p>
+<p><strong>IMPORTANT:</strong> You must have installed the exact same <code>Gazebo</code> version locally as the one found in the Docker setup, otherwise you won't be able to connect</p>
+<p>On Linux:</p>
+<pre><code class="language-bash">source /usr/share/gazebo-11/setup.sh &amp;&amp; \
+gzclient --verbose
+</code></pre>
+<p><code>/usr/share/gazebo-11/setup.sh</code> contains a few default environment variables that you don't need to pass, otherwise use:</p>
+<pre><code>GAZEBO_MASTER_URI=127.0.0.1:11345 gzclient --verbose
 </code></pre>
 
                     </main>
